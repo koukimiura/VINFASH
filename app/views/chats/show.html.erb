@@ -1,0 +1,97 @@
+<div class= "row">
+  <div class="col-xs-4">
+        <h3>最近のチャット</h3>
+        <hr>
+<% @anotherEntries.each do |entry| %>
+<% if entry.chat_id == @chat.id %>
+<div>
+    <div class="chat-index ">
+        <div class="chat-left">
+            <%= image_tag entry.user.image.to_s, size: "50x50" %> 
+            <strong><%=link_to entry.user.name, user_path(entry.user_id) %></strong>
+        </div>
+        <div class="chat-right text-left">
+            <!--message -->
+        </div>
+    </div>
+</div>
+<% else %>
+<div class= "url-chat">
+    <%= link_to chat_path(entry.chat_id) do %>
+        <div class="chat-index ">
+            <div class="chat-left">
+               <%= image_tag entry.user.image.to_s, size: "50x50" %> 
+               <strong><%= entry.user.name %></strong>
+            </div>
+            <div class="chat-right text-left">
+                <!--message -->
+            </div>
+        </div>
+    <% end %>
+</div>
+<% end %>
+<% end %> 
+</div>
+     
+<div class="col-xs-8">
+    
+<% @anotherEntries.each do |entry|  %>
+    <% if entry.chat_id == @chat.id %>
+       <h2 class="text-center"><%= link_to entry.user.name, user_path(entry.user_id) %>
+       <%= link_to chat_path(entry.chat_id), method: :delete, date: {confirm: "本当に投稿を削除しますか？"} do %>
+            <span class="fas fa-trash"></span>
+       <% end %>
+       </h2>
+    <% end %>
+<% end %>
+<hr>
+
+<% if @talks.present? %>
+    <% @talks.each do |talk| %>
+         <% if talk.user_id == current_user.id %>
+            <h4 class="text-right">
+                <p class="alert alert-success">
+             <% if talk.user_id == current_user.id %>
+            <%= link_to talk.content, talk_path(talk.id), method: :delete, 
+            date: {confirm: "本当に投稿を削除しますか？"}%>
+        <% else %>
+            <%= talk.content %>
+        <% end %>
+            <br><br>
+            <%= image_tag talk.user.image.to_s, size: "50x50" %>
+            <small><strong> <%= link_to talk.user.name, user_path(talk.user_id) %></strong></small>
+                </p>
+            </h4>
+            
+        <% else %>
+        
+             <h4 class="text-left">
+                <p class="alert alert-info">
+         <% if talk.user_id == current_user.id %>
+            <%= link_to talk.content, talk_path(talk.id), method: :delete,
+               date: {confirm: "本当に投稿を削除しますか？"}%>
+                      
+        <% else %>
+            <%= talk.content %>
+        <% end %>
+        <br><br>
+        <%= image_tag talk.user.image.to_s, size: "50x50" %>
+        <small><strong> <%= link_to talk.user.name, user_path(talk.user.id) %></strong></small>
+                </p>
+            </h4>
+        <% end %>
+    <% end %>
+<% else %>
+    <br>
+    <h4>メッセージはありません</h4>
+    <br>
+<% end %>
+
+   <%= form_for @talk do |f| %>
+    <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
+        <%= f.hidden_field :entry_id, :value => @entry.id %>
+    <p><%= f.submit "送信", class: 'btn btn-info' %></p>
+    <% end %> 
+         
+     </div>
+</div>

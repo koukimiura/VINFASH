@@ -3,13 +3,9 @@ class MessagesController < ApplicationController
     
     def create
         @message = Message.create(message_params)
-        if @message.post_id.present?
-            redirect_to post_path(@message.post_id)
+            redirect_to :back
             
-        else
-             redirect_to event_path(@message.event_id)
-            
-        end
+       
     end
     
     def destroy

@@ -13,9 +13,11 @@ class User < ApplicationRecord
          
          has_many :posts, :dependent => :destroy
          has_many :my_areas, :dependent => :destroy
-         accepts_nested_attributes_for :my_areas
          has_many :likes, :dependent => :destroy
          has_many :events, :dependent => :destroy
-         has_many :messages
-         
+         has_many :messagess
+         has_many :entries, :dependent => :destroy
+         has_many :talks
+         has_many :my_shoes, :dependent => :destroy
+         accepts_nested_attributes_for :my_shoes, allow_destroy: true
 end

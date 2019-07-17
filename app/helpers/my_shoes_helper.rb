@@ -1,0 +1,2 @@
+module MyShoesHelper
+end

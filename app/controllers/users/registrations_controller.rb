@@ -19,15 +19,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @areas = Area.all
     @area = Area.new
     @user = User.new
-    @my_area = @user.my_areas.build
-    #@my_area = MyArea.new
+    @my_shoe = @user.my_shoes.build
+    @my_shoes = MyShoe.all
      super
    end
    
 
   # PUT /resource
    def update
-    #@my_area = MyArea.update(area_id: @area.id, user_id: @user.id).merge(user_id: current_user.id)
+    
      super
    end
 
@@ -58,8 +58,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
      devise_parameter_sanitizer.permit(:account_update,
-     keys: [:name, :gender, :birthday, :adress, :image, :my_size, :my_shoes_size,
-     :my_height, :genre, :my_price, :self_introduction, my_areas_attributes: [:area_id, :user_id] ])
+     keys: [:name, :gender, :birthday, :adress, :image, :my_size,
+     :my_height, :genre, :my_price, :self_introduction, :my_shoes_attribute => [:id, :size, :user_id] ])
   end
 
   # The path used after sign up.

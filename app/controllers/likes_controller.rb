@@ -1,13 +1,12 @@
 class LikesController < ApplicationController
-    before_action :authenticate_user! => [:create, :destroy]
+    before_action :authenticate_user!, only: [:create, :destroy]
     
     def create
-         #@post = Post.find(params[:post_id])
-
         @like= Like.new(
-    user_id: current_user.id,
-    post_id: params[:post_id]
+            user_id: current_user.id,
+            post_id: params[:post_id]
     )
+    logger.debug("================= create = #{params[:post_id]}")
         if @like.save
             redirect_to post_path(params[:post_id])
         end
@@ -38,7 +37,7 @@ class LikesController < ApplicationController
            user_id: current_user.id,
            event_id: params[:event_id]
            )
-        @like.destroy
+            @like.destroy
             redirect_to event_path(params[:event_id])
     end
 end

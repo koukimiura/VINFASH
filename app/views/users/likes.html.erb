@@ -34,13 +34,23 @@
 </div>
 
 <div class="col-xs-6">
-<ul class="user-tabs" >
-    <li><%= link_to "投稿", user_path(@user.id) %></li>
-    <li class="active"><%= link_to "いいね", likes_user_path(@user.id) %></li>
+ <ul class="user-tabs" >
+    <li class="active"><%= link_to "投稿", user_path(@user.id) %></li>
+    <li><%= link_to "いいね", likes_user_path(@user.id) %></li>
     <li><%= link_to "イベントにいいね", likes_events_user_path(@user.id) %></li>
     <li><%= link_to "イベント投稿", events_user_path(@user.id) %></li>
+<% if current_user.id == @user.id %>
+    <li><%= link_to "最近のチャット",chats_user_path(@user.id) %></li>
+<% else %>
+    <%= form_for @chat do |f| %>
+    <%= fields_for @entry do |e| %>
+    <%= e.hidden_field :user_id, :value => @user.id %>
+    <%= e.hidden_field :name, :value => @user.name %>
+    <% end %>
+    <li><%= f.submit"チャットする" %></li>
+    <% end %>
+<% end %>
 </ul>
-
 
     <% @likes.each do |like| %>
     <% post = Post.find_by(id: like.post_id) %>

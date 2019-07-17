@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190614210719) do
+ActiveRecord::Schema.define(version: 20190711124809) do
 
   create_table "areas", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,7 +19,14 @@ ActiveRecord::Schema.define(version: 20190614210719) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.string   "name"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "name",       default: "新規チャット"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "chat_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,6 +39,13 @@ ActiveRecord::Schema.define(version: 20190614210719) do
     t.string   "image"
     t.string   "location"
     t.integer  "user_id"
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.integer  "follower"
+    t.integer  "followed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -58,6 +72,13 @@ ActiveRecord::Schema.define(version: 20190614210719) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "my_shoes", force: :cascade do |t|
+    t.string   "size"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -67,9 +88,17 @@ ActiveRecord::Schema.define(version: 20190614210719) do
     t.integer  "user_id"
   end
 
+  create_table "talks", force: :cascade do |t|
+    t.integer  "entry_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",            null: false
-    t.string   "encrypted_password",     default: "",            null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -77,17 +106,15 @@ ActiveRecord::Schema.define(version: 20190614210719) do
     t.string   "gender"
     t.string   "birthday"
     t.string   "adress"
-    t.string   "image",                  default: "default.png"
+    t.string   "image"
     t.string   "my_size"
     t.string   "my_shoes_size"
     t.string   "my_height"
     t.string   "genre"
     t.integer  "my_price"
     t.text     "self_introduction"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.integer  "area_id"
-    t.integer  "my_area_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

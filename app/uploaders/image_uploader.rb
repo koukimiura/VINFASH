@@ -8,7 +8,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   if Rails.env.production? || Rails.env.staging?
     storage :fog
   else
-    storage :fog
+    storage :file
   end
   
 
@@ -22,12 +22,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   #process resize_to_limit: [1200, 5000]
   
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url(*args)
+   def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
+      #ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  "default.png"
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+   end
 
 
   # Process files as they are uploaded:
@@ -55,7 +55,7 @@ class ImageUploader < CarrierWave::Uploader::Base
    # 許可する画像の拡張子
   def extension_whitelist
      %w(jpg jpeg gif png)
-   end
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
@@ -64,7 +64,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?
      #"something.jpg" if original_filename
-   end
+  end
    
    
    # 一意となるトークンを作成
@@ -89,4 +89,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  
+  #def default_url
+    #"default.png"
+  #end
+  
 end

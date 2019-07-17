@@ -74,3 +74,5 @@ gem 'font-awesome-rails'
 
 #delete confirm
 gem 'data-confirm-modal'
+
+gem 'websocket-extensions','~> 0.1.4'

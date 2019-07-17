@@ -22,10 +22,12 @@
     margin-top: 50px;
 }
 
-
-
 .ul, li{
     list-style-type: none;
+}
+
+.ol, li {
+    list-style:decimal
 }
 
 .number-alarm{
@@ -33,6 +35,7 @@
 }
 
 
+/*post一覧*/
 .posts-index-item{
 　padding: 20px 30px;
 　overflow: hidden;
@@ -42,7 +45,8 @@
 
 .posts-left{
     float: left;
-    width: 10%;
+    width: 100px;
+    height: 100px;
 }
 
 .posts-right{
@@ -50,21 +54,16 @@
   
 }
 
-.posts-bottom {
-    
-}
-
 .posts-image {
-    width: 30%;
-    height: 10%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .posts-middle {
-   padding : 25px 25px 70px 25px; 
-}
-
-.posts-content {
-    margin-left: 25px;
+   padding-left: 30px; 
+   padding-bottom: 70px;
+   margin-top: 30px;
 }
 
 .post-show-item {
@@ -102,18 +101,6 @@
 }
 
 
-.post-show-item2{
-    
-}
-
-.post-title2{
-    
-}
-
-.post-show-content2{
-    
-}
-
 .post-time{
     
 }
@@ -142,6 +129,10 @@
    box-shadow: 0 2px 6px #c1ced7;
 }
 
+
+
+/*いいね*/
+
 .like-btn {
   color: #8899a6;
 }
@@ -149,11 +140,11 @@
   color: #ff2581;
 }
 
-
-
 .posts-edit-imag {
     padding: 50px;
 }
+
+/*投稿に対するchat*/
 
 .chat {
     background-color: #F5F5F5;
@@ -169,10 +160,7 @@ chat img {
     width: 10px;
 }
 
-
-
-
-
+/*user詳細ページ*/
 
 .user {
   width: 100px ;
@@ -182,7 +170,7 @@ chat img {
 }
 
 .users-show {
-  
+  margin-top: 40px;
 }
 
 .users-image {
@@ -197,8 +185,6 @@ chat img {
     
 }
 
- 
- 
 .user-tabs {
   margin-top: 40px;
   background-color: white;
@@ -212,8 +198,12 @@ chat img {
 
 .user-tabs a {
   display: inline-block;
-  padding: 30px;
-  padding: 16px 30px;
+  padding :16px 20px 16px 10px;
+}
+
+.user-tabs input {
+ margin-top: 10px;
+  
 }
 
 .user-tabs li.active a {
@@ -224,7 +214,114 @@ chat img {
     border-bottom: 2px solid #3ecdc6;
 }
 
+
+/*chat機能*/
+.url-chat :hover {
+    /*display: inline-block;*/
+    background-color: #EEEEEE; /* 背景色をグレー（#c9c9c9）にする */
+    
+}
+
+.url-chat a {
+    display: block;
+}
+
+
+.chat-index {
+　 background-color: white;
+   padding: 20px 30px;
+   overflow: hidden;
+   box-shadow: 0 2px 6px #c1ced7
+}
+
+.chat-user {
+    font-size: 18px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
 .content-box {
-    padding-bottom: 70px;
+    padding: 40px 0px 40px 0px;
     box-shadow: 0 2px 6px #c1ced7;
+}
+
+.content-box p {
+    text-align: center;
+}
+
+.talk-last {
+    color: #f5f5f5;
+}
+
+
+.chat-left{
+    display: inline-block;
+}
+
+/*フォロー機能*/
+.following {
+}
+
+.following-user {
+    
+    box-shadow: 0 2px 6px #c1ced7;
+    padding-left: 20px;
+    padding-top: 10px;
+    display: inline-block;
+    text-align: left;
+    
+}
+
+.f-image {
+    margin-bottom: 10px;
+}
+
+.following-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    box-shadow: 0 2px 6px #c1ced7;
+    object-fit: cover;
+}
+
+.following-image a {
+    display: inline-block;
+}
+
+.following-image input {
+    display: inline-block;
+}
+
+
+.f-btn {
+    margin-left: 60px;
+    margin-top: 30px;
+}
+
+
+.f-detail a {
+    font-size: 20px;
+}
+
+
+.f-content {
+    padding-bottom:  60px;
+}
+
+.r-f {
+    margin-top: 10px;
+  
+}
+
+.myarea-header {
+    margin: 100px auto 30px;
+}
+
+.new p {
+    margin: 40px auto 30px;
+}
+
+.already li {
+     margin: 40px auto 30px;
+     font-size: 20px;
 }

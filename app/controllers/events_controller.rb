@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-    before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+    before_action :authenticate_user!, :only => [:new, :show, :create, :edit, :update, :destroy]
     
     def index
         @events = Event.all.order(created_at: :desc)
@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     def show
         @event = Event.find(params[:id])
         @like = Like.new
-        @like_count = Like.where(id: @event.id).count
+        @like_count = Like.where(event_id: @event.id).count
         @message = Message.new
         @messages = Message.where(event_id: @event.id)
     end
@@ -20,8 +20,10 @@ class EventsController < ApplicationController
     def create
         @event = Event.new(event_params)
         if @event.save
+        flash[:notice] = '投稿しました。'
         redirect_to events_path
         else
+        flash[:alert] = '投稿できませんでした。'
         render 'events/new'
         end
     end

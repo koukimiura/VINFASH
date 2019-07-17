@@ -43,9 +43,7 @@
                 <p class="alert alert-success">
          <% if message.user_id == current_user.id %>
             <%= link_to message.content, message_path(message.id), method: :delete,
-            date: {confirm: "本当に投稿を削除しますか？",
-                   cancel: "やめる",
-　                 commit: "削除する"}, title: "削除の確認" %>
+            date: {confirm: "本当に投稿を削除しますか？"} %>
                    
         <% else %>
             <%= message.content %>
@@ -62,9 +60,7 @@
                 <p class="alert alert-info">
         <% if message.user_id == current_user.id %>
             <%= link_to message.content, message_path(message.id), method: :delete,
-            date: {confirm: "本当に投稿を削除しますか？",
-                   cancel: "やめる",
-　                 commit: "削除する"}, title: "削除の確認" %>
+            date: {confirm: "本当に投稿を削除しますか？"} %>
                    
         <% else %>
             <%= message.content %>
@@ -81,26 +77,33 @@
     <h4>メッセージはありません</h4>
     <br>
 <% end %>
-
-   <%= form_for @message do |f| %>
+        
+<%= form_for @message do |f| %>
     <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
         <%= f.hidden_field :post_id, :value => @post.id %>
     <p><%= f.submit "送信", class: 'btn btn-info' %></p>
-    <% end %> 
+<% end %> 
 </div>
     
     
 <% else %>
-    
-    
-    
-<div class="post-show-item text-center" >
-    <h1 class="item-name"><%=@post.title %></h1>
 
-  <div class="post-show-item2 text-left">
-     <p class="user-name">投稿者: <%= @post.user.name%></p>
-    
-<!--いいねをする処理-->    
+
+
+<h1 class="text-center"><%=@post.title %></h1>
+<hr>
+
+<div class= "posts-index-item text-left">
+      <div class="posts-left">
+   <%= image_tag @post.user.image.to_s, class: "users-image" %>
+      </div>
+      <div class="posts-right">
+    <p>名前:<%= link_to @post.user.name, user_path(@post.user_id) %></p>
+       </div> 
+         <div class="posts-middle">
+      投稿内容:<%= @post.content %>
+         </div>
+<!--いいねをする処理-->          
 <%if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
         <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
         <span class="fa fa-heart like-btn-unlike"></span>
@@ -111,17 +114,13 @@
          <% end %>
 <% end %>
     <%= @like_count %>
-   </div>  
-<hr>    
-    <div class= "post-show-content text-left">
-         <h3>投稿内容</h3><br><br>
-            <p ><%= @post.content %></p>
-        <div class="post-time">
-            <%=@post.created_at %>
-        </div>
-     </div>
+<div class="post-time">
+    <%=@post.created_at %>
 </div>
-
+</div>
+    
+    
+   
 
 <div class='chat text-center'>
     <h3 class="chat-h">コメント欄</h3>
@@ -133,9 +132,7 @@
                 <p class="alert alert-success">
              <% if message.user_id == current_user.id %>
             <%= link_to message.content, message_path(message.id), method: :delete,
-            date: {confirm: "本当に投稿を削除しますか？",
-                   cancel: "やめる",
-　                 commit: "削除する"}, title: "削除の確認" %>
+            date: {confirm: "本当に投稿を削除しますか？"} %>
                    
         <% else %>
             <%= message.content %>
@@ -152,9 +149,7 @@
                 <p class="alert alert-info">
          <% if message.user_id == current_user.id %>
             <%= link_to message.content, message_path(message.id), method: :delete,
-            date: {confirm: "本当に投稿を削除しますか？",
-                   cancel: "やめる",
-　                 commit: "削除する"}, title: "削除の確認" %>
+            date: {confirm: "本当に投稿を削除しますか？"} %>
                    
         <% else %>
             <%= message.content %>
@@ -171,7 +166,7 @@
     <h4>メッセージはありません</h4>
     <br>
 <% end %>
-
+        
    <%= form_for @message do |f| %>
     <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
         <%= f.hidden_field :post_id, :value => @post.id %>
@@ -185,9 +180,7 @@
 <% if @post.user_id == current_user.id %>
 <p><%= link_to '編集する', edit_post_path(@post.id), class:'btn btn-info' %></p>
 <p><%= link_to '削除', post_path(@post.id), method: :delete, class:'btn btn-warning',
-            date: {confirm: "本当に投稿を削除しますか？",
-                   cancel: "やめる",
-　                 commit: "削除する"}, title: "削除の確認" %>
+           date: {confirm: "本当に投稿を削除しますか？"} %>
                    
 <% end %>
 </div>
