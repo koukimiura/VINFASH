@@ -26,9 +26,6 @@
     list-style-type: none;
 }
 
-.ol, li {
-    list-style:decimal
-}
 
 .number-alarm{
     color: red;
@@ -51,7 +48,7 @@
 
 .posts-right{
     padding : 25px 25px 25px 0px;
-  
+    font-size: 18px;
 }
 
 .posts-image {
@@ -67,9 +64,9 @@
 }
 
 .post-show-item {
- background-color: #fff;
- margin: 40px auto;
- width:500px;
+    background-color: #fff;
+    margin: 40px auto;
+    width:500px;
 }
 
 .post-show-image{
@@ -81,6 +78,10 @@
 }
 
 
+.posts-content {
+    font-size: 15px;
+}
+
 
 .user-name {
     font-size: 20px;
@@ -91,18 +92,18 @@
     
 }
 
-.post-show-content{
-    
+.post-show-content p {
+    font-size: 15px;
 }
 
-
-.post-tim{
-    
+.posts-middle {
+    font-size: 15px
 }
+
 
 
 .post-time{
-    
+    text-align: right;
 }
 
 .form-error {
@@ -149,7 +150,8 @@
 .chat {
     background-color: #F5F5F5;
     margin: 40px auto;
-    width:500px;
+    padding: 20px 30px;
+　  overflow: hidden;
 }
 
 .chat-h {
@@ -169,16 +171,27 @@ chat img {
   clear: both;
 }
 
+
+    /*font-weight: bold;*/
+
 .users-show {
   margin-top: 40px;
 }
 
-.users-image {
+.users-show img {
   width: 80px;
   height: 80px;
   border-radius: 40%;
   box-shadow: 0 2px 6px #c1ced7;
   object-fit: cover;
+}
+
+.users-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 40%;
+      box-shadow: 0 2px 6px #c1ced7;
+      object-fit: cover;
 }
 
 .user-show-btn {
@@ -214,6 +227,23 @@ chat img {
     border-bottom: 2px solid #3ecdc6;
 }
 
+.friend a {
+    margin: 0px 30px 0px 0px;
+  
+}
+
+.content-box {
+     width: 90%;
+     height: 130px;
+     box-shadow: 0 2px 6px #c1ced7;
+     padding: 20px 20px 20px 35px;
+     text-align: left;
+}
+
+.content-box2 {
+    font-size: 12px;
+}
+
 
 /*chat機能*/
 .url-chat :hover {
@@ -240,43 +270,57 @@ chat img {
     margin-left: 10px;
 }
 
-.content-box {
-    padding: 40px 0px 40px 0px;
-    box-shadow: 0 2px 6px #c1ced7;
-}
 
-.content-box p {
-    text-align: center;
-}
-
-.talk-last {
-    color: #f5f5f5;
-}
-
-
-.chat-left{
+.chat-image {
     display: inline-block;
 }
+
+.chat-image img{
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    /*box-shadow: 0 2px 6px #c1ced7;*/
+    object-fit: hidden;
+}
+
+.chat-user-name{
+     display: inline-block;
+}
+
+
+.chat-talk{
+    display: inline-block;
+}
+
+
+
+
 
 /*フォロー機能*/
 .following {
+    margin: 5px auto 0px;
+}
+.following-user {
+    padding: 15px 10px;
+    box-shadow: 0 2px 6px #c1ced7;
+}
+/*おおおや*/
+.f-2 {
+    display: flex;
+    align-items: stretch;
 }
 
-.following-user {
-    
-    box-shadow: 0 2px 6px #c1ced7;
-    padding-left: 20px;
-    padding-top: 10px;
-    display: inline-block;
-    text-align: left;
-    
+.f-3 {
+    flex-direction: row;
 }
 
 .f-image {
-    margin-bottom: 10px;
+    margin: 0px 8px 10px;
+    justify-content: flex-start;
+    
 }
 
-.following-image {
+.following img {
     width: 60px;
     height: 60px;
     border-radius: 100%;
@@ -284,34 +328,59 @@ chat img {
     object-fit: cover;
 }
 
-.following-image a {
-    display: inline-block;
+.f-detail {
+    display: flex;
+    flex-direction: column;
 }
 
-.following-image input {
-    display: inline-block;
+.f-1{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    align-self: flex-start;
+    margin: 0px 5px;
 }
 
 
+/*ボタンとmore-detail*/
 .f-btn {
-    margin-left: 60px;
-    margin-top: 30px;
+    
 }
 
 
-.f-detail a {
-    font-size: 20px;
+.f-btn a {
+     width: 94px;
+    object-fit: hidden;
+    margin-left: 10px;
 }
 
+f-btn input {
+     width: 94px;
+    object-fit: hidden;
+    margin-left: 10px;
+} 
 
 .f-content {
-    padding-bottom:  60px;
+    padding-top:  5px;
+    font-size: 15px;
+    font-weight: 40px;
 }
+
+
+
+
+
+
+
 
 .r-f {
     margin-top: 10px;
   
 }
+
+
+/*myarea*/
 
 .myarea-header {
     margin: 100px auto 30px;
@@ -321,7 +390,17 @@ chat img {
     margin: 40px auto 30px;
 }
 
+
 .already li {
      margin: 40px auto 30px;
      font-size: 20px;
+     width: 180px;
 }
+
+
+
+
+
+/*.ol {
+    list-style:decimal;
+}*/

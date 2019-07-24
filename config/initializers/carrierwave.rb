@@ -3,7 +3,7 @@ require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
  
 CarrierWave.configure do |config|
-   if Rails.env.production?
+    Rails.env.production?
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'rails-first-bucket'
@@ -14,10 +14,10 @@ CarrierWave.configure do |config|
       region: 'ap-northeast-1',
       path_style: true
     }
-   else
-    config.storage :file
-     config.enable_processing = false if Rails.env.test?
-   end
+   #else
+    #config.storage :file
+     #config.enable_processing = false if Rails.env.test?
+   #send
 end
  
 CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/

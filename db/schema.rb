@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190711124809) do
+ActiveRecord::Schema.define(version: 20190722103021) do
 
   create_table "areas", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20190711124809) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "name",       default: "新規チャット"
+  end
+
+  create_table "consumptions", force: :cascade do |t|
+    t.string   "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "entries", force: :cascade do |t|
@@ -72,11 +78,18 @@ ActiveRecord::Schema.define(version: 20190711124809) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "my_consumptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "consumption_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "my_shoes", force: :cascade do |t|
-    t.string   "size"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "shoe_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -86,6 +99,12 @@ ActiveRecord::Schema.define(version: 20190711124809) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+  end
+
+  create_table "shoes", force: :cascade do |t|
+    t.string   "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "talks", force: :cascade do |t|
@@ -108,10 +127,8 @@ ActiveRecord::Schema.define(version: 20190711124809) do
     t.string   "adress"
     t.string   "image"
     t.string   "my_size"
-    t.string   "my_shoes_size"
     t.string   "my_height"
     t.string   "genre"
-    t.integer  "my_price"
     t.text     "self_introduction"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false

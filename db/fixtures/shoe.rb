@@ -1,4 +1,4 @@
-MyShoe.seed(:id,
+Shoe.seed(:id,
   {:id => 1, :size =>"~20cm"},
   {:id => 2, :size =>"20.5cm"},
   {:id => 3, :size =>"21cm"},
@@ -20,6 +20,5 @@ MyShoe.seed(:id,
   {:id => 17, :size =>"29cm"},
   {:id => 18, :size =>"29.5cm"},
   {:id => 19, :size =>"30cm" }
-  
   
   )

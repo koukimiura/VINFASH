@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, :only => [:new, :show, :create, :edit, :update, :destroy]
+    before_action :ensure_correct_user, :only => [:edit, :update]
     
     def index
         @posts = Post.all.order(created_at: :desc)
     end
     
-    def show
+    def shows
         @post = Post.find(params[:id])
         @like = Like.new
         @like_count = Like.where(post_id: @post.id).count
@@ -15,7 +16,6 @@ class PostsController < ApplicationController
     
     def new
         @post = Post.new
-
     end
     
     def create
@@ -49,6 +49,14 @@ class PostsController < ApplicationController
          @post = Post.find(params[:id])
          @post.destroy
          redirect_to posts_path
+    end
+    
+    def ensure_correct_user
+        @post = Post.find(params[:id])
+       if  @post.user_id != current_user.id
+           flash[:alert] = '権限はありません'
+           redirect_to :back
+       end
     end
     
     

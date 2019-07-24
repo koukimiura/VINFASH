@@ -5,12 +5,14 @@
 <% @anotherEntries.each do |entry| %>
 <% if entry.chat_id == @chat.id %>
 <div>
-    <div class="chat-index ">
-        <div class="chat-left">
-            <%= image_tag entry.user.image.to_s, size: "50x50" %> 
+    <div class="chat-index text-left">
+        <div class="chat-image">
+            <%= image_tag entry.user.image.to_s %> 
+        </div>
+        <div class="chat-user-name">
             <strong><%=link_to entry.user.name, user_path(entry.user_id) %></strong>
         </div>
-        <div class="chat-right text-left">
+        <div class="chat-talk">
             <!--message -->
         </div>
     </div>
@@ -18,12 +20,14 @@
 <% else %>
 <div class= "url-chat">
     <%= link_to chat_path(entry.chat_id) do %>
-        <div class="chat-index ">
-            <div class="chat-left">
-               <%= image_tag entry.user.image.to_s, size: "50x50" %> 
-               <strong><%= entry.user.name %></strong>
+        <div class="chat-index text-left">
+            <div class="chat-image">
+               <%= image_tag entry.user.image.to_s %> 
             </div>
-            <div class="chat-right text-left">
+            <div class="chat-user-name">
+                <strong><%= entry.user.name %></strong>
+            </div>
+            <div class="chat-talk">
                 <!--message -->
             </div>
         </div>
@@ -39,7 +43,7 @@
     <% if entry.chat_id == @chat.id %>
        <h2 class="text-center"><%= link_to entry.user.name, user_path(entry.user_id) %>
        <%= link_to chat_path(entry.chat_id), method: :delete, date: {confirm: "本当に投稿を削除しますか？"} do %>
-            <span class="fas fa-trash"></span>
+            <span class="fas fa-trash fa-lg"></span>
        <% end %>
        </h2>
     <% end %>

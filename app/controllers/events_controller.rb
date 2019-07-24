@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     before_action :authenticate_user!, :only => [:new, :show, :create, :edit, :update, :destroy]
-    
+    before_action :ensure_correct_user, :only => [ :edit, :update]
     def index
         @events = Event.all.order(created_at: :desc)
     end
@@ -45,6 +45,15 @@ class EventsController < ApplicationController
          @event = Event.find(params[:id])
          @event = @event.destroy
          redirect_to events_path
+    end
+    
+    
+    def ensure_correct_user
+        @event = Event.find(params[:id])
+            if @event.user_id != current_user.id
+                flash[:notice] = "権限はありません"
+                redirect_to :back
+            end
     end
     
     

@@ -1,4 +1,4 @@
 class Area < ApplicationRecord
-    has_many :my_areas
-    
+    #validates :user_id, allow_nil: true
+     has_many :my_areas
 end

@@ -1,4 +1,4 @@
-<h1 class="text-center">投稿一覧</h1>
+<h1 class="text-center">イベント投稿一覧</h1>
 <hr>
 
  <% @events.each do |event| %>
@@ -7,7 +7,7 @@
    <%= image_tag event.user.image.to_s, class: "users-image" %>
   </div>
   <div class="posts-right">
-    名前:<%= link_to event.user.name, user_path(event.user_id) %>
+    <strong>名前:<%= link_to event.user.name, user_path(event.user_id) %></strong>
    </div> 
      <div class="posts-middle">
       投稿内容:<%= link_to event.content, event_path(event.id), class: "posts-content" %>

@@ -1,30 +1,35 @@
 <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-6 user-show-left">
             
     <div class="users-show">
-        <%= image_tag @user.image.to_s, class: "users-image" %>
+        <%= image_tag @user.image.to_s %>
     </div>
     <h2><%= link_to @user.name, user_path(@user) %></h2>
     <!--フォローの数とフォロワー -->
-    <div class="text-left">
-    <%= link_to "Following", following_user_path(@user)%>
+    <div class="friend text-left">
     <%= @friend_following %>
-    <%= link_to "Followers", followers_user_path(@user)%>
+    <%= link_to  following_user_path(@user) do %>
+    <i class="fas fa-flag fa-2x"></i>
+    <% end %>
     <%= @friend_followers %>
+    <%= link_to followers_user_path(@user) do %>
+    <i class="far fa-flag fa-2x"></i>
+    <% end %>
     </div>
     <p><%= @user.email %></p>
     <p><%= @user.gender %> : 誕生日<%= @user.birthday %></p>
     <p>主な服のサイズ: <%= @user.my_size %></p>
-    <p>主な靴のサイズ: <%= @user.my_shoes_size %></p>
+    <p>主な靴のサイズ: <%= @shoe.size %></p>
     <p>身長: <%= @user.my_height %></p>
     <p>好きな洋服ジャンル: <%= @user.genre %></p>
-    <p>よく買い物に行く都道府県エリア: </p>
-    <p>よく買い物に行くエリア: </p>
-    <p>月に洋服にかける金額: <%= @user.my_price %></p>
-    <% if @area.present? %>
-     <p>よく買い物に行くエリア:<%= @area.name %><p>
+    <p>月に洋服にかける金額: <%= @consumptin.price %></p>
+    <% if @chosen_area.any? %>
+        <% @chosen_area.each do |area| %>
+        <% a = Area.find(area) %>
+             <p>よく買い物に行くエリア:<%= a.name %><p>
+        <% end %>
     <% else %>
-     <p>未記入</p>
+        <p>未記入</p>
     <% end %>
 <!-- ボタンの表示条件式 -->
 <div class="user-show-btn" >
@@ -68,7 +73,9 @@
 </div>
  <br>
 <div class="content-box">
-    <p><%= @user.self_introduction %></p>
+    <div class="content-box2">
+        <%= @user.self_introduction %>
+    </div>
 </div>
 </div>
 

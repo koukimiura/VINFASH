@@ -77,18 +77,15 @@
 <% @anotherEntries.each do |entry| %>
 <div class="url-chat">
     <%= link_to chat_path(entry.chat_id) do %>
-        <div class="chat-index ">
-            <div class="chat-left">
-               <%= image_tag entry.user.image.to_s, size: "50x50" %> 
+        <div class="chat-index text-left">
+            <div class="chat-image">
+               <%= image_tag entry.user.image.to_s %> 
             </div>
-            <div class="chat-right text-left">
-                <p><strong><%= entry.user.name %></strong></p>
-               
-                            
-                            <% a= Talk.where(entry_id: @talks) %>
-                            <% a.each do |b| %> 
-                                <p><%= b.content %></p>
-                            <% end %>
+            <div class="chat-user-name">
+                <strong><%= entry.user.name %></strong>
+            </div>
+            <div class="chat-talk">
+                <!--message -->
             </div>
         </div>
     <% end %>

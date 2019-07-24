@@ -8,7 +8,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   if Rails.env.production? || Rails.env.staging?
     storage :fog
   else
-    storage :file
+    storage :fog
   end
   
 
@@ -16,18 +16,24 @@ class ImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   # S3のディレクトリ名
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    if original_filename.present?
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}" 
+    else
+      
+    end
+     
   end
 # デフォルト画像は1200x5000に収まるようリサイズ
   #process resize_to_limit: [1200, 5000]
   
   # Provide a default URL as a default if there hasn't been a file uploaded:
-   def default_url(*args)
-  #   # For Rails 3.1+ asset pipeline compatibility:
-      #ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  "default.png"
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-   end
+  #def default_url(*args) if @user.image.nil?
+  #For Rails 3.1+ asset pipeline compatibility:
+  #ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  #"default.png"
+  #"/images/fallback/" + [version_name, "default.png"].compact.join('_')
+    #end
+  #end
 
 
   # Process files as they are uploaded:

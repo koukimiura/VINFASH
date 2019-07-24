@@ -20,11 +20,6 @@ Rails.application.routes.draw do
   end
  end
  
- 
- 
-  resources :areas, only: [:create]
-  
-  
   post 'likes/:post_id/create' => 'likes#create'
   post 'likes/:post_id/destroy' => 'likes#destroy'
   post 'likes/:event_id/create_event' => 'likes#create_event'
@@ -33,11 +28,11 @@ Rails.application.routes.draw do
   resources :events 
   resources :messages, only: [:create, :destroy]
   resources :talks, only: [:create, :destroy]
-  resources :chats, only:[:index, :show, :create, :edit, :update, :destroy] 
+  resources :chats, only:[:show, :create, :edit, :update, :destroy] 
   resources :my_areas, only:[:create, :destroy]
   get 'my_areas/:user_id/new' => 'my_areas#new'
   
   resources :friends, only:[:create, :destroy]
-  resources :my_shoe, only:[:create, :update, :destroy]
+  #resources :my_shoe, only:[:update, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

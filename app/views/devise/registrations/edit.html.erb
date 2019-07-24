@@ -40,6 +40,11 @@
     <%= f.text_field :adress, autofocus: true, autocomplete: "adress", class:"form-control" %>
   </div>
 
+    <div class="users-show">
+      <%= image_tag ("default.png") %>
+    </div>
+    <br>
+      
       <div class="field">
     <%= f.label :image %><br>
     <%= f.file_field :image, class:"form-control" %>
@@ -54,46 +59,19 @@
   
   
   <div class="field">
-    <%= f.label :my_shoes_size %>
+    <%= f.label :my_shoes %>
     <em class="number-alarm">＊選択してください</em>
     <br>
-    <%= fields_for @my_shoe do |my| %>
-    <%= my.collection_select(:user_id, @my_shoes, :id, :size) %>
+    <%= f.fields_for :my_shoes do |my| %>
+    <%= my.collection_select(:shoe_id, @shoes, :id, :size, :prompt => "選択してください") %>
     <% end %>
-  </div>
-  
- <div class="field">
-    <%= f.label :my_shoes_size %>
-    <em class="number-alarm">＊選択してください</em>
-    <br/>
-    ~20cm<%= f.check_box :my_shoes_size, {}, "~20cm", "false" %><br>
-    20.5cm<%= f.check_box :my_shoes_size, {}, "20.5cm", "false" %><br>
-    21cm<%= f.check_box :my_shoes_size, {}, "21cm", "false" %><br>
-    21.5cm<%= f.check_box :my_shoes_size, {}, "21.5cm", "false" %><br>
-    22cm<%= f.check_box :my_shoes_size, {}, "22cm", "false" %><br>
-    22.5cm<%= f.check_box :my_shoes_size, {}, "22.5cm", "false" %><br>
-    23cm<%= f.check_box :my_shoes_size, {}, "23cm", "false" %><br>
-    23.5cm<%= f.check_box :my_shoes_size, {}, "23.5cm", "false" %><br>
-    24cm<%= f.check_box :my_shoes_size, {}, "24cm", "false" %><br>
-    24.5cm<%= f.check_box :my_shoes_size, {}, "24.5cm", "false" %><br>
-    25cm<%= f.check_box :my_shoes_size, {}, "25cm", "false" %><br>
-    25.5cm<%= f.check_box :my_shoes_size, {}, "25.5cm", "false" %><br>
-    26cm<%= f.check_box :my_shoes_size, {}, "26cm", "false" %><br>
-    26.5cm<%= f.check_box :my_shoes_size, {}, "26.5cm", "false" %><br>
-    27cm<%= f.check_box :my_shoes_size, {}, "27cm", "false" %><br>
-    27.5cm<%= f.check_box :my_shoes_size, {}, "27.5cm", "false" %><br>
-    28cm<%= f.check_box :my_shoes_size, {}, "28cm", "false" %><br>
-    28.5cm<%= f.check_box :my_shoes_size, {}, "28.5cm", "false" %><br>
-    29cm<%= f.check_box :my_shoes_size, {}, "29cm", "false" %><br>
-    29.5cm<%= f.check_box :my_shoes_size, {}, "29.5cm", "false" %><br>
-    30cm~<%= f.check_box :my_shoes_size, {}, "30cm~", "false" %><br>
   </div>
   
   <div class="field">
     <%= f.label :my_height %>
     <em class="number-alarm">＊半角英数字で数値のみ記入</em>
     <br>
-    <%= f.number_field :my_height, autofocus: true, class:"form-control"%>cm
+    <%= f.number_field :my_height, autofocus: true %>cm
   </div>
   
   <div class="field">
@@ -108,8 +86,9 @@
     <%= f.label :月に洋服にかける金額 %>
     <em class="number-alarm">＊選択してください</em>
     <br>
-    <%= f.select :my_price, {"~5万円" => 1, "5~10万円" => 2, "10~15万円" => 3,"15~20万円" => 4,
-    "20~30万円" => 5,"30~50万円" => 6,"50~万円" => 7} %>
+    <%= f.fields_for :my_consumptions do |c| %>
+    <%= c.collection_select(:consumption_id, @consumptions, :id, :price, :prompt => "選択してください") %>
+    <% end %>
   </div>
   
   <div class="field">

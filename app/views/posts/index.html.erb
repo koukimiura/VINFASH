@@ -7,7 +7,7 @@
    <%= image_tag post.user.image.to_s, class: "users-image" %>
   </div>
   <div class="posts-right">
-    名前:<%= link_to post.user.name, user_path(post.user_id) %>
+    <strong>名前:<%= link_to post.user.name, user_path(post.user_id) %></strong>
    </div> 
      <div class="posts-middle">
       投稿内容:<%= link_to post.content, post_path(post.id), class: "posts-content" %>

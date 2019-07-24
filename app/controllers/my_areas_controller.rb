@@ -1,25 +1,20 @@
 class MyAreasController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create, :destroy]
     
-    
      def new
-        @user = User.find(params[:user_id])
         @my_area = MyArea.new
         @areas = Area.all
         
-        
-        
         @chosen_areas = []
-        
-        
-        
-        MyArea.where(user_id: @user.id).each do |my|
+    
+        MyArea.where(user_id: current_user.id).each do |my|
             if Area.find(my.area_id)
                 @chosen_areas.push(my.area_id)
-                #@number_count = Area.where(id: my.area_id).count
             end
         end
      end
+     
+     
      
      def create
          @my_area = MyArea.create(my_area_params)
@@ -34,7 +29,6 @@ class MyAreasController < ApplicationController
      end
     
     private
-    
     def my_area_params
         params.require(:my_area).permit(:area_id, :user_id).merge(:user_id => current_user.id)
     end

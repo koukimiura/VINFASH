@@ -1,8 +1,6 @@
 class FriendsController < ApplicationController
   before_action :authenticate_user!, only:[:create, :destroy]
 
-  
-    
   def create
         @friend = Friend.create(friend_params)
         redirect_to :back

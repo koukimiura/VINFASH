@@ -114,24 +114,36 @@
 <% else %>
     <% @receive_friends.each do |receive_friend| %>
         <% receive = User.find(receive_friend) %>
-           <h4>友達申請中</h4> 
-                <div class="following-user">
-                     <div class="f-image">
-                         <%= image_tag receive.image.to_s, class: "following-image" %>
-                         <%= form_for @friend do |f| %>
-                                <%= f.hidden_field :followed, :value => receive.id %>
-                                <%= f.submit "承認待ち！", class: "btn btn-warning" %>
-                        <% end %>
-                     </div>
-                         <div class="f-detail">
-                             <strong><%= link_to receive.name, user_path(receive.id) %></strong>
-                             <br>
-                             <p>ジャンル:<%= receive.genre %></p>
-                         </div>
-                             <div class="f-content">
-                                 <%= receive.self_introduction %>
-                             </div>
-                </div>
+           <h4>友達申請中</h4>
+           <div>
+               <div class="following-user">
+                   <div class="f-2">
+                       <div class="f-3">
+                           <div class="f-image">
+                             <%= image_tag receive.image.to_s, class: "following-image" %>
+                          </div>
+                       </div>
+                       <div class="f-detail">
+                           <div class="f-1">
+                               <div class="more-detail">
+                                   <strong><%= link_to receive.name, user_path(receive.id) %></strong>
+                                   <br>
+                                   <p>ジャンル:<%= receive.genre %></p>
+                               </div>
+                               <div class="f-btn">
+                                   <%= form_for @friend do |f| %>
+                                       <%= f.hidden_field :followed, :value => receive.id %>
+                                       <%= f.submit "承認待ち！", class: "btn btn-warning" %>
+                                   <% end %>
+                               </div>
+                           </div>
+                           <div class="f-content">
+                              <%= receive.self_introduction %>
+                          </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
       <% end %> 
 <% end %>
 
@@ -142,22 +154,34 @@
 <% else %>
 <% @friends.each do |friend| %>
     <% f= User.find(friend) %>
-         <h4>友達</h4> 
-            <div class="following-user">
-                     <div class="f-image">
-                         <%= image_tag f.image.to_s, class: "following-image" %>
-                         <%= link_to "友達", friend_path(f.id), method: :delete, class: "btn btn-info f-btn",
-                             date: {confirm: "本当に友達を解除しますか？"} %>
-                     </div>
-                         <div class="f-detail">
-                             <strong><%= link_to f.name, user_path(f.id) %></strong>
-                             <br>
-                             <p>ジャンル:<%= f.genre %></p>
-                         </div>
-                             <div class="f-content">
-                                 <%= f.self_introduction %>
-                             </div>
-                </div>
+        <h4>友達</h4>
+            <div>
+               <div class="following-user">
+                   <div class="f-2">
+                       <div class="f-3">
+                           <div class="f-image">
+                             <%= image_tag f.image.to_s, class: "following-image" %>
+                          </div>
+                       </div>
+                       <div class="f-detail">
+                           <div class="f-1">
+                               <div class="more-detail">
+                                   <strong><%= link_to f.name, user_path(f.id) %></strong>
+                                   <br>
+                                   <p>ジャンル:<%= f.genre %></p>
+                               </div>
+                               <div class="f-btn">
+                                   <%= link_to "友達", friend_path(f.id), method: :delete, class: "btn btn-info f-btn",
+                                   date: {confirm: "本当に友達を解除しますか？"} %>
+                               </div>
+                           </div>
+                           <div class="f-content">
+                              <%= f.self_introduction %>
+                          </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
       <% end %> 
 <% end %>
 
@@ -165,11 +189,24 @@
 <!--@userのフォローしているユーザーを表示ボタンはcurrent_userにとって -->
 <% @my_friend_followers.each do |my_friend_follower| %>
     <% mff2 = User.find(my_friend_follower) %>
-            <div class="following-user">
-                <div class="f-image">
-                    <%= image_tag mff2.image.to_s, class: "following-image" %>
-                    <% if current_user.id != mff2.id %>
-                                <% if Friend.find_by(follower: current_user.id, followed: mff2.id) &&
+        <div>
+           <div class="following-user">
+               <div class="f-2">
+                   <div class="f-3">
+                       <div class="f-image">
+                         <%= image_tag mff2.image.to_s, class: "following-image" %>
+                      </div>
+                   </div>
+                   <div class="f-detail">
+                       <div class="f-1">
+                           <div class="more-detail">
+                               <strong><%= link_to mff2.name, user_path(mff2.id) %></strong>
+                               <br>
+                               <p>ジャンル:<%= mff2.genre %></p>
+                           </div>
+                           <div class="f-btn">
+                               <% if current_user.id != mff2.id %>
+                                   <% if Friend.find_by(follower: current_user.id, followed: mff2.id) &&
                                       Friend.find_by(follower: mff2.id, followed: current_user.id) %>
                                         <%= form_for @chat do |f| %>
                                             <%= fields_for @entry do |e| %>
@@ -177,34 +214,33 @@
                                             <% end %>
                                         <%= f.submit "チャットする", class: "btn btn-info" %>
                                         <% end %>
-                                <% elsif Friend.find_by(follower: current_user.id, followed: mff2.id) &&
+                                  <% elsif Friend.find_by(follower: current_user.id, followed: mff2.id) &&
                                          !Friend.find_by(follower: mff2.id, followed: current_user.id) %>
                                         <%= link_to "友達申請中", friend_path(mff2.id), method: :delete, class: "btn btn-success f-btn",
                                             date: {confirm: "本当に投稿を削除しますか？"} %>
             
-                                 <% elsif !Friend.find_by(follower: current_user.id, followed: mff2.id) &&
+                                  <% elsif !Friend.find_by(follower: current_user.id, followed: mff2.id) &&
                                              Friend.find_by(follower: mff2.id, followed: current_user.id) %>
                                         <%= form_for @friend do |f| %>
-                                        <%= f.hidden_field :followed, :value => mff2.id %>
-                                        <%= f.submit "承認待ち！", class: "btn btn-warning" %>
+                                            <%= f.hidden_field :followed, :value => mff2.id %>
+                                            <%= f.submit "承認待ち！", class: "btn btn-warning" %>
                                         <% end %>   
-                                 <% else %>
+                                  <% else %>
                                         <%= form_for @friend do |f| %>
-                                        <%= f.hidden_field :followed, :value => mff2.id %>
-                                        <%= f.submit "友達になる。", class: "btn btn-primary" %>
+                                            <%= f.hidden_field :followed, :value => mff2.id %>
+                                            <%= f.submit "友達になる。", class: "btn btn-primary" %>
                                         <% end %>
-                                 <% end %> 
-                            <% end %>
-                </div>
-                    <div class="f-detail">
-                        <strong><%= link_to mff2.name, user_path(mff2.id) %></strong>
-                            <br>
-                             <p>ジャンル:<%= mff2.genre %></p>
-                     </div>
-                        <div class="f-content">
-                            <%= mff2.self_introduction %>
-                        </div>
-            </div>
+                                  <% end %> 
+                              <% end %>
+                           </div>
+                       </div>
+                       <div class="f-content">
+                          <%= mff2.self_introduction %>
+                      </div>
+                   </div>
+               </div>
+           </div>
+       </div>
 <% end %>
 </div>
 <!-- current_user.id == @user.id -->

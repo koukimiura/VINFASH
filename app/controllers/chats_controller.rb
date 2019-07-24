@@ -1,15 +1,15 @@
 class ChatsController < ApplicationController
-     before_action :authenticate_user!, only: [:index, :show,:create, :destroy]
-     #before_action :ensure_correct_user, only: [:index,:create, :destroy]
+     before_action :authenticate_user!, only: [:show, :edit, :update,:create, :destroy]
+     before_action :ensure_correct_user, only: [:edit, :update, :create, :destroy]
      
-    def index
-        @entries = Entry.where(user_id: current_user.id).order(created_at: :desc)
-        @messages1 = Message.where(chat_id: @entries.chat_id)
-    end
+    #def index
+       # @entries = Entry.where(user_id: current_user.id).order(created_at: :desc)
+        #@messages1 = Message.where(chat_id: @entries.chat_id)
+    #end
     
     def show
         @chat = Chat.find(params[:id])
-        #一覧（相手の名前を出す。）
+    #一覧（相手の名前を出す。）
      #each文配列をmyRoomIds代入
       myChatIds = []
         #current_userのレコードを取得
@@ -22,8 +22,7 @@ class ChatsController < ApplicationController
        #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
       @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', current_user.id)
        
-        
-        
+    
     if Entry.where(user_id: current_user.id, chat_id: @chat.id).present?
         #chat用
         @entry = Entry.find_by(chat_id: @chat.id)
@@ -48,12 +47,12 @@ class ChatsController < ApplicationController
     end
     
     
-    
+    #いずれ複数チャットができるアプリを作った時のためchatはnameカラムあり。
     def edit
         @chat = Chat.find(params{:id})
     end  
         
-        
+     #いずれ複数チャットができるアプリを作った時のためchatはnameカラムあり。   
     def update
         @chat.update(params_chat)
         redirect_to @chat
@@ -77,13 +76,9 @@ class ChatsController < ApplicationController
     
     
     private
-    
     def params_chat
        params.require(:chat).permit(name)
-        
     end
-    
-    
     
     def params_entry
         params.require(:entry).permit(:chat_id, :user_id).merge(chat_id: @chat.id)
