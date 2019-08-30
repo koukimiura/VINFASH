@@ -1,29 +1,41 @@
-<% if @post.image %>
-    <div class="post-show-item text-center" >
-        <h1 class="item-name"><%=@post.title %></h1>
-        <hr>
-            <div class="post-show-image" >
-                 <P><%= image_tag @post.image.to_s, :size => '640x326' %></P>
-            </div>
-          　<div class="post-show-item1 text-left">
-                <p class="user-name">投稿者: <%= @post.user.name%></p>
-                <!--いいねをする処理-->    
-                <% if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
-                        <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
-                        <span class="fa fa-heart like-btn-unlike fa-2x"></span>
-                        <% end %>
-                <% else %>
-                        <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
-                        <span class="fa fa-heart like-btn fa-2x"></span>
-                         <% end %>
-                <% end %>
-                    <%= @like_count %>
-            </div>  
-<hr> 
-            <div class= "post-show-content text-left">
-                 <h3>投稿内容</h3>
-                　　<br><br>
-                    <p ><%= @post.content %></p>
+<% if @post.image? %>
+    <div class="post-show-item text-left" >
+        <h1 class="item-name text-center"><%=@post.title %></h1>
+
+            <div class="post-image">
+                <div class="post-show-image text-center" >
+                     <%= image_tag @post.image.to_s%>
+                </div>
+    <hr>
+              　<div class="post-show-item1 text-left">
+              　    <% if @post.user.image? %>
+                       <div class="posts-left">
+                           <%= image_tag @post.user.image.to_s, class: "users-image" %>
+                       </div>
+                   <% else %>
+                       <div class="posts-left">
+                           <%= image_tag ("default.png"), class: "users-image" %>
+                       </div>
+                   <% end %>
+                       <div class="posts-right">
+                           <p>名前:<%= link_to @post.user.name, user_path(@post.user_id) %></p>
+                       </div> 
+                       <div class= "post-show-content text-left">
+                           <h3>投稿内容</h3>
+                           <%= @post.content %>
+                       </div>
+                </div>
+<!--いいねをする処理-->    
+                    <% if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
+                            <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+                            <span class="fa fa-heart like-btn-unlike fa-2x"></span>
+                            <% end %>
+                    <% else %>
+                            <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+                            <span class="fa fa-heart like-btn fa-2x"></span>
+                             <% end %>
+                    <% end %>
+                        <%= @like_count %>
                 <div class="post-time">
                     <%=@post.created_at %>
                 </div>
@@ -83,9 +95,15 @@
 <h1 class="text-center"><%=@post.title %></h1>
 <hr>
     <div class= "posts-index-item text-left">
-        <div class="posts-left">
-            <%= image_tag @post.user.image.to_s, class: "users-image" %>
-        </div>
+        <% if @post.user.image? %>
+            <div class="posts-left">
+               <%= image_tag @post.user.image.to_s, class: "users-image" %>
+           </div>
+        <% else %>
+            <div class="posts-left">
+                <%= image_tag ("default.png"), class: "users-image" %>
+            </div>
+        <% end %>
         <div class="posts-right">
             <p>名前:<%= link_to @post.user.name, user_path(@post.user_id) %></p>
         </div> 
@@ -115,15 +133,19 @@
                  <% if message.user_id == @post.user_id %>
                     <h4 class="text-right">
                         <p class="alert alert-success">
-                             <% if message.user_id == current_user.id %>
-                                 <%= link_to message.content, message_path(message.id), method: :delete,
+                            <% if message.user_id == current_user.id %>
+                                <%= link_to message.content, message_path(message.id), method: :delete,
                                     date: {confirm: "本当に投稿を削除しますか？"} %>
                             <% else %>
                                 <%= message.content %>
                             <% end %>
-                                <br><br>
-                                <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
+                            <br><br>
+                                <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                <% end %>
+                            <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
                         </p>
                      </h4>
                   <% else %>
@@ -135,9 +157,13 @@
                             <% else %>
                                 <%= message.content %>
                             <% end %>
-                                <br><br>
-                                <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
+                            <br><br>
+                                <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                <% end %>
+                            <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
                           </p>
                       </h4>
                   <% end %>

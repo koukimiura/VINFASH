@@ -1,0 +1,18 @@
+<h2 class="sub-title">通知</h2>
+    <% if @notifications.present? %>
+        <% @notifications.each do |notification| %>
+            <div class="notifications-index">
+                <div class="notifications">
+                    <div class="notification-content">
+                        <%= test(notification)%>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+            <p>通知なし</p>
+    <% end %>
+    
+    
+    
+    

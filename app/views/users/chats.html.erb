@@ -1,95 +1,154 @@
 <div class="row">
-        <div class="col-xs-6">
-            
-    <div class="users-show">
-        <%= image_tag @user.image.to_s, class: "users-image" %>
-    </div>
-    <h2><%= link_to @user.name, user_path(@user) %></h2>
-    <!--フォローの数とフォロワー -->
-    <div class="text-left">
-    <%= link_to  following_user_path(@user) do %>
-    <i class="fas fa-flag"></i>
-    <% end %>
-    <%= @friend_following %>
-    <%= link_to followers_user_path(@user) do %>
-    <i class="far fa-flag"></i>
-    <% end %>
-    <%= @friend_followers %>
-    </div>
-    <!--users_detail -->
-    <p><%= @user.email %></p>
-    <p><%= @user.gender %> : 誕生日<%= @user.birthday %></p>
-    <p>主な服のサイズ: <%= @user.my_size %></p>
-    <p>主な服のサイズ: <%= @user.my_shoes_size %></p>
-    <p>身長: <%= @user.my_height %></p>
-    <p>好きな洋服ジャンル: <%= @user.genre %></p>
-    <p>よく買い物に行く都道府県エリア: </p>
-    <p>よく買い物に行くエリア: </p>
-    <p>月に洋服にかける金額: <%= @user.my_price %></p>
-    <% if @area.present? %>
-     <p>よく買い物に行くエリア:<%= @area.name %><p>
-    <% else %>
-     <p>未記入</p>
-    <% end %>
- <div class="user-show-btn" >
-  <% if @user.id == current_user.id %>
-<%= link_to "編集する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
-<%= link_to "削除する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
-  <% else %>
-<%= form_for @chat do |f| %>
-<%= fields_for @entry do |e| %>
-<%= e.hidden_field :user_id, :value => @user.id %>
-<%= e.hidden_field :name, :value => @user.id %>
-<% end %>
-<%= f.submit "チャットする", class: "btn btn-primary" %>
-<% end %>
-  <% end %>
- </div>
- <br>
- <div class="content-box">
- <%= @user.self_introduction %>
- </div>
-</div>
-
-
-
-<div class="col-xs-6">
-    
-<ul class="user-tabs" >
-    <li><%= link_to "投稿", user_path(@user.id) %></li>
-    <li><%= link_to "いいね", likes_user_path(@user.id) %></li>
-    <li><%= link_to "イベントにいいね", likes_events_user_path(@user.id) %></li>
-    <li><%= link_to "イベント投稿", events_user_path(@user.id) %></li>
-<% if current_user.id == @user.id %>
-    <li class="active"><%= link_to "最近のチャット", chats_user_path(@user.id) %></li>
-<% else %>
-<%= form_for @chat do |f| %>
-<%= fields_for @entry do |e| %>
-<%= e.hidden_field :user_id, :value => @user.id %>
-<%= e.hidden_field :name, :value => @user.id %>
-<% end %>
-<li class="active"><%= f.submit "チャットする", class: "btn btn-primary" %></li>
-<% end %>
-<% end %>
-</ul>
-
-
-<% @anotherEntries.each do |entry| %>
-<div class="url-chat">
-    <%= link_to chat_path(entry.chat_id) do %>
-        <div class="chat-index text-left">
-            <div class="chat-image">
-               <%= image_tag entry.user.image.to_s %> 
-            </div>
-            <div class="chat-user-name">
-                <strong><%= entry.user.name %></strong>
-            </div>
-            <div class="chat-talk">
-                <!--message -->
+        <div class="col-xs-6 user-show-left">
+        <div class="users-show">
+            <% if @user.image? %>
+            <%= image_tag @user.image.to_s %>
+            <% else %>
+            <%= image_tag "default.png" %>
+            <% end %>
+        </div>
+        <h2><%= link_to @user.name, user_path(@user) %></h2>
+<!--フォローの数とフォロワー -->
+        <div class="friend text-left">
+        <%= @friend_following %>
+        <%= link_to  following_user_path(@user) do %>
+        <i class="fas fa-flag fa-2x"></i>
+        <% end %>
+        <%= @friend_followers %>
+        <%= link_to followers_user_path(@user) do %>
+        <i class="far fa-flag fa-2x"></i>
+        <% end %>
+        </div>
+        <p><%= @user.email %></p>
+        <p><%= @user.gender %> : 誕生日<%= @user.birthday %></p>
+        <p>主な服のサイズ: <%= @user.my_size %></p>
+        <% if @shoe.size %>
+            <p>主な靴のサイズ: <%= @shoe.size %></p>
+        <% else %>
+            <p>未記入</p>
+        <% end %>
+        <p>身長: <%= @user.my_height %></p>
+        <p>好きな洋服ジャンル: <%= @user.genre %></p>
+        <% if @consumption.price %>
+            <p>月に洋服にかける金額: <%= @consumption.price %></p>
+        <% else %>
+            <p>未記入</p>
+        <% end %>
+        <% if @chosen_area.any? %>
+            <% @chosen_area.each do |area| %>
+            <% a = Area.find(area) %>
+                 <p>よく買い物に行くエリア:<%= a.name %><p>
+            <% end %>
+        <% else %>
+            <p>未記入</p>
+        <% end %>
+<!-- ボタンの表示条件式 -->
+        <div class="user-show-btn" >
+        <% if @user.id == current_user.id %>
+                <%= link_to "編集する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
+                <%= link_to "削除する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
+<!-- 友達かどうか -->
+        <% elsif Friend.find_by(follower: current_user.id, followed: @user.id) &&
+                     !Friend.find_by(follower: @user.id, followed: current_user.id) %>
+                         
+                    <%= @relationship %><%= link_to "友達申請中", friend_path(@user.id), method: :delete, class: "btn btn-info",
+                    date: {confirm: "本当に投稿を削除しますか？"} %>
+                    
+        <% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
+                     Friend.find_by(follower: @user.id, followed: current_user.id) %>
+                <%= form_for @friend do |f| %>
+                <%= f.hidden_field :followed, :value => @user.id %>
+                <%= @relationship %><%= f.submit "承認待ち！", class: "btn btn-primary" %>
+                <% end %> 
+        
+        <% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
+                     !Friend.find_by(follower: @user.id, followed: current_user.id) %>
+                <%= form_for @friend do |f| %>
+                <%= f.hidden_field :followed, :value => @user.id %>
+                <%= @relationship %><%= f.submit "友達になる。", class: "btn btn-primary" %>
+                <% end %>
+        
+        <% else %>
+            <% if @isChat == true %>
+                 <%= link_to "チャットする", chat_path(@chatId), class: "btn btn-warning" %>
+                 
+            <% else %>
+                <%= form_for @chat do |f| %>
+                    <%= fields_for @entry do |e| %>
+                    <%= e.hidden_field :user_id, :value => @user.id %>
+                    <% end %>
+                <%= f.submit "チャットする", class: "btn btn-warning" %>
+                <% end %>
+            <% end %>
+        <% end %>
+        </div>
+<br>
+        <div class="content-box">
+            <div class="content-box2">
+                <%= @user.self_introduction %>
             </div>
         </div>
-    <% end %>
-</div>
-<% end %> 
-</div>
+    </div>
+
+<!-- タブ-->
+    <div class="col-xs-6">
+        <% if current_user.id == @user.id %>
+             <ul class="user-tabs" >
+                <li><%= link_to "投稿", user_path(@user.id) %></li>
+                <li><%= link_to "いいね", likes_user_path(@user.id) %></li>
+                <li><%= link_to "イベントにいいね", likes_events_user_path(@user.id) %></li>
+                <li><%= link_to "イベント投稿", events_user_path(@user.id) %></li>
+                <li class="active"><%= link_to "最近のチャット",chats_user_path(@user.id) %></li>
+            </ul>
+        <% end %>
+
+<!--一覧系-->
+        <% @anotherEntries.each do |an| %>
+            <div>
+               <div class="f-1">
+                   <%= link_to chat_path(an.chat_id) do %>
+                       <div class="following-user">
+                           <div class="f-2">
+                               <div class="f-icon">
+                                   <% if an.user.image? %>
+                                       <div class="f-image">
+                                         <%= image_tag an.user.image.to_s, class: "following-image" %>
+                                       </div>
+                                  <% else %>
+                                      <div class="f-image">
+                                          <%= image_tag "default.png", class: "following-image" %>
+                                      </div>
+                                  <% end %>
+                               </div>
+                               <div class="f-detail">
+                                   <div class="f-3">
+                                       <div class="more-detail">
+                                           <strong><%= an.user.name %></strong>
+                                           <br>
+                                       </div>
+                                       <div class="f-btn">
+                                           <div class="f-btn2">
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="f-content">
+                                       <!--message -->
+                                           <% @entries.each do |e| %>
+                                               <% if an.chat_id == e.chat_id %>
+                                                   <% talks = Talk.where(entry_id: e.id).order(created_at: :desc).limit(1) %>
+                                                       <% talks.each do |talk| %>
+                                                           <%= talk.content %>
+                                                   <% end %>
+                                              <% end %>
+                                         <% end %>
+                                  </div>
+                               </div>
+                           </div>
+                       </div>
+                   <% end %>
+               </div>
+           </div>
+       <% end %>
+    </div>
 </div> 
+         

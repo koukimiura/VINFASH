@@ -1,36 +1,46 @@
 <% if @event.image? %>
     <div class="post-show-item text-center" >
         <h1 class="item-name"><%=@event.title %></h1>
-        <hr>
-            <div class="post-show-image" >
-                <P><%= image_tag @event.image.to_s, :size => '640x326' %></P>
-            </div>
-            <div class="post-show-item1 text-left">
-                <p class="user-name">名前:<%= link_to @event.user.name, user_path(@event.user_id) %></p>
-                <!--いいねをする処理-->    
-                <% if Like.find_by(user_id: current_user.id, event_id: @event.id) %>
-                        <%= link_to("/likes/#{@event.id}/destroy_event", {method: "post"}) do %>
-                        <span class="fas fa-heart like-btn-unlike fa-2x"></span>
-                        <% end %>
-                <% else %>
-                        <%= link_to("/likes/#{@event.id}/create_event", {method: "post"}) do %>
-                        <span class="fas fa-heart like-btn fa-2x"></span>
-                         <% end %>
-                <% end %>
-                <%= @like_count %>
-            </div>  
-<hr> 
-            <div class= "post-show-content text-left">
-                <h3>投稿内容</h3>
-                <br><br>
-                <p ><%= @event.content %></p>
+            <div class="post-image">
+                <div class="post-show-image text-center" >
+                     <%= image_tag @event.image.to_s%>
+                </div>
+    <hr>
+              　<div class="post-show-item1 text-left">
+              　   <% if @event.user.image %>
+                       <div class="posts-left">
+                           <%= image_tag @event.user.image.to_s, class: "users-image" %>
+                       </div>
+                   <% else %>
+                       <div class="posts-left">
+                           <%= image_tag ("default.png"), class: "users-image" %>
+                       </div>
+                   <% end %>
+                       <div class="posts-right">
+                           <p>名前:<%= link_to @event.user.name, user_path(@event.user_id) %></p>
+                       </div> 
+                       <div class= "post-show-content text-left">
+                           <h3>投稿内容</h3>
+                           <%= @event.content %>
+                       </div>
+                </div>
+<!--いいねをする処理-->    
+                    <% if Like.find_by(user_id: current_user.id, event_id: @event.id) %>
+                            <%= link_to("/likes/#{@event.id}/destroy_event", {method: "post"}) do %>
+                            <span class="fa fa-heart like-btn-unlike fa-2x"></span>
+                            <% end %>
+                    <% else %>
+                            <%= link_to("/likes/#{@event.id}/create_event", {method: "post"}) do %>
+                            <span class="fa fa-heart like-btn fa-2x"></span>
+                             <% end %>
+                    <% end %>
+                        <%= @like_count %>
                 <div class="post-time">
                     <%=@event.created_at %>
                 </div>
             </div>
     </div>
-
-<<div class='chat text-center'>
+<div class='chat text-center'>
     <h3 class="chat-h">コメント欄</h3>
         <% if @messages.present? %>
             <% @messages.each do |message| %>
@@ -43,9 +53,13 @@
                             <% else %>
                                 <%= message.content %>
                             <% end %>
-                                <br><br>
-                                <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
+                            <br><br>
+                                <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                <% end %>
+                            <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
                         </p>
                      </h4>
                   <% else %>
@@ -57,11 +71,15 @@
                             <% else %>
                                 <%= message.content %>
                             <% end %>
-                                <br><br>
-                                <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
-                                        </p>
-                                    </h4>
+                            <br><br>
+                                <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                <% end %>
+                            <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
+                        </p>
+                    </h4>
                   <% end %>
             <% end %>
         <% else %>
@@ -82,9 +100,15 @@
 <h1 class="text-center"><%=@event.title %></h1>
 <hr>   
     <div class= "posts-index-item text-left">
-        <div class="posts-left">
-            <%= image_tag @event.user.image.to_s, class: "users-image" %>
-        </div>
+        <% if @event.user.image.present? %>
+            <div class="posts-left">
+               <%= image_tag @event.user.image.to_s, class: "users-image" %>
+           </div>
+        <% else %>
+            <div class="posts-left">
+                <%= image_tag ("default.png"), class: "users-image" %>
+            </di>
+        <% end %>
         <div class="posts-right">
             <p>名前:<%= link_to @event.user.name, user_path(@event.user_id) %></p>
             <p>開催場所:<%= @event.location %></p>
@@ -125,23 +149,31 @@
                             <% else %>
                                 <%= message.content %>
                             <% end %>
-                                <br><br>
-                                <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
+                            <br><br>
+                                <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                <% end %>
+                            <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
                         </p>
                     </h4>
                 <% else %>
                     <h4 class="text-left">
                         <p class="alert alert-info">
-                            <% if message.user_id == current_user.id %>
+                           <% if message.user_id == current_user.id %>
                                <%= link_to message.content, message_path(message.id), method: :delete,
                                     date: {confirm: "本当に投稿を削除しますか？"}%>
                            <% else %>
                                <%= message.content %>
                            <% end %>
-                               <br><br>
-                               <%= image_tag message.user.image.to_s, size: "50x50" %>
-                               <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
+                           <br><br>
+                               <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                               <% else %>
+                                    <%= image_tag ("default.png"), size: "50x50" %>
+                               <% end %>
+                           <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
                         </p>
                     </h4>
                 <% end %>

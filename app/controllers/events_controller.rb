@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
     before_action :authenticate_user!, :only => [:new, :show, :create, :edit, :update, :destroy]
     before_action :ensure_correct_user, :only => [ :edit, :update]
+    before_action :forbid_login_user, only: [:show, :new, :create, :edit, :update, :destroy]
+    
     def index
         @events = Event.all.order(created_at: :desc)
     end

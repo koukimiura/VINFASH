@@ -3,7 +3,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
     #before_action :configure_sign_up_params, only: [:create]
    before_action :configure_account_update_params, only: [:update]
+   #before_action :children_params, only: [:update]
    protect_from_forgery #追記
+   before_action :shoeAll, only: [:edit, :update]
+   before_action :consumptionAll, only: [:edit, :update]
    
   # GET /resource/sign_up
    # def new
@@ -24,9 +27,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new
     #my_shoe
     @user.my_shoes.build
-    @shoes = Shoe.all
+    # @shoes = Shoe.all
     #my_consumption
-    @consumptions = Consumption.all
+    #@consumptions = Consumption.all
     @user.my_consumptions.build
      super
    end
@@ -54,6 +57,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
    protected
    
+   def shoeAll
+     @shoes = Shoe.all
+   end
+   
+   def consumptionAll
+     @consumptions = Consumption.all
+   end
+   
 
   # If you have extra params to permit, append them to the sanitizer.
     #def configure_sign_up_params
@@ -68,9 +79,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
      keys: [:name, :gender, :birthday, :adress, :image, :my_size,
      :my_height, :genre, :self_introduction,
      :my_shoes_attributes => [:id, :shoe_id, :user_id],
-     :my_consumptions_attributes => [:id, :consumption_id, :user_id]])
+     :my_consumptions_attributes => [:id, :consumption_id, :user_id]]) 
+     
      logger.debug("my_shoes_attributes => #{params[:user][:my_shoes_attributes]}")
   end
+  
 
   # The path used after sign up.
    def after_sign_up_path_for(resource)
@@ -81,4 +94,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
 end

@@ -1,12 +1,15 @@
 <h1 class= "text-center">編集する</h1>
 <hr>
 
+<% if @post.image? %>
+    <div class="posts-edit-image">
+        <p class= "text-center"><%= image_tag @post.image.to_s, :size => '640x326' %></p>
+    </div>
+<hr>
+<% else %>
+    <div></div>
+<% end %>
 
-<div class="posts-edit-image">
-    <p class= "text-center"><%= image_tag @post.image.to_s, :size => '640x326' %></p>
-</div>
-
- <hr>
 
 <%= form_for @post do |f| %>
 <div class="form">

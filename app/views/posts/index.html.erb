@@ -1,21 +1,29 @@
 <h1 class="text-center">投稿一覧</h1>
 <hr>
 
- <% @posts.each do |post| %>
- <div class= "posts-index-item">
-  <div class="posts-left">
-   <%= image_tag post.user.image.to_s, class: "users-image" %>
+<% @posts.each do |post| %>
+  <div class= "posts-index-item">
+    <% if post.user.image.present? %>
+      <div class="posts-left">
+        <%= image_tag post.user.image.to_s, class: "users-image" %>
+      </div>
+    <% else %>
+      <div class="posts-left">
+        <%= image_tag ("default.png"), class: "users-image" %>
+      </div>
+   <% end %>
+      <div class="posts-right">
+        <strong>名前:<%= link_to post.user.name, user_path(post.user_id) %></strong>
+      </div> 
+      <div class="posts-middle">
+        投稿内容:<%= link_to post.content, post_path(post.id), class: "posts-content" %>
+      </div>
+      <% if post.image? %>
+        <div class="posts-bottom" >
+            <%= image_tag post.image.to_s, class: "posts-image" %>
+        </div>
+      <% else %>
+        <div></div>
+     <% end %>
   </div>
-  <div class="posts-right">
-    <strong>名前:<%= link_to post.user.name, user_path(post.user_id) %></strong>
-   </div> 
-     <div class="posts-middle">
-      投稿内容:<%= link_to post.content, post_path(post.id), class: "posts-content" %>
-     </div>
-     <div class="posts-bottom" >
-  <% if post.image.present? %>
-      <%= image_tag post.image.to_s, class: "posts-image" %>
-  <% end %>
-     </div>
-     </div>
- <% end %>
+<% end %>

@@ -1,5 +1,6 @@
 class MyAreasController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create, :destroy]
+    before_action :forbid_login_user
     
      def new
         @my_area = MyArea.new
@@ -18,8 +19,10 @@ class MyAreasController < ApplicationController
      
      def create
          @my_area = MyArea.create(my_area_params)
+          @my_area.save
          flash[:notice] = 'エリアを登録しました'
          redirect_to :back
+             
      end
     
      def destroy

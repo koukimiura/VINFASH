@@ -1,139 +1,140 @@
 <div class="row">
-        <div class="col-xs-6 user-show-left">
-            
-    <div class="users-show">
-        <%= image_tag @user.image.to_s %>
-    </div>
-    <h2><%= link_to @user.name, user_path(@user) %></h2>
-    <!--フォローの数とフォロワー -->
-    <div class="friend text-left">
-    <%= @friend_following %>
-    <%= link_to  following_user_path(@user) do %>
-    <i class="fas fa-flag fa-2x"></i>
-    <% end %>
-    <%= @friend_followers %>
-    <%= link_to followers_user_path(@user) do %>
-    <i class="far fa-flag fa-2x"></i>
-    <% end %>
-    </div>
-    <p><%= @user.email %></p>
-    <p><%= @user.gender %> : 誕生日<%= @user.birthday %></p>
-    <p>主な服のサイズ: <%= @user.my_size %></p>
-    <p>主な靴のサイズ: <%= @shoe.size %></p>
-    <p>身長: <%= @user.my_height %></p>
-    <p>好きな洋服ジャンル: <%= @user.genre %></p>
-    <p>月に洋服にかける金額: <%= @consumptin.price %></p>
-    <% if @chosen_area.any? %>
-        <% @chosen_area.each do |area| %>
-        <% a = Area.find(area) %>
-             <p>よく買い物に行くエリア:<%= a.name %><p>
-        <% end %>
-    <% else %>
-        <p>未記入</p>
-    <% end %>
-<!-- ボタンの表示条件式 -->
-<div class="user-show-btn" >
-<% if @user.id == current_user.id %>
-        <%= link_to "編集する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
-        <%= link_to "削除する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
-<!-- 友達かどうか -->
-<% elsif Friend.find_by(follower: current_user.id, followed: @user.id) &&
-             !Friend.find_by(follower: @user.id, followed: current_user.id) %>
-                 
-            <%= @relationship %><%= link_to "友達申請中", friend_path(@user.id), method: :delete, class: "btn btn-info",
-            date: {confirm: "本当に投稿を削除しますか？"} %>
-            
-<% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
-             Friend.find_by(follower: @user.id, followed: current_user.id) %>
-        <%= form_for @friend do |f| %>
-        <%= f.hidden_field :followed, :value => @user.id %>
-        <%= @relationship %><%= f.submit "承認待ち！", class: "btn btn-primary" %>
-        <% end %> 
-
-<% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
-             !Friend.find_by(follower: @user.id, followed: current_user.id) %>
-        <%= form_for @friend do |f| %>
-        <%= f.hidden_field :followed, :value => @user.id %>
-        <%= @relationship %><%= f.submit "友達になる。", class: "btn btn-primary" %>
-        <% end %>
-        
-<% else %>
-    <% if @isChat == true %>
-         <%= link_to "チャットする", chat_path(@chatId), class: "btn btn-warning" %>
-         
-    <% else %>
-        <%= form_for @chat do |f| %>
-            <%= fields_for @entry do |e| %>
-            <%= e.hidden_field :user_id, :value => @user.id %>
+    <div class="col-xs-6 user-show-left">
+        <div class="users-show">
+            <% if @user.image? %>
+            <%= image_tag @user.image.to_s %>
+            <% else %>
+            <%= image_tag "default.png" %>
             <% end %>
-        <%= f.submit "チャットする", class: "btn btn-warning" %>
+        </div>
+        <h2><%= link_to @user.name, user_path(@user) %></h2>
+<!--フォローの数とフォロワー -->
+        <div class="friend text-left">
+        <%= @friend_following %>
+        <%= link_to  following_user_path(@user) do %>
+        <i class="fas fa-flag fa-2x"></i>
         <% end %>
-    <% end %>
-<% end %>
-</div>
- <br>
-<div class="content-box">
-    <div class="content-box2">
-        <%= @user.self_introduction %>
+        <%= @friend_followers %>
+        <%= link_to followers_user_path(@user) do %>
+        <i class="far fa-flag fa-2x"></i>
+        <% end %>
+        </div>
+        <p><%= @user.email %></p>
+        <p><%= @user.gender %> : 誕生日<%= @user.birthday %></p>
+        <p>主な服のサイズ: <%= @user.my_size %></p>
+        <% if @shoe.size %>
+            <p>主な靴のサイズ: <%= @shoe.size %></p>
+        <% else %>
+            <p>未記入</p>
+        <% end %>
+        <p>身長: <%= @user.my_height %></p>
+        <p>好きな洋服ジャンル: <%= @user.genre %></p>
+        <% if @consumption.price %>
+            <p>月に洋服にかける金額: <%= @consumption.price %></p>
+        <% else %>
+            <p>未記入</p>
+        <% end %>
+        <% if @chosen_area.any? %>
+            <% @chosen_area.each do |area| %>
+            <% a = Area.find(area) %>
+                 <p>よく買い物に行くエリア:<%= a.name %><p>
+            <% end %>
+        <% else %>
+            <p>未記入</p>
+        <% end %>
+<!-- ボタンの表示条件式 -->
+        <div class="user-show-btn" >
+        <% if @user.id == current_user.id %>
+                <%= link_to "編集する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
+                <%= link_to "削除する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
+<!-- 友達かどうか -->
+        <% elsif Friend.find_by(follower: current_user.id, followed: @user.id) &&
+                     !Friend.find_by(follower: @user.id, followed: current_user.id) %>
+                         
+                    <%= @relationship %><%= link_to "友達申請中", friend_path(@user.id), method: :delete, class: "btn btn-info",
+                    date: {confirm: "本当に投稿を削除しますか？"} %>
+                    
+        <% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
+                     Friend.find_by(follower: @user.id, followed: current_user.id) %>
+                <%= form_for @friend do |f| %>
+                <%= f.hidden_field :followed, :value => @user.id %>
+                <%= @relationship %><%= f.submit "承認待ち！", class: "btn btn-primary" %>
+                <% end %> 
+        
+        <% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
+                     !Friend.find_by(follower: @user.id, followed: current_user.id) %>
+                <%= form_for @friend do |f| %>
+                <%= f.hidden_field :followed, :value => @user.id %>
+                <%= @relationship %><%= f.submit "友達になる。", class: "btn btn-primary" %>
+                <% end %>
+        
+        <% else %>
+            <% if @isChat == true %>
+                 <%= link_to "チャットする", chat_path(@chatId), class: "btn btn-warning" %>
+                 
+            <% else %>
+                <%= form_for @chat do |f| %>
+                    <%= fields_for @entry do |e| %>
+                    <%= e.hidden_field :user_id, :value => @user.id %>
+                    <% end %>
+                <%= f.submit "チャットする", class: "btn btn-warning" %>
+                <% end %>
+            <% end %>
+        <% end %>
+        </div>
+<br>
+        <div class="content-box">
+            <div class="content-box2">
+                <%= @user.self_introduction %>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 
 
 
 <!-- tabu -->
-<div class="col-xs-6">
- <ul class="user-tabs" >
-    <li class="active"><%= link_to "投稿", user_path(@user.id) %></li>
-    <li><%= link_to "いいね", likes_user_path(@user.id) %></li>
-    <li><%= link_to "イベントにいいね", likes_events_user_path(@user.id) %></li>
-    <li><%= link_to "イベント投稿", events_user_path(@user.id) %></li>
-<% if current_user.id == @user.id %>
-    <li><%= link_to "最近のチャット",chats_user_path(@user.id) %></li>
-<% elsif Friend.find_by(follower: current_user.id, followed: @user.id) &&
-             Friend.find_by(follower: @user.id, followed: current_user.id) %>
-        <%= form_for @chat do |f| %>
-        <%= fields_for @entry do |e| %>
-        <%= e.hidden_field :user_id, :value => @user.id %>
+    <div class="col-xs-6">
+        <% if current_user.id == @user.id %>
+             <ul class="user-tabs" >
+                <li class="active"><%= link_to "投稿", user_path(@user.id) %></li>
+                <li><%= link_to "いいね", likes_user_path(@user.id) %></li>
+                <li><%= link_to "イベントにいいね", likes_events_user_path(@user.id) %></li>
+                <li><%= link_to "イベント投稿", events_user_path(@user.id) %></li>
+                <li><%= link_to "最近のチャット",chats_user_path(@user.id) %></li>
+            </ul>
+        <% else %>
+            <ul class="user-tabs2" >
+                <li class="active"><%= link_to "投稿", user_path(@user.id) %></li>
+                <li><%= link_to "いいね", likes_user_path(@user.id) %></li>
+                <li><%= link_to "イベントにいいね", likes_events_user_path(@user.id) %></li>
+                <li><%= link_to "イベント投稿", events_user_path(@user.id) %></li>
+            </ul>
         <% end %>
-        <li><%= f.submit "チャットする", class: "btn btn-warning" %></li>
-        <% end %>
-<% elsif Friend.find_by(follower: current_user.id, followed: @user.id) &&
-             !Friend.find_by(follower: @user.id, followed: current_user.id) %>
-             
-            <li><%= link_to "友達申請中", following_user_path(current_user.id) %></li>
-            
-<% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
-             Friend.find_by(follower: @user.id, followed: current_user.id) %>
         
-            <li><%= link_to "承認待ち", followers_user_path(current_user.id) %></li>
-
-<% else %>
-        <%= form_for @friend do |f| %>
-        <%= f.hidden_field :followed, :value => @user.id %>
-        <li><%= f.submit "友達になる。", class: "btn btn-primary" %></li>
-        <% end %>
-<% end %>
-</ul>
-
-
-
 <!-- 一覧系 -->
-<% @user.posts.each do |post| %>
-  <div class= "posts-index-item">
-    <div class="posts-left">
-   <%= image_tag post.user.image.to_s, class: "users-image" %>
+        <% @user.posts.each do |post| %>
+            <div class= "posts-index-item">
+                <div class="posts-left">
+                   <% if post.user.image? %>
+                       <%= image_tag post.user.image.to_s, class: "users-image" %>
+                   <% else %>
+                       <%= image_tag "default.png", class: "users-image" %>
+                   <% end %>
+                </div>
+                <div class="posts-right">
+                    名前:<%= link_to post.user.name, user_path(post.user_id) %>
+                </div> 
+                <div class="posts-middle">
+                    投稿内容:<%= link_to post.content, post_path(post.id), class: "posts-content" %>
+                </div>
+                    <% if post.image? %>
+                        <div class="posts-bottom" >
+                            <%= image_tag post.image.to_s, class: "posts-image" %>
+                        </div>
+                    <% else %>
+                        <div></div>
+                    <% end %>
+            </div>
+        <% end %>
     </div>
-      <div class="posts-right">
-    名前:<%= link_to post.user.name, user_path(post.user_id) %>
-       </div> 
-         <div class="posts-middle">
-    投稿内容:<%= link_to post.content, post_path(post.id), class: "posts-content" %>
-         </div>
-         <div class="posts-bottom" >
-    <%= image_tag post.image.to_s, class: "posts-image" %>
-         </div>
-   </div>
-<% end %>
-</div>
 </div>

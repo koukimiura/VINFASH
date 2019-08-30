@@ -19,4 +19,5 @@ class Message < ApplicationRecord
     belongs_to :user
     belongs_to :post
     belongs_to :event
+    has_many :notifications, :dependent => :destroy
 end

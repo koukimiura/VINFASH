@@ -1,8 +1,15 @@
 class FriendsController < ApplicationController
   before_action :authenticate_user!, only:[:create, :destroy]
+  before_action :forbid_login_user
 
   def create
         @friend = Friend.create(friend_params)
+        @notifcation=Notification.new(
+          visiter_id: @friend.follower,
+          visited_id: @friend.followed,
+          action: "F"
+          )
+        @notifcation.save if notification.valid?
         redirect_to :back
         flash[:notice] = '申請しました。'
   end

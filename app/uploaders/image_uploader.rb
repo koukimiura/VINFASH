@@ -16,13 +16,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   # S3のディレクトリ名
   def store_dir
-    if original_filename.present?
+    original_filename.present?
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}" 
-    else
-      
-    end
-     
   end
+  
 # デフォルト画像は1200x5000に収まるようリサイズ
   #process resize_to_limit: [1200, 5000]
   
@@ -95,9 +92,4 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-  
-  #def default_url
-    #"default.png"
-  #end
-  
 end

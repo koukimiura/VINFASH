@@ -1,11 +1,35 @@
 class MessagesController < ApplicationController
     before_action :authenticate_user!, only: [:create, :destroy]
+    before_action :forbid_login_user
     
     def create
         @message = Message.create(message_params)
-            redirect_to :back
             
+        if @message.post_id?
+            @post = Post.find(@mesage.post_id)
+            @notification = Notification.new(
+                visiter_id: @message.user_id,
+                visited_id: @post.user_id,
+                post_id: @post.id,
+                messsage_id: @message.id,
+                action: "m_on_post"
+                )
+            @notificatioz.save if notification.valid?
+        end
        
+       if @message.event_id?
+            @event = Event.find(@mesage.event_id)
+            @notification = Notification.new(
+                visiter_id: @message.user_id,
+                visited_id: @event.user_id,
+                event_id: @event.id,
+                messsage_id: @message.id,
+                action: "m_on_event"
+                )
+            @notificatioz.save if notification.valid?
+       end
+        
+       redirect_to :back
     end
     
     def destroy

@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
      before_action :authenticate_user!, only: [:show, :edit, :update,:create, :destroy]
-     before_action :ensure_correct_user, only: [:edit, :update, :create, :destroy]
+     before_action :forbid_login_user
      
     #def index
        # @entries = Entry.where(user_id: current_user.id).order(created_at: :desc)
@@ -22,7 +22,12 @@ class ChatsController < ApplicationController
        #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
       @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', current_user.id)
        
-    
+      #talk一覧(chat一覧に最新メッセージを表示)
+      # user参加のチャット相手がわかる
+      @entries = Entry.where(chat_id: myChatIds)
+       
+       
+    #正しいユーザーかどうか
     if Entry.where(user_id: current_user.id, chat_id: @chat.id).present?
         #chat用
         @entry = Entry.find_by(chat_id: @chat.id)
@@ -49,30 +54,29 @@ class ChatsController < ApplicationController
     
     #いずれ複数チャットができるアプリを作った時のためchatはnameカラムあり。
     def edit
-        @chat = Chat.find(params{:id})
+        #@chat = Chat.find(params{:id})
+        redirect_to posts_path
     end  
         
      #いずれ複数チャットができるアプリを作った時のためchatはnameカラムあり。   
     def update
-        @chat.update(params_chat)
-        redirect_to @chat
+        #@chat.update(params_chat)
+        #redirect_to @chat
+        redirect_to posts_path
     end
     
     def destroy
         @chat = Chat.find(params[:id])
-        @chat.destroy
-        redirect_to :back
+         if Entry.where(user_id: current_user.id, chat_id: @chat.id).present?
+        #chat用
+            @chat.destroy
+            redirect_to :back
+        else
+            render 'users/index'
+            flash[:alert] = '権限はありません'
+         end
     end
     
-    def ensure_correct_user
-     if Entry.where(user_id: current_user.id, chat_id: @chat.id).present?
-     else
-      flash[:alert] = "権限はありません"
-      #redirect_to :back
-      redirect_to :back
-     end
-
-    end
     
     
     private

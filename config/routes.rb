@@ -6,6 +6,7 @@ Rails.application.routes.draw do
  :passwords     => 'users/passwords'
  
   }
+  
   resources :posts 
   root 'home#top'
   resources :home, only: [:top]
@@ -31,8 +32,8 @@ Rails.application.routes.draw do
   resources :chats, only:[:show, :create, :edit, :update, :destroy] 
   resources :my_areas, only:[:create, :destroy]
   get 'my_areas/:user_id/new' => 'my_areas#new'
-  
   resources :friends, only:[:create, :destroy]
-  #resources :my_shoe, only:[:update, :destroy]
+  get 'notifications/post_event_index' => 'notifications#post_event_index'
+  get 'notifications/friends_index' => 'notifications#friends_index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

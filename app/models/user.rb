@@ -4,12 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-         #validates :name, {presence: true}, length: { maximum: 25 }
-         #validates :birthday, {presence: true}
-         #validates :gender, {presence: true}
-         #validates :my_size, {presence: true}
-         #validates :my_height, {presence: true}
-         #validates :genre, {presence: true}, length: { maximum: 25 }
+         validates :name, length: { maximum: 25 }, presence: true, on: :update
+         validates :birthday, presence: true, on: :update
+         validates :gender, presence: true, on: :update
+         validates :my_size, presence: true, on: :update
+         validates :my_height, presence: true, on: :update
+         validates :genre, length: { maximum: 25 }, presence: true,  on: :update
          
           mount_uploader :image, ImageUploader
          
@@ -22,7 +22,12 @@ class User < ApplicationRecord
          
          has_many :my_areas, dependent: :destroy
          has_many :my_shoes, dependent: :destroy
-         accepts_nested_attributes_for :my_shoes#, allow_destroy: true 
+         accepts_nested_attributes_for :my_shoes, allow_destroy: true 
          has_many :my_consumptions, dependent: :destroy
-         accepts_nested_attributes_for :my_consumptions#, allow_destroy: true
+         accepts_nested_attributes_for :my_consumptions, allow_destroy: true
+         
+         has_many :user1,  class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
+         has_many :user2,  class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+         #has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
+         #has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 end

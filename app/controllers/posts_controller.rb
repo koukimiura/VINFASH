@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, :only => [:new, :show, :create, :edit, :update, :destroy]
-    before_action :ensure_correct_user, :only => [:edit, :update]
+    before_action :ensure_correct_user, :only => [:edit, :update, :destroy]
+    before_action :forbid_login_user, only: [:show, :new, :create, :edit, :update, :destroy]
     
     def index
         @posts = Post.all.order(created_at: :desc)
     end
     
-    def shows
+    def show
         @post = Post.find(params[:id])
         @like = Like.new
         @like_count = Like.where(post_id: @post.id).count
