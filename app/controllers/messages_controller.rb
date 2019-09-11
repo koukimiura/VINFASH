@@ -3,34 +3,40 @@ class MessagesController < ApplicationController
     before_action :forbid_login_user
     
     def create
-        @message = Message.create(message_params)
-            
-        if @message.post_id?
-            @post = Post.find(@mesage.post_id)
+        @message = Message.new(message_params)
+        if @message.save
+            @post = Post.find_by(id: @message.post_id)
+            @event = Event.find_by(id: @message.event_id)
+            #@relay_notifications = Notification.where(visited_id: @message.user_id, post_id: @post.id, action: "m_on_post")
+        end
+        
+        if @post && @message.user_id != @post.user_id
             @notification = Notification.new(
                 visiter_id: @message.user_id,
                 visited_id: @post.user_id,
                 post_id: @post.id,
-                messsage_id: @message.id,
+                message_id: @message.id,
                 action: "m_on_post"
                 )
-            @notificatioz.save if notification.valid?
+            @notification.save 
         end
        
-       if @message.event_id?
-            @event = Event.find(@mesage.event_id)
+       if @event && @message.user_id != @event.user_id
             @notification = Notification.new(
                 visiter_id: @message.user_id,
                 visited_id: @event.user_id,
                 event_id: @event.id,
-                messsage_id: @message.id,
+                message_id: @message.id,
                 action: "m_on_event"
                 )
-            @notificatioz.save if notification.valid?
+            @notification.save
        end
-        
+       
        redirect_to :back
     end
+    
+    
+    
     
     def destroy
         @message = Message.find(params[:id])

@@ -22,18 +22,18 @@
         <p><%= @user.email %></p>
         <p><%= @user.gender %> : 誕生日<%= @user.birthday %></p>
         <p>主な服のサイズ: <%= @user.my_size %></p>
-        <% if @shoe.size %>
+        <% if @shoe %>
             <p>主な靴のサイズ: <%= @shoe.size %></p>
         <% else %>
             <p>未記入</p>
         <% end %>
         <p>身長: <%= @user.my_height %></p>
         <p>好きな洋服ジャンル: <%= @user.genre %></p>
-        <% if @consumption.price %>
+        <% if @consumption %>
             <p>月に洋服にかける金額: <%= @consumption.price %></p>
         <% else %>
-            <p>未記入</p>
-        <% end %>
+            <p>月に洋服にかける金額: 未記入</p>
+        <% end %>>
         <% if @chosen_area.any? %>
             <% @chosen_area.each do |area| %>
             <% a = Area.find(area) %>
@@ -109,27 +109,31 @@
         <% end %>
     
         <% @user.events.each do |event| %>
-            <div class= "posts-index-item">
-                <div class="posts-left">
-                    <% if event.user.image? %>
-                        <%= image_tag event.user.image.to_s, class: "users-image" %>
-                    <% else %>
-                        <%= image_tag "default.png", class: "users-image" %>
-                    <% end %>
+            <div class="posts-index">
+                <div class= "posts-index-item">
+                    <div class="posts-left">
+                        <% if event.user.image? %>
+                            <%= image_tag event.user.image.to_s, class: "users-image" %>
+                        <% else %>
+                            <%= image_tag "default.png", class: "users-image" %>
+                        <% end %>
+                    </div>
+                    <div class="posts-right">
+                        名前:<%= link_to event.user.name, user_path(event.user_id) %>
+                        <br><br>
+                        開催場所:<%= event.location %>
+                    </div> 
+                    <div class="posts-middle">
+                        投稿内容:<%= link_to event.content, post_path(event.id), class: "posts-content" %>
+                    </div>
+                        <% if event.image.present? %>
+                            <div class="posts-bottom" >
+                                <%= image_tag event.image.to_s, class: "posts-image" %>
+                            </div>
+                        <% else %>
+                            <div></div>
+                        <% end %>
                 </div>
-                <div class="posts-right">
-                    名前:<%= link_to event.user.name, user_path(event.user_id) %>
-                </div> 
-                <div class="posts-middle">
-                    投稿内容:<%= link_to event.content, post_path(event.id), class: "posts-content" %>
-                </div>
-                    <% if event.image.present? %>
-                        <div class="posts-bottom" >
-                            <%= image_tag event.image.to_s, class: "posts-image" %>
-                        </div>
-                    <% else %>
-                        <div></div>
-                    <% end %>
             </div>
         <% end %>
     </div>

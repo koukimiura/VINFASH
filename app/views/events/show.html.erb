@@ -7,17 +7,18 @@
                 </div>
     <hr>
               　<div class="post-show-item1 text-left">
-              　   <% if @event.user.image %>
+              　    <%if @event.user.image?%>
                        <div class="posts-left">
                            <%= image_tag @event.user.image.to_s, class: "users-image" %>
                        </div>
                    <% else %>
                        <div class="posts-left">
-                           <%= image_tag ("default.png"), class: "users-image" %>
+                           <%= image_tag "default.png", class: "users-image" %>
                        </div>
                    <% end %>
                        <div class="posts-right">
                            <p>名前:<%= link_to @event.user.name, user_path(@event.user_id) %></p>
+                           <p>開催場所:<%= @event.location %></p>
                        </div> 
                        <div class= "post-show-content text-left">
                            <h3>投稿内容</h3>
@@ -57,7 +58,7 @@
                                 <% if message.user.image? %>
                                     <%= image_tag message.user.image.to_s, size: "50x50" %>
                                 <% else %>
-                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                    <%= image_tag "default.png", size: "50x50" %>
                                 <% end %>
                             <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
                         </p>
@@ -75,7 +76,7 @@
                                 <% if message.user.image? %>
                                     <%= image_tag message.user.image.to_s, size: "50x50" %>
                                 <% else %>
-                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                    <%= image_tag "default.png", size: "50x50" %>
                                 <% end %>
                             <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
                         </p>
@@ -106,7 +107,7 @@
            </div>
         <% else %>
             <div class="posts-left">
-                <%= image_tag ("default.png"), class: "users-image" %>
+                <%= image_tag "default.png", class: "users-image" %>
             </di>
         <% end %>
         <div class="posts-right">
@@ -153,7 +154,7 @@
                                 <% if message.user.image? %>
                                     <%= image_tag message.user.image.to_s, size: "50x50" %>
                                 <% else %>
-                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                    <%= image_tag "default.png", size: "50x50" %>
                                 <% end %>
                             <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
                         </p>
@@ -170,9 +171,9 @@
                            <br><br>
                                <% if message.user.image? %>
                                     <%= image_tag message.user.image.to_s, size: "50x50" %>
-                               <% else %>
-                                    <%= image_tag ("default.png"), size: "50x50" %>
-                               <% end %>
+                                <% else %>
+                                    <%= image_tag "default.png", size: "50x50" %>
+                                <% end %>
                            <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
                         </p>
                     </h4>
@@ -194,8 +195,8 @@
 
 <div class='text-center'>
     <% if @event.user_id == current_user.id %>
-        <p><%= link_to '編集する', edit_post_path(@event.id), class:'btn btn-info' %></p>
-        <p><%= link_to '削除', post_path(@event.id), method: :delete, class:'btn btn-warning',
+        <p><%= link_to '編集する', edit_event_path(@event.id), class:'btn btn-info' %></p>
+        <p><%= link_to '削除', event_path(@event.id), method: :delete, class:'btn btn-warning',
             date: {confirm: "本当に投稿を削除しますか？"}%></p>
     <% end %>
 </div>

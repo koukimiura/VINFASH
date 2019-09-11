@@ -9,7 +9,7 @@ class FriendsController < ApplicationController
           visited_id: @friend.followed,
           action: "F"
           )
-        @notifcation.save if notification.valid?
+        @notifcation.save
         redirect_to :back
         flash[:notice] = '申請しました。'
   end

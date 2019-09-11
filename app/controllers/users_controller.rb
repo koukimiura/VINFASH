@@ -14,11 +14,15 @@ class UsersController < ApplicationController
     
     #my_shoe
     @my_shoe = MyShoe.find_by(user_id: @user.id)
-    @shoe = Shoe.find(@my_shoe.shoe_id)
+    if @my_shoe
+        @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
+    end
     #my_consumption
     
     @my_consumption = MyConsumption.find_by(user_id: @user.id)
-    @consumption = Consumption.find(@my_consumption.consumption_id)
+    if @my_consumption
+        @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
+    end
     
     #user買い物エリア
     @chosen_area=[]
@@ -56,12 +60,15 @@ class UsersController < ApplicationController
     
     #my_shoe
     @my_shoe = MyShoe.find_by(user_id: @user.id)
-    @shoe = Shoe.find(@my_shoe.shoe_id)
+    if @my_shoe
+        @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
+    end
     #my_consumption
     
     @my_consumption = MyConsumption.find_by(user_id: @user.id)
-    @consumption = Consumption.find(@my_consumption.consumption_id)
-    
+    if @my_consumption
+        @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
+    end
     
   #user買い物エリア
     @chosen_area=[]
@@ -88,12 +95,15 @@ class UsersController < ApplicationController
     
     #my_shoe
     @my_shoe = MyShoe.find_by(user_id: @user.id)
-    @shoe = Shoe.find(@my_shoe.shoe_id)
+    if @my_shoe
+        @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
+    end
     #my_consumption
     
     @my_consumption = MyConsumption.find_by(user_id: @user.id)
-    @consumption = Consumption.find(@my_consumption.consumption_id)
-    
+    if @my_consumption
+        @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
+    end
     
     #user買い物エリア
     @chosen_area=[]
@@ -121,12 +131,15 @@ class UsersController < ApplicationController
     
     #my_shoe
     @my_shoe = MyShoe.find_by(user_id: @user.id)
-    @shoe = Shoe.find(@my_shoe.shoe_id)
+    if @my_shoe
+        @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
+    end
+    
     #my_consumption
-    
     @my_consumption = MyConsumption.find_by(user_id: @user.id)
-    @consumption = Consumption.find(@my_consumption.consumption_id)
-    
+    if @my_consumption
+        @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
+    end
     
     #user買い物エリア
     @chosen_area=[]
@@ -150,14 +163,18 @@ class UsersController < ApplicationController
     @friend_followers = Friend.where(followed: @user.id).count
     @relationship = "友人レベル"
     
-    
    #my_shoe
     @my_shoe = MyShoe.find_by(user_id: @user.id)
-    @shoe = Shoe.find(@my_shoe.shoe_id)
-    #my_consumption
+    if @my_shoe
+        @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
+    end
     
+    #my_consumption
     @my_consumption = MyConsumption.find_by(user_id: @user.id)
-    @consumption = Consumption.find(@my_consumption.consumption_id)
+    if @my_consumption
+        @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
+    end
+    
     #一覧（相手の名前を出す。）
      #each文配列をmyRoomIds代入
     myChatIds = []
@@ -170,17 +187,27 @@ class UsersController < ApplicationController
         end
        #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
     @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', @user.id)
-    #talk一覧(chat一覧に最新メッセージを表示)
-    # user参加のチャット相手がわかる
+    # user参加��チャット相手がわかる
     @entries = Entry.where(chat_id: myChatIds)
     
+    @entries2= Entry.where(chat_id: myChatIds)
+    #talk一覧(chat一覧に最新メッセージを表示)
     
+    entryIds=[]
+    @anotherEntries.each do |an|
+        @entries.each do |e| 
+             if an.chat_id == e.chat_id 
+               entryIds.push(e.id)
+                    #talks.each do |talk| 
+                       # talk.content
+                    #end
+            end
+        end 
+    end 
     
-    
-    
-    
-    
-                                                          #where.not
+     @talks = Talk.where(entry_id: entryIds).order(created_at: :desc)
+     
+                                             
     #一覧（相手の名前を出す。）
         #current_userのレコードを取得
        #@currentEntries = Entry.where(user_id: @user.id)
@@ -193,11 +220,6 @@ class UsersController < ApplicationController
        #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
        #@anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', @user.id)
                                                          #where.not
-    
-    
-    
-       
-     
     #user買い物エリア
     @chosen_area=[]
     
@@ -220,11 +242,15 @@ class UsersController < ApplicationController
     
     #my_shoe
     @my_shoe = MyShoe.find_by(user_id: @user.id)
-    @shoe = Shoe.find(@my_shoe.shoe_id)
-    #my_consumption
+    if @my_shoe
+        @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
+    end
     
+    #my_consumption
     @my_consumption = MyConsumption.find_by(user_id: @user.id)
-    @consumption = Consumption.find(@my_consumption.consumption_id)
+    if @my_consumption
+        @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
+    end
     
     #user買い物エリア
     @chosen_area=[]
@@ -275,11 +301,15 @@ class UsersController < ApplicationController
     
     #my_shoe
     @my_shoe = MyShoe.find_by(user_id: @user.id)
-    @shoe = Shoe.find(@my_shoe.shoe_id)
-    #my_consumption
+    if @my_shoe
+        @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
+    end
     
+    #my_consumption
     @my_consumption = MyConsumption.find_by(user_id: @user.id)
-    @consumption = Consumption.find(@my_consumption.consumption_id)
+    if @my_consumption
+        @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
+    end
     
     #user買い物エリア
     @chosen_area=[]
@@ -289,8 +319,6 @@ class UsersController < ApplicationController
        @chosen_area.push(my.area_id) 
       end
     end
-    
-    
     
     #followedのアルゴリズム 
     @friends =[]

@@ -23,6 +23,7 @@
     </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        
         <% if user_signed_in? %>
             <% if current_user.email != nil && current_user.name == nil || current_user.gender == nil || 
             current_user.birthday == nil || current_user.adress == nil || current_user.my_size == nil || 
@@ -30,9 +31,32 @@
               <li><%= link_to '新規登録', edit_user_registration_path %></li>
               <li><%= link_to 'ログイン', edit_user_registration_path %></li>
             <% else %>
-            <li><%= link_to '通知', notifications_post_event_index_path %></li>
-            <li><%= link_to '新規投稿', new_post_path %></li>
-            <li><%= link_to '新規イベント投稿', new_event_path %></li>
+              <!--チャット通知 -->
+                <% if unchecked_notifications_chats.any? %>
+                  <li><%= link_to notifications_chats_index_path do %>
+                   <i class="fa fa-circle notification-circle"></i> Message
+                  <% end %></li>
+                <% else %>
+                  <li><%= link_to 'Message', notifications_chats_index_path %></li>
+                <% end %>
+            　<!--友達通知 -->
+            　<% if unchecked_notifications_friends.any? %>
+                <li><%= link_to notifications_friends_index_path do %>
+                 <i class="fa fa-circle notification-circle"></i> 友達通知
+                <% end %></li>
+              <% else %>
+                <li><%= link_to '友達通知', notifications_friends_index_path %></li>
+              <% end %>
+              <!--投稿通知 -->
+              <% if unchecked_notifications.any? %>
+                <li><%= link_to notifications_post_event_index_path do %>
+                 <i class="fa fa-circle notification-circle"></i> 投稿通知
+                <% end %></li>
+              <% else %>
+                <li><%= link_to '投稿通知', notifications_post_event_index_path %></li>
+              <% end %>
+              <li><%= link_to '新規投稿', new_post_path %></li>
+              <li><%= link_to '新規イベント投稿', new_event_path %></li>
             　<li class="dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">マイページ<span class="caret"></span></a>
           			  <ul class="dropdown-menu" role="menu">

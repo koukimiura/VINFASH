@@ -35,5 +35,6 @@ Rails.application.routes.draw do
   resources :friends, only:[:create, :destroy]
   get 'notifications/post_event_index' => 'notifications#post_event_index'
   get 'notifications/friends_index' => 'notifications#friends_index'
+  get 'notifications/chats_index' => 'notifications#chats_index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

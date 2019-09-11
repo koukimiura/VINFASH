@@ -38,6 +38,10 @@ class ChatsController < ApplicationController
         redirect_to :back
         flash[:alert] = '権限はありません'
     end
+    
+    #@notifications = Notification.where(visited_id: current_user.id)
+                                     .where(action: "T")
+                                     .order(created_at: :desc)
     end
     
     def create

@@ -21,10 +21,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
    def edit
-    #@user = User.find(params[:id])
     @areas = Area.all
     @area = Area.new
-    @user = User.new
+    
+    #@user = User.find(params[:id])
+    logger.debug(@user)
     #my_shoe
     @user.my_shoes.build
     # @shoes = Shoe.all

@@ -13,9 +13,10 @@ class LikesController < ApplicationController
         @notification = Notification.new(
             visiter_id: @like.user_id,
             visited_id: @post.user_id,
+            post_id: @post.id,
             action: "post_like"
             )
-        @notification.save if notification.valid?
+        @notification.save 
         
         redirect_to post_path(params[:post_id])
        end 
@@ -41,9 +42,10 @@ class LikesController < ApplicationController
             @notification = Notification.new(
                 visiter_id: @like.user_id,
                 visited_id: @event.user_id,
+                event_id: @event.id,
                 action: "event_like"
                 )
-            @notification.save if notification.valid?
+            @notification.save 
             redirect_to event_path(params[:event_id])
         end
     end

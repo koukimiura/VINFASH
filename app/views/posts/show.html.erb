@@ -14,7 +14,7 @@
                        </div>
                    <% else %>
                        <div class="posts-left">
-                           <%= image_tag ("default.png"), class: "users-image" %>
+                           <%= image_tag "default.png", class: "users-image" %>
                        </div>
                    <% end %>
                        <div class="posts-right">
@@ -56,7 +56,11 @@
                                 <%= message.content %>
                             <% end %>
                                 <br><br>
-                                <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag "default.png", size: "50x50" %>
+                                <% end %>
                                 <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
                         </p>
                      </h4>
@@ -70,7 +74,11 @@
                                 <%= message.content %>
                             <% end %>
                                 <br><br>
-                                <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% if message.user.image? %>
+                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag "default.png", size: "50x50" %>
+                                <% end %>
                                 <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
                                         </p>
                                     </h4>
@@ -101,7 +109,7 @@
            </div>
         <% else %>
             <div class="posts-left">
-                <%= image_tag ("default.png"), class: "users-image" %>
+                <%= image_tag "default.png", class: "users-image" %>
             </div>
         <% end %>
         <div class="posts-right">
@@ -143,7 +151,7 @@
                                 <% if message.user.image? %>
                                     <%= image_tag message.user.image.to_s, size: "50x50" %>
                                 <% else %>
-                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                    <%= image_tag "default.png", size: "50x50" %>
                                 <% end %>
                             <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
                         </p>
@@ -161,7 +169,7 @@
                                 <% if message.user.image? %>
                                     <%= image_tag message.user.image.to_s, size: "50x50" %>
                                 <% else %>
-                                    <%= image_tag ("default.png"), size: "50x50" %>
+                                    <%= image_tag "default.png", size: "50x50" %>
                                 <% end %>
                             <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
                           </p>

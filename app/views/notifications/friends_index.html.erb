@@ -7,16 +7,12 @@
                         <div class="notifications-index">
                             <div class="notifications">
                                 <div class="notification-content">
-                                    <%= test(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
-                                    <% if @message %>
-                                    <p><%= @message.content %></p>
-                                    <% end %>
+                                    <%= test_2(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
                                 </div>
                             </div>
                         </div>
                 <% end %>
             <% end %>
-       </div> 
-       <%= paginate @notifications %>
+        </div>
+        <%= paginate @notifications %>
     </div>
-    

@@ -22,17 +22,17 @@
         <p><%= @user.email %></p>
         <p><%= @user.gender %> : 誕生日<%= @user.birthday %></p>
         <p>主な服のサイズ: <%= @user.my_size %></p>
-        <% if @shoe.size %>
+        <% if @shoe %>
             <p>主な靴のサイズ: <%= @shoe.size %></p>
         <% else %>
             <p>未記入</p>
         <% end %>
         <p>身長: <%= @user.my_height %></p>
         <p>好きな洋服ジャンル: <%= @user.genre %></p>
-        <% if @consumption.price %>
+        <% if @consumption %>
             <p>月に洋服にかける金額: <%= @consumption.price %></p>
         <% else %>
-            <p>未記入</p>
+            <p>月に洋服にかける金額: 未記入</p>
         <% end %>
         <% if @chosen_area.any? %>
             <% @chosen_area.each do |area| %>
@@ -107,31 +107,35 @@
                 <li><%= link_to "イベント投稿", events_user_path(@user.id) %></li>
             </ul>
         <% end %>
-    
         <% @likes.each do |like| %>
-            <% post = Post.find_by(id: like.post_id) %>
-                <div class= "posts-index-item">
-                    <div class="posts-left">
-                        <% if post.user.image? %>
-                            <%= image_tag post.user.image.to_s, class: "users-image" %>
+        <!-- nilを入れないために-->
+           <% if like.post_id != nil %> 
+                <% post = Post.find_by(id: like.post_id) %>
+                <div class="posts-index">
+                    <div class= "posts-index-item">
+                        <div class="posts-left">
+                            <% if post.user.image? %>
+                                <%= image_tag post.user.image.to_s, class: "users-image" %>
+                            <% else %>
+                                <%= image_tag "default.png", class: "users-image" %>
+                            <% end %>
+                        </div>
+                        <div class="posts-right">
+                            名前:<%= link_to post.user.name, user_path(post.user_id) %>
+                        </div> 
+                        <div class="posts-middle">
+                            投稿内容:<%= link_to post.content, post_path(post.id), class: "posts-content" %>
+                        </div>
+                        <% if post.image? %>
+                            <div class="posts-bottom" >
+                                <%= image_tag post.image.to_s, class: "posts-image" %>
+                            </div>
                         <% else %>
-                            <%= image_tag "default.png", class: "users-image" %>
+                            <div></div>
                         <% end %>
                     </div>
-                    <div class="posts-right">
-                        名前:<%= link_to post.user.name, user_path(post.user_id) %>
-                    </div> 
-                    <div class="posts-middle">
-                        投稿内容:<%= link_to post.content, post_path(post.id), class: "posts-content" %>
-                    </div>
-                    <% if post.image? %>
-                        <div class="posts-bottom" >
-                            <%= image_tag post.image.to_s, class: "posts-image" %>
-                        </div>
-                    <% else %>
-                        <div></div>
-                    <% end %>
                 </div>
+            <% end %>
         <% end %>
     </div>
 </div>   
