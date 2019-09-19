@@ -2,89 +2,61 @@
   <div class="col-xs-4">
         <h3>最近のチャット</h3>
         <hr>
-<% @anotherEntries.each do |an| %>
-<% if an.chat_id == @chat.id %>
-    <div>
-       <div class="f-1">
-           <div class="following-user">
-               <div class="f-2">
-                   <div class="f-icon">
-                       <% if an.user.image? %>
-                           <div class="f-image">
-                             <%= image_tag an.user.image.to_s, class: "following-image" %>
-                           </div>
-                      <% else %>
-                          <div class="f-image">
-                              <%= image_tag "default.png", class: "following-image" %>
-                          </div>
-                      <% end %>
-                   </div>
-                   <div class="f-detail">
-                       <div class="f-3">
-                           <div class="more-detail">
-                               <strong><%= link_to an.user.name, user_path(an.user.id) %></strong>
-                               <br>
-                           </div>
-                           <div class="f-btn">
-                               <div class="f-btn2">
-                               </div>
-                           </div>
-                       </div>
-                       <div class="f-content">
-                           <!--message -->
-                      </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-    </div>
-<% else %>
-    <div>
-       <div class="f-1">
-           <%= link_to chat_path(an.chat_id) do %>
-               <div class="following-user">
-                   <div class="f-2">
-                       <div class="f-icon">
-                           <% if an.user.image? %>
-                               <div class="f-image">
-                                 <%= image_tag an.user.image.to_s, class: "following-image" %>
-                               </div>
-                          <% else %>
-                              <div class="f-image">
-                                  <%= image_tag "default.png", class: "following-image" %>
-                              </div>
-                          <% end %>
-                       </div>
-                       <div class="f-detail">
-                           <div class="f-3">
-                               <div class="more-detail">
-                                   <strong><%= an.user.name %></strong>
-                                   <br>
-                               </div>
-                               <div class="f-btn">
-                                   <div class="f-btn2">
-                                   </div>
-                               </div>
-                           </div>
-                           <div class="f-content">
-                               <!--message -->
-                                   <% @entries.each do |e| %>
-                                       <% if an.chat_id == e.chat_id %>
-                                           <% talks = Talk.where(entry_id: e.id).order(created_at: :desc).limit(1) %>
-                                               <% talks.each do |talk| %>
+    <% if @notifications.present? %>
+        <% @notifications.each do |notification| %>
+            <% if @chat.id == notification.chat_id %>
+                <% notification.update_attributes(check: true) %>
+            <% end %>
+        <% end %>
+    <% end %>
+        
+<!-- chat一覧 -->
+    <% @talks.each do |talk| %>
+        <% @entries2.each do |entry| %>
+            <% if talk.entry_id == entry.id %>
+                <% if entry.user_id != current_user.id %>
+                    <% another = User.find(entry.user_id) %>
+                        <div>
+                           <div class="f-1">
+                               <%= link_to chat_path(entry.chat_id) do %>
+                                   <div class="following-user">
+                                       <div class="f-2">
+                                           <div class="f-icon">
+                                               <% if another.image? %>
+                                                   <div class="f-image">
+                                                     <%= image_tag another.image.to_s, class: "following-image" %>
+                                                   </div>
+                                              <% else %>
+                                                  <div class="f-image">
+                                                      <%= image_tag "default.png", class: "following-image" %>
+                                                  </div>
+                                              <% end %>
+                                           </div>
+                                           <div class="f-detail">
+                                               <div class="f-3">
+                                                   <div class="more-detail">
+                                                       <strong><%= another.name %></strong>
+                                                       <br>
+                                                   </div>
+                                                   <div class="f-btn">
+                                                       <div class="f-btn2">
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="f-content">
+                                                   <!--message -->
                                                    <%= talk.content %>
-                                           <% end %>
-                                      <% end %>
-                                 <% end %>
-                          </div>
+                                              </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               <% end %>
+                           </div>
                        </div>
-                   </div>
-               </div>
-           <% end %>
-       </div>
-    </div>
-<% end %>
-<% end %> 
+                <% end %>
+            <% end %>
+       <% end %>
+    <% end %>
 </div>
      
     <div class="col-xs-8">
@@ -99,14 +71,15 @@
         <% end %>
 <hr>
 
-        <% if @talks.present? %>
-            <% @talks.each do |talk| %>
-                 <% if talk.user_id == current_user.id %>
+        <% if @talks_message.present? %>
+            <% @talks_message.each do |talk_message| %>
+            
+                <% if current_user.id == talk_message.user_id %>
                     <h4 class="text-right">
                         <p class="alert alert-success">
-                            <% if talk.user_id == current_user.id %>
+                            <% if talk_message.user_id == current_user.id %>
                                 <%= link_to talk.content, talk_path(talk.id), method: :delete, 
-                                date: {confirm: "本当に投稿を削除しますか？"}%>
+                                data: {confirm: "本当に投稿を削除しますか？"}%>
                             <% else %>
                                 <%= talk.content %>
                             <% end %>
@@ -124,7 +97,7 @@
                         <p class="alert alert-info">
                             <% if talk.user_id == current_user.id %>
                                 <%= link_to talk.content, talk_path(talk.id), method: :delete,
-                                   date: {confirm: "本当に投稿を削除しますか？"}%>
+                                   data: {confirm: "本当に投稿を削除しますか？"}%>
                             <% else %>
                                 <%= talk.content %>
                             <% end %>
@@ -145,10 +118,15 @@
             <br>
         <% end %>
 
+        
         <%= form_for @talk do |f| %>
-        <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
-            <%= f.hidden_field :entry_id, :value => @entry.id %>
-        <p><%= f.submit "送信", class: 'btn btn-info' %></p>
+            <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
+                <% @entries_for_talk.each do |entry| %>
+                    <% if entry.user_id == current_user.id %>
+                        <%= f.hidden_field :entry_id, :value => entry.id %>
+                    <% end %>   
+                <% end %>
+            <p><%= f.submit "送信", class: 'btn btn-info' %></p>
         <% end %> 
-     </div>
+    </div>
 </div>

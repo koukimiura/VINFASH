@@ -8,7 +8,7 @@ Shoe.seed(:id,
   {:id => 7, :size =>"23cm"},
   {:id => 8, :size =>"23.5cm"},
   {:id => 9, :size =>"24cm"},
-  {:id => 10, :size =>"~24.5cm"},
+  {:id => 10, :size =>"24.5cm"},
   {:id => 11, :size =>"25cm"},
   {:id => 12, :size =>"25.5cm"},
   {:id => 13, :size =>"26cm"},
@@ -19,6 +19,6 @@ Shoe.seed(:id,
   {:id => 18, :size =>"28.5cm"},
   {:id => 17, :size =>"29cm"},
   {:id => 18, :size =>"29.5cm"},
-  {:id => 19, :size =>"30cm" }
+  {:id => 19, :size =>"30cm~" }
   
   )

@@ -23,23 +23,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def edit
     @areas = Area.all
     @area = Area.new
+    @user.my_consumptions.build
+    @user.my_shoes.build
+    #@my_shoe=MyShoe.new
     
     #@user = User.find(params[:id])
-    logger.debug(@user)
     #my_shoe
-    @user.my_shoes.build
     # @shoes = Shoe.all
     #my_consumption
     #@consumptions = Consumption.all
-    @user.my_consumptions.build
+   
+    
      super
    end
    
 
   # PUT /resource
    def update
-    super
-    
+     super
+     #@my_shoe=MyShoe.update(my_shoe_params)
    end
 
   # DELETE /resource
@@ -57,7 +59,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
    protected
-   
+  
    def shoeAll
      @shoes = Shoe.all
    end
@@ -65,6 +67,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def consumptionAll
      @consumptions = Consumption.all
    end
+   
+   private
+   
+   #def my_shoe_params
+     #params.require(:my_shoe).permit(:shoe_id, :user_id).merge(:user_id => current_user.id)
+   #end
+   
    
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -79,10 +88,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
      devise_parameter_sanitizer.permit(:account_update,
      keys: [:name, :gender, :birthday, :adress, :image, :my_size,
      :my_height, :genre, :self_introduction,
-     :my_shoes_attributes => [:id, :shoe_id, :user_id],
-     :my_consumptions_attributes => [:id, :consumption_id, :user_id]]) 
-     
-     logger.debug("my_shoes_attributes => #{params[:user][:my_shoes_attributes]}")
+     my_shoes_attributes: [:id, :shoe_id, :user_id],
+     my_consumptions_attributes: [:id, :consumption_id, :user_id]]) 
+     #logger.debug("my_shoes_attributes => #{params[:user][:my_shoes_attributes]}")
   end
   
 

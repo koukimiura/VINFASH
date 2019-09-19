@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190815071056) do
+ActiveRecord::Schema.define(version: 20190917062815) do
 
   create_table "areas", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20190815071056) do
   create_table "friends", force: :cascade do |t|
     t.integer  "follower"
     t.integer  "followed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inquiries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -102,7 +110,7 @@ ActiveRecord::Schema.define(version: 20190815071056) do
     t.integer  "message_id"
     t.integer  "chat_id"
     t.integer  "talk_id"
-    t.string   "action"   # talk:t like:l message:m follow:f
+    t.string   "action"
     t.boolean  "check",      default: false
   end
 

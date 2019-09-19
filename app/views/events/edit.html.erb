@@ -1,32 +1,17 @@
 <h1 class= "text-center">編集する</h1>
 <hr>
 
+<div class='post-edit'>
+    <div class='post-edit2'>
+        <% if @event.image? %>
+    <div class="post-edit-image text-center">
+        <%= image_tag @event.image.to_s %>
+    </div>
+<hr>
+        <% end %>
 
-<div class="posts-edit-image">
-    <p class= "text-center"><%= image_tag @event.image.to_s, :size => '640x326' %></p>
+
+<%= render 'form' %>
+    </div>
 </div>
 
- <hr>
-
-<%= form_for @event do |f| %>
-<div class="form">
-       <div class="form-body">
-    <% @event.errors.full_messages.each do |message| %>
-        <div class="form-error">
-    <%= message %>
-     <% end %>
-     </div>
-    <p>タイトル</p>
-    <P><%= f.text_field :title, class: 'form-control' %></P>
-    <p>開催場所</p>
-    <p><%= f.text_field :location, class: 'form-control' %></p>
-    <p>イベントの詳細</p>
-    <p><%= f.text_area :content, placeholder: 'イベントの詳細や開催場所の詳細', class: 'form-control my-form' %></p>
-    <p><%= f.label :画像 %></p>
-    <P><%= f.file_field :image, class: 'form-control' %></P>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-    <hr>
-    <p><%= f.submit "投稿する", class: 'btn btn-info' %></p>
-   </div>
-</div>
- <% end %>

@@ -46,13 +46,16 @@
         <div class="user-show-btn" >
         <% if @user.id == current_user.id %>
                 <%= link_to "編集する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
-                <%= link_to "削除する", edit_user_registration_path(@user.id), class: "btn btn-warning" %>
+                <%= link_to "削除する", user_registration_path(@user.id), method: :delete, data:
+                    {confirm: "本当に投稿を削除しますか？",
+                     cancel: 'やめる',
+                     commit: '削除する'}, title: '削除確認', class:'btn btn-warning' %>
 <!-- 友達かどうか -->
         <% elsif Friend.find_by(follower: current_user.id, followed: @user.id) &&
                      !Friend.find_by(follower: @user.id, followed: current_user.id) %>
                          
                     <%= @relationship %><%= link_to "友達申請中", friend_path(@user.id), method: :delete, class: "btn btn-info",
-                    date: {confirm: "本当に投稿を削除しますか？"} %>
+                    data: {confirm: "本当に投稿を削除しますか？"} %>
                     
         <% elsif !Friend.find_by(follower: current_user.id, followed: @user.id) &&
                      Friend.find_by(follower: @user.id, followed: current_user.id) %>
@@ -83,6 +86,7 @@
         <% end %>
         </div>
 <br>
+    <h4>自己紹介</h4>
         <div class="content-box">
             <div class="content-box2">
                 <%= @user.self_introduction %>

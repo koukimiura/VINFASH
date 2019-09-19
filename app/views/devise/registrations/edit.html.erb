@@ -52,18 +52,17 @@
     <%= f.radio_button :my_size, "xxl" %>野獣サイズ<br>
   </div>
   
-  
   <div class="field">
     <%= f.label :my_shoes %>
     <em class="number-alarm">＊選択してください</em>
     <br>
-    <%= f.fields_for :my_shoes do |my| %>
-    <%= my.collection_select(:shoe_id, @shoes, :id, :size, :prompt => "選択してください") %>
+    <%= f.fields_for :my_shoes, @user.my_shoes.build do |my| %>
+      <%= my.collection_select(:shoe_id, @shoes, :id, :size, :prompt => "選択してください") %>
     <% end %>
   </div>
   
   <div class="field">
-    <%= f.label :my_height %>
+    <%= f.label :身長 %>
     <em class="number-alarm">＊半角英数字で数値のみ記入</em>
     <br>
     <%= f.number_field :my_height, autofocus: true %>cm
@@ -75,13 +74,13 @@
     <br>
     <%= f.text_field :genre, autofocus: true, class:"form-control" %>
   </div>
-  
-  
+
   <div class="field">
     <%= f.label :月に洋服にかける金額 %>
     <em class="number-alarm">＊選択してください</em>
     <br>
-    <%= f.fields_for :my_consumptions do |c| %>
+    <%= f.fields_for :my_consumptions, @user.my_consumptions.build do |c| %>
+    <!--                   (保存されるからむ、オブジェクトの配列, カラムに保存される項(選択されるからむ）、表示されるカラム名 -->
     <%= c.collection_select(:consumption_id, @consumptions, :id, :price, :prompt => "選択してください") %>
     <% end %>
   </div>

@@ -50,7 +50,7 @@
                         <p class="alert alert-success">
                              <% if message.user_id == current_user.id %>
                                  <%= link_to message.content, message_path(message.id), method: :delete,
-                                    date: {confirm: "本当に投稿を削除しますか？"} %>
+                                    data: {confirm: "本当に投稿を削除しますか？"} %>
                             <% else %>
                                 <%= message.content %>
                             <% end %>
@@ -68,7 +68,7 @@
                          <p class="alert alert-info">
                              <% if message.user_id == current_user.id %>
                                  <%= link_to message.content, message_path(message.id), method: :delete,
-                                 date: {confirm: "本当に投稿を削除しますか？"} %>
+                                 data: {confirm: "本当に投稿を削除しますか？"} %>
                             <% else %>
                                 <%= message.content %>
                             <% end %>
@@ -145,7 +145,7 @@
                         <p class="alert alert-success">
                             <% if message.user_id == current_user.id %>
                                 <%= link_to message.content, message_path(message.id), method: :delete, 
-                                    date: {confirm: "本当に投稿を削除しますか？"}%>
+                                    data: {confirm: "本当に投稿を削除しますか？"}%>
                    
                             <% else %>
                                 <%= message.content %>
@@ -164,7 +164,7 @@
                         <p class="alert alert-info">
                            <% if message.user_id == current_user.id %>
                                <%= link_to message.content, message_path(message.id), method: :delete,
-                                    date: {confirm: "本当に投稿を削除しますか？"}%>
+                                    data: {confirm: "本当に投稿を削除しますか？"}%>
                            <% else %>
                                <%= message.content %>
                            <% end %>
@@ -197,6 +197,6 @@
     <% if @event.user_id == current_user.id %>
         <p><%= link_to '編集する', edit_event_path(@event.id), class:'btn btn-info' %></p>
         <p><%= link_to '削除', event_path(@event.id), method: :delete, class:'btn btn-warning',
-            date: {confirm: "本当に投稿を削除しますか？"}%></p>
+            data: {confirm: "本当に投稿を削除しますか？"}%></p>
     <% end %>
 </div>

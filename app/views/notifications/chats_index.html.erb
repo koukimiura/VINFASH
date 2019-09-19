@@ -3,7 +3,6 @@
         <div class="users-index">
             <% if @notifications.present? %>
                 <% @notifications.each do |notification| %>
-                    <% notification.update_attributes(check: true) %>
                     <%= link_to chat_path(notification.chat_id) do %>
                         <div class="notifications-index">
                             <div class="notifications">

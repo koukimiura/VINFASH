@@ -20,6 +20,7 @@
       </button>
       <a href="/posts" class="navbar-brand">myapp</a>
       <%= link_to 'イベント一覧', events_path, class:"navbar-brand" %>
+      <%= link_to 'お問い合わせ', new_inquiry_path, class:"navbar-brand" %>
     </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
@@ -76,14 +77,16 @@
 </nav>
     <div class="container my-page">
       <%if notice %>
-    <br>
-    <p class= "alert alert-success"><%= notice %></p>
-    <% end %>
-    <%if alert %>
-    <br>
-    <p class= "alert alert-danger"><%= alert %></p>
-    <% end %>
-    <%= yield %>
+        <br>
+        <p class= "alert alert-success"><%= notice %></p>
+      <% end %>
+      <%if alert %>
+        <br>
+        <p class= "alert alert-danger"><%= alert %></p>
+      <% end %>
+  
+        <%= yield %>
+        
     </div>
   </body>
 </html>

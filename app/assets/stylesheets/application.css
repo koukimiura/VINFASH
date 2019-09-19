@@ -102,11 +102,29 @@
 .post-show-image img{
     height: auto;
     max-width: 100%;
+    
 }
 
 .posts-content {
     font-size: 18px;
 }
+
+.post-edit {
+    margin: auto;
+}
+
+.post-edit2{
+    padding: 10px 15px;
+}
+
+.post-edit-image img {
+    height: auto;
+    max-width: 100%;
+    
+}
+
+
+
 
 
 .user-name {
@@ -258,16 +276,16 @@ user-tabs2 li.active a {
 
 .content-box {
      width: 90%;
-     height: 130px;
+     height: auto;
      box-shadow: 0 2px 6px #c1ced7;
-     padding: 35px 20px 20px 35px;
+     padding: 20px 20px 20px 30px;
      text-align: left;
-     
 }
 
 .content-box2 {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
+    
     
 }
 
@@ -476,3 +494,34 @@ f-btn2 input {
     font-size: 13px;
     
 }
+
+.inquiry {
+    width: auto;
+    height: auto;
+    margin-top: 15px ;
+}
+
+.inquiry-form{
+    padding: 20px 30px;
+}
+
+.iquiry-name{
+    margin-top: 10px; 
+}
+
+.iquiry-eamil{
+    margin-top: 10px;
+}
+
+.iquiry-content{
+    margin-top: 10px;
+    height: 200px;
+}
+
+.my-form2{
+    padding-bottom: 100px;
+}
+.iquiry-action{
+    margin-top: 20px;
+}
+

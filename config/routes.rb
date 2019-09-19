@@ -36,5 +36,9 @@ Rails.application.routes.draw do
   get 'notifications/post_event_index' => 'notifications#post_event_index'
   get 'notifications/friends_index' => 'notifications#friends_index'
   get 'notifications/chats_index' => 'notifications#chats_index'
+  
+  resources :inquiries, only:[:index, :new, :create]
+  
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

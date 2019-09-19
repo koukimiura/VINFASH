@@ -20,6 +20,9 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}" 
   end
   
+  
+  
+  
 # デフォルト画像は1200x5000に収まるようリサイズ
   #process resize_to_limit: [1200, 5000]
   
@@ -58,6 +61,21 @@ class ImageUploader < CarrierWave::Uploader::Base
    # 許可する画像の拡張子
   def extension_whitelist
      %w(jpg jpeg gif png)
+  end
+  
+  #画像の向きを整える
+  
+  def auto
+    manipulate! do|image|
+      image.auto_orient
+    end
+  end
+ 
+  # ここも追加 
+  process :auto
+  process :resize_to_limit => [850, 600]
+  version :thumb do
+    process :resize_to_fit => [400, 400]
   end
 
   # Override the filename of the uploaded files:
