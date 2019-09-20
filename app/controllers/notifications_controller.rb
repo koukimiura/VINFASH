@@ -14,7 +14,6 @@ class NotificationsController < ApplicationController
        # end
     end
     
-    
     def friends_index
         @notifications = Notification.where(visited_id: current_user.id)
                                      .where(action: "F")

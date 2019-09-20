@@ -9,17 +9,19 @@ class ChatsController < ApplicationController
             #chat用
             @entries_for_talk = Entry.where(chat_id: @chat.id)
             @entries3 = Entry.where(chat_id: @chat.id)
-            
+            @entry = Entry.find_by(chat_id: @chat.id)
             
             @talks_message = []
-                
-            @entries3.each do |entry|
-                if Talk.find_by(entry_id: entry.id)
-                    @talks_message.push(Talk.where(entry_id: entry.id))
-                    logger.debug("--------@talks_message = #{@talks_message}")
+  
+           # @entries3.each do |entry|
+                if Talk.where(entry_id: @entries3).present?
+                       Talk.where(entry_id: @entries3).each do |t|
+                          @talks_message.push(t)  
+                        end
+                    #logger.debug("--------@talks_message = #{@talks_message}")
                     #logger.debug("--------------#{@talks_message.inspect}")
                 end
-            end
+        
             
             #talks_talk=[]
                 #logger.debug("--------------#{@talks_message.inspect}")

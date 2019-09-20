@@ -7,11 +7,11 @@
          </div>
      <% end %>
       <p>タイトル</p>
-      <P><%= f.text_field :title, class: 'form-control' %></P>
+      <P><%= f.text_field :title, class: 'form-control my-form' %></P>
       <p>投稿内容</p>
       <p><%= f.text_area :content, class: 'form-control my-form' %></p>
       <p><%= f.label :画像 %></p>
-      <P><%= f.file_field :image, class: 'form-control' %></P>
+      <P><%= f.file_field :image, class: 'form-control my-form' %></P>
          <%= f.hidden_field :user_id, :value => current_user.id %>
       <hr>
       <p><%= f.submit "投稿", class: 'btn btn-info' %></p>

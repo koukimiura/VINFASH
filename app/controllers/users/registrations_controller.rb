@@ -23,6 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def edit
     @areas = Area.all
     @area = Area.new
+    if 
     @user.my_consumptions.build
     @user.my_shoes.build
     #@my_shoe=MyShoe.new

@@ -7,13 +7,13 @@
                 </div>
             <% end %>
             <p>タイトル</p>
-            <P><%= f.text_field :title, class: 'form-control' %></P>
+            <P><%= f.text_field :title, class: 'form-control my-form' %></P>
             <p>開催場所</p>
-            <p><%= f.text_field :location, class: 'form-control' %></p>
+            <p><%= f.text_field :location, class: 'form-control  my-form' %></p>
             <p>イベントの詳細</p>
             <p><%= f.text_area :content, placeholder: 'イベントの詳細や開催場所の詳細', class: 'form-control my-form' %></p>
             <p><%= f.label :画像 %></p>
-            <P><%= f.file_field :image, class: 'form-control' %></P>
+            <P><%= f.file_field :image, class: 'form-control my-form' %></P>
                 <%= f.hidden_field :user_id, :value => current_user.id %>
             <hr>
             <p><%= f.submit "投稿する", class: 'btn btn-info' %></p>

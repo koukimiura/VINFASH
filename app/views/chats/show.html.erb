@@ -70,14 +70,12 @@
             <% end %>
         <% end %>
 <hr>
-
         <% if @talks_message.present? %>
-            <% @talks_message.each do |talk_message| %>
-            
-                <% if current_user.id == talk_message.user_id %>
+            <% @talks_message.each do |talk| %>
+                <% if current_user.id == talk.user_id %>
                     <h4 class="text-right">
                         <p class="alert alert-success">
-                            <% if talk_message.user_id == current_user.id %>
+                            <% if talk.user_id == current_user.id %>
                                 <%= link_to talk.content, talk_path(talk.id), method: :delete, 
                                 data: {confirm: "本当に投稿を削除しますか？"}%>
                             <% else %>

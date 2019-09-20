@@ -183,15 +183,17 @@ before_action :forbid_login_user
         #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
         @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', @user.id)
         #user参加��チャット相手がわかる
-        @entries = Entry.where(chat_id: myChatIds)
+        @entries = Entry.where(chat_id: myChatIds)#.where(user_id: @user.id)
         #view用　each文で回す。
         @entries2= Entry.where(chat_id: myChatIds)
         #talk一覧(chat一覧に最新メッセージを表示)
         entryIds=[]
+        #an_entryIds=[]
             @anotherEntries.each do |an|
                 @entries.each do |e| 
                     if an.chat_id == e.chat_id 
                         entryIds.push(e.id)
+                        #an_entryIds.push(an.id)
                     end
                 end 
             end 
@@ -203,6 +205,27 @@ before_action :forbid_login_user
                     @talks.push(Talk.where(entry_id: entryId).order(created_at: :desc).first)
                 end
             end
+            
+        #@an_talks=[]
+            #an_entryIds.each do |an_entryId|
+                #if Talk.find_by(entry_id: an_entryId) # エントリーしているがトークしてない人を無視
+                    #@an_talks.push(Talk.where(entry_id: an_entryId).order(created_at: :desc).first)
+                #end
+            #end
+        
+        #@all_talks.each do |all|    
+            #@user_talks.each do |user_talk|
+                #@an_talks.each do |an_talk|
+                    
+                #end
+            #end
+        #end
+            
+            
+        @all_talks= Talk.all.order(created_at: :desc)
+            
+                
+            
         #＊今回の肝です。一度繰り返し処理をするのは、entryIdに合う条件がtalksテーブルにはたくさんある。
         #（なぜならユーザーがメッセージを交わすだけレコードが増えるから）各chatでの最新messageを出すため、
         #条件に合うentry_idを　並び替えしかつ各entry.idごとのfirstを取って来る必要がある。
