@@ -26,8 +26,9 @@ class TalksController < ApplicationController
     
 
     def destroy
-        @talk = Talk.find(params[:id])
+        @talk = Talk.find_by(id: params[:id])
         @talk.destroy
+        redirect_to :back
     end
     
     private

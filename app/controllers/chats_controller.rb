@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
-     before_action :authenticate_user!, only: [:show, :edit, :update,:create, :destroy]
+     before_action :authenticate_user!, only: [:show, :create]
      before_action :forbid_login_user
     
     def show
@@ -23,11 +23,7 @@ class ChatsController < ApplicationController
                 end
         
             
-            #talks_talk=[]
-                #logger.debug("--------------#{@talks_message.inspect}")
-            #@talks_message.each do |t|
-                #talks_talk.push(t.id)
-            #end
+           
             
             @talk = Talk.new
         else
@@ -45,29 +41,39 @@ class ChatsController < ApplicationController
                     myChatIds.push(e.chat_id)
                 end
             end
-        #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
+       #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
         @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', current_user.id)
         #user参加��チャット相手がわかる
-        @entries = Entry.where(chat_id: myChatIds)
-        #view用　each文で回す。
-        @entries2= Entry.where(chat_id: myChatIds)
+        @myentries = Entry.where(chat_id: myChatIds).where(user_id: current_user.id)
+    
         #talk一覧(chat一覧に最新メッセージを表示)
-        entryIds=[]
+        #@talk_userIds=[]
+        @talks=[] 
             @anotherEntries.each do |an|
-                @entries.each do |e| 
-                    if an.chat_id == e.chat_id 
-                        entryIds.push(e.id)
+                @myentries.each do |e| 
+                    if an.chat_id == e.chat_id  #同じentry.idが複数入ってしまう。
+                        @talks.push(Talk.order(created_at: :desc)
+                              .where(entry_id: [an.id, e.id]).first)
                     end
                 end 
             end 
-        
-        @talks=[] 
-            # logger.debug("--------entryIds = #{entryIds}")
-            entryIds.each do |entryId|
-                if Talk.find_by(entry_id: entryId) # エントリーしているがトークしてない人を無視
-                    @talks.push(Talk.where(entry_id: entryId).order(created_at: :desc).first)
+            
+        #順番揃える
+        talks2=[]
+            @talks_all = Talk.all.order(created_at: :desc)
+                @talks_all.each do |talk_all|
+                    @talks.each do |talk|
+                        if talk_all.id == talk.id
+                            talks2.push(talk.id)
+                        end
+                    end
                 end
-            end
+        
+        @talks3 = talks2.map do |t|
+            Talk.find(t)
+        end
+            
+            
         @notifications = Notification.where(visited_id: current_user.id)
                                      .where(action: "T")
                                      .order(created_at: :desc)
@@ -86,37 +92,7 @@ class ChatsController < ApplicationController
     end
     
     
-    #いずれ複数チャットができるアプリを作った時のためchatはnameカラムあり。
-    def edit
-        #@chat = Chat.find(params{:id})
-        redirect_to posts_path
-    end  
-        
-     #いずれ複数チャットができるアプリを作った時のためchatはnameカラムあり。   
-    def update
-        #@chat.update(params_chat)
-        #redirect_to @chat
-        redirect_to posts_path
-    end
-    
-    def destroy
-        @chat = Chat.find(params[:id])
-         if Entry.where(user_id: current_user.id, chat_id: @chat.id).present?
-        #chat用
-            @chat.destroy
-            redirect_to :back
-        else
-            render 'users/index'
-            flash[:alert] = '権限はありません'
-         end
-    end
-    
-    
-    
     private
-    def params_chat
-       params.require(:chat).permit(name)
-    end
     
     def params_entry
         params.require(:entry).permit(:chat_id, :user_id).merge(chat_id: @chat.id)

@@ -6,6 +6,7 @@ class Notification < ApplicationRecord
     belongs_to :message
     belongs_to :chat
     belongs_to :talk
+    belongs_to :user
     
     #validates :post_id_or_event_id_or_talk_id, presence: true, allow_nil: true
     #validates :event_id, presence: true, allow_nil: true, if :event_id?

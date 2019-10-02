@@ -1,3 +1,3 @@
 class Shoe < ApplicationRecord
-    has_many :my_shoes
+    has_many :users, foreign_key: "shoe_id"
 end

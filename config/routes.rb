@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   }
   
   resources :posts 
-  root 'home#top'
+  root 'posts#index'
+  #root 'home#top'
   resources :home, only: [:top]
   resources :users, only: [:show] do
   member do
@@ -29,10 +30,10 @@ Rails.application.routes.draw do
   resources :events 
   resources :messages, only: [:create, :destroy]
   resources :talks, only: [:create, :destroy]
-  resources :chats, only:[:show, :create, :edit, :update, :destroy] 
+  resources :chats, only:[:show, :create] 
   resources :my_areas, only:[:create, :destroy]
   get 'my_areas/:user_id/new' => 'my_areas#new'
-  resources :friends, only:[:create, :destroy]
+  resources :friends, only:[:create]
   get 'notifications/post_event_index' => 'notifications#post_event_index'
   get 'notifications/friends_index' => 'notifications#friends_index'
   get 'notifications/chats_index' => 'notifications#chats_index'

@@ -1,0 +1,45 @@
+
+<% @talks3.each do |talk| %>
+    <% entry = Entry.find_by(id: talk.entry_id) %>
+    <% anotherEntries2 = Entry.where(chat_id: entry.chat_id).where('user_id != ?', current_user.id) %>
+        <div>
+           <div class="f-1">
+               <%= link_to chat_path(entry.chat_id) do %>
+                   <div class="following-user">
+                       <div class="f-2">
+                           <div class="f-icon">
+                               <% anotherEntries2.each do |another| %>
+                                   <% another_User = User.find_by(id: another.user_id) %>
+                                       <% if another_User.image? %>
+                                           <div class="f-image">
+                                             <%= image_tag another_User.image.to_s, class: "following-image" %>
+                                           </div>
+                                      <% else %>
+                                          <div class="f-image">
+                                              <%= image_tag "default.png", class: "following-image" %>
+                                          </div>
+                                      <% end %>
+                           </div>
+                           <div class="f-detail">
+                               <div class="f-3">
+                                   <div class="more-detail">
+                                       <strong><%= another_User.name %></strong>
+                                       <br>
+                                   </div>
+                               <% end %>
+                                   <div class="f-btn">
+                                       <div class="f-btn2">
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="f-content">
+                                   <!--message -->
+                                   <%= talk.content %>
+                              </div>
+                           </div>
+                       </div>
+                   </div>
+               <% end %>
+           </div>
+        </div>
+<% end %>

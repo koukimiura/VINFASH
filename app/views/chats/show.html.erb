@@ -11,62 +11,13 @@
     <% end %>
         
 <!-- chat一覧 -->
-    <% @talks.each do |talk| %>
-        <% @entries2.each do |entry| %>
-            <% if talk.entry_id == entry.id %>
-                <% if entry.user_id != current_user.id %>
-                    <% another = User.find(entry.user_id) %>
-                        <div>
-                           <div class="f-1">
-                               <%= link_to chat_path(entry.chat_id) do %>
-                                   <div class="following-user">
-                                       <div class="f-2">
-                                           <div class="f-icon">
-                                               <% if another.image? %>
-                                                   <div class="f-image">
-                                                     <%= image_tag another.image.to_s, class: "following-image" %>
-                                                   </div>
-                                              <% else %>
-                                                  <div class="f-image">
-                                                      <%= image_tag "default.png", class: "following-image" %>
-                                                  </div>
-                                              <% end %>
-                                           </div>
-                                           <div class="f-detail">
-                                               <div class="f-3">
-                                                   <div class="more-detail">
-                                                       <strong><%= another.name %></strong>
-                                                       <br>
-                                                   </div>
-                                                   <div class="f-btn">
-                                                       <div class="f-btn2">
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="f-content">
-                                                   <!--message -->
-                                                   <%= talk.content %>
-                                              </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               <% end %>
-                           </div>
-                       </div>
-                <% end %>
-            <% end %>
-       <% end %>
-    <% end %>
+    <%= render 'users/chat_index', {talks3: @talks3} %>
 </div>
      
     <div class="col-xs-8">
         <% @anotherEntries.each do |an|  %>
             <% if an.chat_id == @chat.id %>
-                <h2 class="text-center"><%= link_to an.user.name, user_path(an.user_id) %>
-                    <%= link_to chat_path(an.chat_id), method: :delete, date: {confirm: "本当に投稿を削除しますか？"} do %>
-                        <span class="fas fa-trash fa-lg"></span>
-                   <% end %>
-                </h2>
+                <h2 class="text-center"><%= link_to an.user.name, user_path(an.user_id) %></h2>
             <% end %>
         <% end %>
 <hr>

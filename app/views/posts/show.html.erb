@@ -51,7 +51,7 @@
                         <p class="alert alert-success">
                              <% if message.user_id == current_user.id %>
                                  <%= link_to message.content, message_path(message.id), method: :delete,
-                                    date: {confirm: "本当に投稿を削除しますか？"} %>
+                                    data: {confirm: "本当に投稿を削除しますか？"} %>
                             <% else %>
                                 <%= message.content %>
                             <% end %>
@@ -69,7 +69,7 @@
                          <p class="alert alert-info">
                              <% if message.user_id == current_user.id %>
                                  <%= link_to message.content, message_path(message.id), method: :delete,
-                                 date: {confirm: "本当に投稿を削除しますか？"} %>
+                                 data: {confirm: "本当に投稿を削除しますか？"} %>
                             <% else %>
                                 <%= message.content %>
                             <% end %>
@@ -134,6 +134,7 @@
         </div>
     </div>
     
+<!--- コメント -->   
 <div class='chat text-center'>
     <h3 class="chat-h">コメント欄</h3>
         <% if @messages.present? %>

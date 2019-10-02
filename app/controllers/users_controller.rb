@@ -11,18 +11,10 @@ before_action :forbid_login_user
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
-    
         #my_shoe
-        @my_shoe = MyShoe.find_by(user_id: @user.id)
-            if @my_shoe
-                @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
-            end
+        @shoe = Shoe.find_by(id: @user.shoe_id)
         #my_consumption
-        @my_consumption = MyConsumption.find_by(user_id: @user.id)
-            if @my_consumption
-                @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
-            end
-        
+        @consumption = Consumption.find_by(id: @user.consumption_id)
         #user買い物エリア
         @chosen_area=[]
             MyArea.where(user_id: @user.id).each do |my|
@@ -54,18 +46,10 @@ before_action :forbid_login_user
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
-        
         #my_shoe
-        @my_shoe = MyShoe.find_by(user_id: @user.id)
-            if @my_shoe
-                @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
-            end
+        @shoe = Shoe.find_by(id: @user.shoe_id)
         #my_consumption
-        @my_consumption = MyConsumption.find_by(user_id: @user.id)
-            if @my_consumption
-                @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
-            end
-        
+        @consumption = Consumption.find_by(id: @user.consumption_id)
         #user買い物エリア
         @chosen_area=[]
             MyArea.where(user_id: @user.id).each do |my|
@@ -86,18 +70,10 @@ before_action :forbid_login_user
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
-        
         #my_shoe
-        @my_shoe = MyShoe.find_by(user_id: @user.id)
-            if @my_shoe
-                @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
-            end
+        @shoe = Shoe.find_by(id: @user.shoe_id)
         #my_consumption
-        @my_consumption = MyConsumption.find_by(user_id: @user.id)
-            if @my_consumption
-                @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
-            end
-        
+        @consumption = Consumption.find_by(id: @user.consumption_id)
         #user買い物エリア
         @chosen_area=[]
             MyArea.where(user_id: @user.id).each do |my|
@@ -116,19 +92,10 @@ before_action :forbid_login_user
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
-        
         #my_shoe
-        @my_shoe = MyShoe.find_by(user_id: @user.id)
-            if @my_shoe
-                @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
-            end
-        
+        @shoe = Shoe.find_by(id: @user.shoe_id)
         #my_consumption
-        @my_consumption = MyConsumption.find_by(user_id: @user.id)
-            if @my_consumption
-                @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
-            end
-        
+        @consumption = Consumption.find_by(id: @user.consumption_id)
         #user買い物エリア
         @chosen_area=[]
             MyArea.where(user_id: @user.id).each do |my|
@@ -148,19 +115,10 @@ before_action :forbid_login_user
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
-        
         #my_shoe
-        @my_shoe = MyShoe.find_by(user_id: @user.id)
-            if @my_shoe
-                @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
-            end
-        
+        @shoe = Shoe.find_by(id: @user.shoe_id)
         #my_consumption
-        @my_consumption = MyConsumption.find_by(user_id: @user.id)
-            if @my_consumption
-                @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
-            end
-        
+        @consumption = Consumption.find_by(id: @user.consumption_id)
         #user買い物エリア
         @chosen_area=[]
             MyArea.where(user_id: @user.id).each do |my|
@@ -168,64 +126,50 @@ before_action :forbid_login_user
                     @chosen_area.push(my.area_id) 
                 end
             end
-        
-        
         #一覧（メッセージ一覧。）
         #each文配列をmyRoomIds代入
         myChatIds = []
+        #myEntries = []
         #current_userのレコードを取得
         #current_userのレコードchat_idと同じchat.idを取得
-            Entry.where(user_id: @user.id).each do |e|
+            Entry.where(user_id: current_user.id).each do |e|
                 if Chat.find(e.chat_id)
+                    #myEntries.push(e.id)
                     myChatIds.push(e.chat_id)
+                   # logger.debug("--------myEntries=#{myEntries}")
                 end
             end
         #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
-        @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', @user.id)
+        @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', current_user.id)
         #user参加��チャット相手がわかる
-        @entries = Entry.where(chat_id: myChatIds)#.where(user_id: @user.id)
-        #view用　each文で回す。
-        @entries2= Entry.where(chat_id: myChatIds)
+        @myentries = Entry.where(chat_id: myChatIds).where(user_id: current_user.id)
+    
         #talk一覧(chat一覧に最新メッセージを表示)
-        entryIds=[]
-        #an_entryIds=[]
+        #@talk_userIds=[]
+        @talks=[] 
             @anotherEntries.each do |an|
-                @entries.each do |e| 
-                    if an.chat_id == e.chat_id 
-                        entryIds.push(e.id)
-                        #an_entryIds.push(an.id)
+                @myentries.each do |e| 
+                    if an.chat_id == e.chat_id  #同じentry.idが複数入ってしまう。
+                        @talks.push(Talk.order(created_at: :desc)
+                              .where(entry_id: [an.id, e.id]).first)
                     end
                 end 
             end 
-        
-        @talks=[] 
-             #logger.debug("--------entryIds = #{entryIds}")
-            entryIds.each do |entryId|
-                if Talk.find_by(entry_id: entryId) # エントリーしているがトークしてない人を無視
-                    @talks.push(Talk.where(entry_id: entryId).order(created_at: :desc).first)
+            
+        #順番揃える
+        talks2=[]
+            @talks_all = Talk.all.order(created_at: :desc)
+                @talks_all.each do |talk_all|
+                    @talks.each do |talk|
+                        if talk_all.id == talk.id
+                            talks2.push(talk.id)
+                        end
+                    end
                 end
-            end
-            
-        #@an_talks=[]
-            #an_entryIds.each do |an_entryId|
-                #if Talk.find_by(entry_id: an_entryId) # エントリーしているがトークしてない人を無視
-                    #@an_talks.push(Talk.where(entry_id: an_entryId).order(created_at: :desc).first)
-                #end
-            #end
         
-        #@all_talks.each do |all|    
-            #@user_talks.each do |user_talk|
-                #@an_talks.each do |an_talk|
-                    
-                #end
-            #end
-        #end
-            
-            
-        @all_talks= Talk.all.order(created_at: :desc)
-            
-                
-            
+        @talks3 = talks2.map do |t|
+            Talk.find(t)
+        end
         #＊今回の肝です。一度繰り返し処理をするのは、entryIdに合う条件がtalksテーブルにはたくさんある。
         #（なぜならユーザーがメッセージを交わすだけレコードが増えるから）各chatでの最新messageを出すため、
         #条件に合うentry_idを　並び替えしかつ各entry.idごとのfirstを取って来る必要がある。
@@ -254,19 +198,10 @@ before_action :forbid_login_user
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
-        
         #my_shoe
-        @my_shoe = MyShoe.find_by(user_id: @user.id)
-            if @my_shoe
-                @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
-            end
-        
+        @shoe = Shoe.find_by(id: @user.shoe_id)
         #my_consumption
-        @my_consumption = MyConsumption.find_by(user_id: @user.id)
-            if @my_consumption
-                @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
-            end
-        
+        @consumption = Consumption.find_by(id: @user.consumption_id)
         #user買い物エリア
         @chosen_area=[]
             MyArea.where(user_id: @user.id).each do |my|
@@ -304,15 +239,9 @@ before_action :forbid_login_user
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
         #my_shoe
-        @my_shoe = MyShoe.find_by(user_id: @user.id)
-            if @my_shoe
-                @shoe = Shoe.find_by(id: @my_shoe.shoe_id)
-            end
+        @shoe = Shoe.find_by(id: @user.shoe_id)
         #my_consumption
-        @my_consumption = MyConsumption.find_by(user_id: @user.id)
-            if @my_consumption
-                @consumption = Consumption.find_by(id: @my_consumption.consumption_id)
-            end
+        @consumption = Consumption.find_by(id: @user.consumption_id)
         #user買い物エリア
         @chosen_area=[]
             MyArea.where(user_id: @user.id).each do |my|

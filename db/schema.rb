@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190917062815) do
+ActiveRecord::Schema.define(version: 20190929131739) do
 
   create_table "areas", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20190917062815) do
   create_table "chats", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "name"
   end
 
   create_table "consumptions", force: :cascade do |t|
@@ -86,20 +85,6 @@ ActiveRecord::Schema.define(version: 20190917062815) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "my_consumptions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "consumption_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  create_table "my_shoes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "shoe_id"
-  end
-
   create_table "notifications", force: :cascade do |t|
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
@@ -154,6 +139,8 @@ ActiveRecord::Schema.define(version: 20190917062815) do
     t.text     "self_introduction"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "shoe_id"
+    t.integer  "consumption_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

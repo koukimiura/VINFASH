@@ -21,20 +21,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
    def edit
-    @areas = Area.all
-    @area = Area.new
-    if 
-    @user.my_consumptions.build
-    @user.my_shoes.build
-    #@my_shoe=MyShoe.new
-    
-    #@user = User.find(params[:id])
-    #my_shoe
-    # @shoes = Shoe.all
-    #my_consumption
-    #@consumptions = Consumption.all
-   
-    
      super
    end
    
@@ -88,9 +74,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
      devise_parameter_sanitizer.permit(:account_update,
      keys: [:name, :gender, :birthday, :adress, :image, :my_size,
-     :my_height, :genre, :self_introduction,
-     my_shoes_attributes: [:id, :shoe_id, :user_id],
-     my_consumptions_attributes: [:id, :consumption_id, :user_id]]) 
+     :my_height, :genre, :self_introduction, :shoe_id, :consumption_id]) 
      #logger.debug("my_shoes_attributes => #{params[:user][:my_shoes_attributes]}")
   end
   
@@ -106,3 +90,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   
 end
+

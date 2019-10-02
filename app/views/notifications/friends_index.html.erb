@@ -1,18 +1,16 @@
-<h2 class="sub-title">通知</h2>
-    <div>
-        <div class="users-index">
-            <% if @notifications.present? %>
-                <% @notifications.each do |notification| %>
-                    <% notification.update_attributes(check: true) %>
-                        <div class="notifications-index">
-                            <div class="notifications">
-                                <div class="notification-content">
-                                    <%= test_2(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
-                                </div>
+<div class="notifications-index">
+    <h3 class="sub-title">通知</h3>
+        <% if @notifications.present? %>
+            <% @notifications.each do |notification| %>
+                <% notification.update_attributes(check: true) %>
+                    <div class="notifications">
+                        <div class="notification">
+                            <div class="notification-content">
+                                <%= test_2(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
                             </div>
                         </div>
-                <% end %>
+                        <%= paginate @notifications %>
+                    </div>
             <% end %>
-        </div>
-        <%= paginate @notifications %>
-    </div>
+        <% end %>
+</div>
