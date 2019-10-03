@@ -52,8 +52,8 @@
    background-color: white;
    /*margin: 0px auto;*/
    padding: 20px 30px;
-   overflow: hidden;
    box-shadow: 0 2px 6px #c1ced7;
+   overflow: hidden;
 }
 
 .posts-left{
@@ -93,7 +93,7 @@
 .post-show-item {
     margin: 40px auto;
     padding: 20px 30px;
-　  overflow: hidden;
+    overflow: hidden;
 }
 
 .post-image{
@@ -121,7 +121,7 @@
     background-color: #F5F5F5;
     margin: 40px auto;
     padding: 20px 30px;
-　  overflow: hidden;
+    overflow: hidden;
 }
 
 .chat-h {
@@ -231,8 +231,8 @@
 .user-tabs {
   margin-top: 40px;
   background-color: white;
-  overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
 }
 
 .user-tabs li {
@@ -257,8 +257,8 @@
 .user-tabs2 {
   margin-top: 40px;
   background-color: white;
-  overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
 }
 
 .user-tabs2 li {
