@@ -276,5 +276,8 @@ DEPENDENCIES
   web-console
   websocket-extensions (~> 0.1.4)
 
+RUBY VERSION
+   ruby 2.6.3p62
+
 BUNDLED WITH
    1.17.2
