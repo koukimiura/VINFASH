@@ -8,7 +8,7 @@ ruby "2.6.3"
 #gem 'sqlite3', '~> 1.3.6'
 gem 'sqlite3', '~> 1.3.13', group: [:development, :test]
 gem 'pg', group: :production
-# Use Puma as the app server
+# Use Puma as the app servery
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
