@@ -5,12 +5,13 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
+  #adapter: sqlite3
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
+  adapter: sqlite3 # 追加
   database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -23,3 +24,9 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+
+
+
+
+
+
