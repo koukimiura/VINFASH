@@ -1,21 +1,18 @@
 <div class="notifications-index">
-<h2 class="sub-title">通知</h2>
-    <div>
-        <div class="users-index">
-            <% if @notifications.present? %>
-                <% @notifications.each do |notification| %>
-                    <%= link_to chat_path(notification.chat_id) do %>
-                        <div class="notifications-index">
-                            <div class="notifications">
-                                <div class="notification-content">
-                                    <%= test_3(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
-                                    <p><%= @talk.content %></p>
-                                </div>
+    <h2 class="sub-title">通知</h2>
+        <% if @notifications.present? %>
+            <% @notifications.each do |notification| %>
+                <%= link_to chat_path(notification.chat_id) do %>
+                    <div class="notifications">
+                        <div class="notification">
+                            <div class="notification-content">
+                                <%= test_3(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
+                                <p><%= @talk.content %></p>
                             </div>
                         </div>
-                    <% end %>
+                    </div>
                 <% end %>
             <% end %>
-       </div> 
-         <%= paginate @notifications %>
-    </div>
+        <% end %>
+    <%= paginate @notifications %>
+</div>

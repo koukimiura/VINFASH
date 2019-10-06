@@ -9,8 +9,8 @@
                                 <%= test_2(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
                             </div>
                         </div>
-                        <%= paginate @notifications %>
                     </div>
             <% end %>
         <% end %>
+    <%= paginate @notifications %>
 </div>
