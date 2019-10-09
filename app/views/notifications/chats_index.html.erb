@@ -1,5 +1,5 @@
 <div class="notifications-index">
-    <h2 class="sub-title">通知</h2>
+    <h3 class="sub-title">通知</h3>
         <% if @notifications.present? %>
             <% @notifications.each do |notification| %>
                 <%= link_to chat_path(notification.chat_id) do %>

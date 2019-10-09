@@ -5,7 +5,7 @@
                 <% notification.update_attributes(check: true) %>
                     <div class="notifications">
                         <div class="notification">
-                            <div class="notification-content">
+                            <div class="notification-content_black">
                                 <%= test_2(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
                             </div>
                         </div>

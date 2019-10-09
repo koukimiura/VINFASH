@@ -5,7 +5,7 @@
         <div class="new text-center">
             <%= form_for @my_area do |f| %>
                 <p><%= f.label :お買い物エリア %></p>
-                <p><%= f.collection_select(:area_id, @areas, :id, :name) %></p>
+                <p><%= f.collection_select(:area_id, @areas, :id, :name,:prompt => "選択してください") %></p>
                 <p><%= f.submit "登録する", class:"btn btn-info" %></p>
             <% end %>
         </div>
@@ -30,7 +30,7 @@
         <h3 class="text-center myarea-header">新規入力</h3>
         <%= form_for @my_area do |f| %>
                 <p><%= f.label :お買い物エリア %></p>
-                <p><%= f.collection_select(:area_id, @areas, :id, :name) %></p>
+                <p><%= f.collection_select(:area_id, @areas, :id, :name, :prompt => "選択してください") %></p>
                 <p><%= f.submit "登録する", class:"btn btn-info" %></p>
             <% end %>
     </div>

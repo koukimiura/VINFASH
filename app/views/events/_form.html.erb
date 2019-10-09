@@ -15,7 +15,7 @@
             <p><%= f.label :画像 %></p>
             <P><%= f.file_field :image, class: 'form-control my-form' %></P>
                 <%= f.hidden_field :user_id, :value => current_user.id %>
-            <hr>
+            <br>
             <p><%= f.submit "投稿する", class: 'btn btn-info' %></p>
         </div>
     </div>

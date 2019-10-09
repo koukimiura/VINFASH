@@ -3,105 +3,105 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-6 edit-color">
 
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'  %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-  <%= f.label :name %>
-  <em class="number-alarm">＊必須</em>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'  %>
+    </div>
+  
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+  
+    <div class="field">
+    <%= f.label :name %>
+    <em class="number-alarm">＊必須</em>
+    <br>
+      <%= f.text_field :name, autocomplete: "name", class:"form-control" %>
+    </div>
+  
+    
+    <div class="field">
+      <%= f.label :性別 %>
+      <em class="number-alarm">＊必須</em>
+      <br>
+      <%= f.radio_button :gender, "男" %>イケメン <%= f.radio_button :gender, "男" %>野獣 <%= f.radio_button :gender, "女" %>美女
+    </div>
+    
+    <div class="field">
+      <%= f.label :生年月日 %><br>
+      <%= f.date_field :birthday %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :住所 %><em class="number-alarm">＊お住いの都道府県と市町村区</em>
+      <br>
+      <%= f.text_field :adress, autocomplete: "adress", class:"form-control" %>
+    </div>
+  
+        <div class="field">
+      <%= f.label :image %><br>
+      <%= f.file_field :image, class:"form-control" %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :洋服のサイズ %><br>
+      <%= f.radio_button :my_size, "xs"%>XS <%= f.radio_button :my_size, "s" %>S <%= f.radio_button :my_size, "m" %>M<br>
+      <%= f.radio_button :my_size, "l" %>L <%= f.radio_button :my_size, "xl" %>XL <%= f.radio_button :my_size, "xxl" %>XXL<br>
+      <%= f.radio_button :my_size, "xxl" %>野獣サイズ<br>
+    </div>
+    
+    <div class="field">
+      <%= f.label :靴のサイズ%>
+      <em class="number-alarm">＊選択してください</em>
+      <br>
+        <%= f.collection_select(:shoe_id, @shoes, :id, :size, :prompt => "選択してください") %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :身長 %>
+      <em class="number-alarm">＊半角英数字で数値のみ記入</em>
+      <br>
+      <%= f.number_field :my_height %>cm
+    </div>
+    
+    <div class="field">
+      <%= f.label :好きな洋服のジャンル %>
+      <em class="number-alarm">＊必須</em>
+      <br>
+      <%= f.text_field :genre, class:"form-control" %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :月に洋服にかける金額 %>
+      <em class="number-alarm">＊選択してください</em>
+      <br>
+      <!--                   (保存されるからむ、オブジェクトの配列, カラムに保存される項(選択されるからむ）、表示されるカラム名 -->
+      <%= f.collection_select(:consumption_id, @consumptions, :id, :price, :prompt => "選択してください") %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :Introduction %><br>
+      <%= f.text_area :self_introduction, placeholder: "よろしく！", class:"form-control"%>
+    </div>
   <br>
-    <%= f.text_field :name, autocomplete: "name", class:"form-control" %>
-  </div>
-
   
-  <div class="field">
-    <%= f.label :性別 %>
-    <em class="number-alarm">＊必須</em>
-    <br>
-    <%= f.radio_button :gender, "男" %>イケメン <%= f.radio_button :gender, "男" %>野獣 <%= f.radio_button :gender, "女" %>美女
-  </div>
-  
-  <div class="field">
-    <%= f.label :生年月日 %><br>
-    <%= f.date_field :birthday %>
-  </div>
-
-  <div class="field">
-    <%= f.label :住所 %><em class="number-alarm">＊お住いの都道府県と市町村区</em>
-    <br>
-    <%= f.text_field :adress, autocomplete: "adress", class:"form-control" %>
-  </div>
-
-      <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image, class:"form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :主な洋服のサイズ %><br>
-    <%= f.radio_button :my_size, "xs"%>XS <%= f.radio_button :my_size, "s" %>S <%= f.radio_button :my_size, "m" %>M<br>
-    <%= f.radio_button :my_size, "l" %>L <%= f.radio_button :my_size, "xl" %>XL <%= f.radio_button :my_size, "xxl" %>XXL<br>
-    <%= f.radio_button :my_size, "xxl" %>野獣サイズ<br>
-  </div>
-  
-  <div class="field">
-    <%= f.label :my_shoes %>
-    <em class="number-alarm">＊選択してください</em>
-    <br>
-      <%= f.collection_select(:shoe_id, @shoes, :id, :size, :prompt => "選択してください") %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :身長 %>
-    <em class="number-alarm">＊半角英数字で数値のみ記入</em>
-    <br>
-    <%= f.number_field :my_height %>cm
-  </div>
-  
-  <div class="field">
-    <%= f.label :好きなジャンル %>
-    <em class="number-alarm">＊必須</em>
-    <br>
-    <%= f.text_field :genre, class:"form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :月に洋服にかける金額 %>
-    <em class="number-alarm">＊選択してください</em>
-    <br>
-    <!--                   (保存されるからむ、オブジェクトの配列, カラムに保存される項(選択されるからむ）、表示されるカラム名 -->
-    <%= f.collection_select(:consumption_id, @consumptions, :id, :price, :prompt => "選択してください") %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :Introduction %><br>
-    <%= f.text_area :self_introduction, placeholder: "よろしく！", class:"form-control"%>
-  </div>
-<br>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br>
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
- 
-<br>
-  <div class="actions">
-    <p><%= f.submit "登録する", class:"btn btn-info" %></p>
-  </div>
+    <div class="field">
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br>
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
+    </div>
+   
+  <br>
+    <div class="actions">
+      <p><%= f.submit "登録する", class:"btn btn-info" %></p>
+    </div>
   </div>
 </div>
 <% end %>
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'cancel-account' %></p>
 
 <%= link_to "Back", :back %>

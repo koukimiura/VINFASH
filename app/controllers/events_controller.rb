@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     before_action :authenticate_user!, :only => [:new, :show, :create, :edit, :update, :destroy]
-    before_action :ensure_correct_user, :only => [ :edit, :update]
+    before_action :ensure_correct_user, :only => [:edit, :update, :destroy]
     before_action :forbid_login_user, only: [:show, :new, :create, :edit, :update, :destroy]
     
     def index
@@ -21,13 +21,13 @@ class EventsController < ApplicationController
     
     def create
         @event = Event.new(event_params)
-        if @event.save
-        flash[:notice] = '投稿しました。'
-        redirect_to events_path
-        else
-        flash[:alert] = '投稿できませんでした。'
-        render 'events/new'
-        end
+            if @event.save
+                flash[:notice] = '投稿しました。'
+                redirect_to events_path
+            else
+                flash[:alert] = '投稿できませんでした。'
+                render 'events/new'
+            end
     end
     
     def edit 
@@ -36,16 +36,19 @@ class EventsController < ApplicationController
     
     def update
          @event = Event.find(params[:id])
-        if @event.update(event_params)
-        redirect_to events_path
-        else
-        render 'events/edit'
-        end
+            if @event.update(event_params)
+                flash[:notice] = 'イベントを編集しました。'
+                redirect_to events_path
+            else
+                render 'events/edit'
+                flash[:alert] = '投稿できませんでした。'
+            end
     end
     
-    def destrory
+
+    def destroy
          @event = Event.find(params[:id])
-         @event = @event.destroy
+         @event.destroy
          redirect_to events_path
     end
     

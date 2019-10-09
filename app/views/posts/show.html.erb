@@ -1,32 +1,68 @@
-<% if @post.image? %>
-    <div class="post-show-item text-left" >
-        <h1 class="item-name text-center"><%=@post.title %></h1>
-
-            <div class="post-image">
-                <div class="post-show-image text-center" >
-                     <%= image_tag @post.image.to_s%>
-                </div>
-    <hr>
-              　<div class="post-show-item1 text-left">
-              　    <% if @post.user.image? %>
-                       <div class="posts-left">
+<div class="post-show">
+    <% if @post.image? %>
+        <div class="post-show-item" >
+                <h1 class="item-name text-center"><%=@post.title %></h1>
+                    <div class="post-image">
+                        <div class="post-show-image text-center" >
+                             <%= image_tag @post.image.to_s%>
+                        </div>
+                        <hr>
+                      　<div class="post-show-item1 text-left">
+                      　    <% if @post.user.image? %>
+                               <div class="posts-left">
+                                   <%= image_tag @post.user.image.to_s, class: "users-image" %>
+                               </div>
+                           <% else %>
+                               <div class="posts-left">
+                                   <%= image_tag "default.png", class: "users-image" %>
+                               </div>
+                           <% end %>
+                               <div class="posts-right">
+                                   <p>名前:<%= link_to @post.user.name, user_path(@post.user_id) %></p>
+                               </div> 
+                               <div class= "post-show-content text-left">
+                                   <h3>投稿内容</h3>
+                                   <%= @post.content %>
+                               </div>
+                        </div>
+        <!--いいねをする処理-->    
+                            <% if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
+                                    <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+                                    <span class="fa fa-heart like-btn-unlike fa-2x"></span>
+                                    <% end %>
+                            <% else %>
+                                    <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+                                    <span class="fa fa-heart like-btn fa-2x"></span>
+                                     <% end %>
+                            <% end %>
+                                <%= @like_count %>
+                        <div class="post-time">
+                            <%=@post.created_at %>
+                        </div>
+                    </div>
+            </div>
+    <% else %>
+    <!-- no image -->
+        <div class= "post-show-no-image text-left">
+            <h1 class="item-name text-center"><%=@post.title %></h1>
+                <div class= "post-show-no-image2">
+                    <% if @post.user.image? %>
+                        <div class="posts-left">
                            <%= image_tag @post.user.image.to_s, class: "users-image" %>
                        </div>
-                   <% else %>
-                       <div class="posts-left">
-                           <%= image_tag "default.png", class: "users-image" %>
-                       </div>
-                   <% end %>
-                       <div class="posts-right">
-                           <p>名前:<%= link_to @post.user.name, user_path(@post.user_id) %></p>
-                       </div> 
-                       <div class= "post-show-content text-left">
-                           <h3>投稿内容</h3>
-                           <%= @post.content %>
-                       </div>
-                </div>
-<!--いいねをする処理-->    
-                    <% if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
+                    <% else %>
+                        <div class="posts-left">
+                            <%= image_tag "default.png", class: "users-image" %>
+                        </div>
+                    <% end %>
+                    <div class="posts-right">
+                        <p>名前:<%= link_to @post.user.name, user_path(@post.user_id) %></p>
+                    </div> 
+                    <div class="posts-middle">
+                        投稿内容:<%= @post.content %>
+                    </div>
+                    <!--いいねをする処理-->          
+                    <%if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
                             <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
                             <span class="fa fa-heart like-btn-unlike fa-2x"></span>
                             <% end %>
@@ -35,169 +71,80 @@
                             <span class="fa fa-heart like-btn fa-2x"></span>
                              <% end %>
                     <% end %>
-                        <%= @like_count %>
-                <div class="post-time">
-                    <%=@post.created_at %>
+                    <%= @like_count %>
+                    <div class="post-time">
+                        <%=@post.created_at %>
+                    </div>
                 </div>
-            </div>
-    </div>
-
-<div class='chat text-center'>
-    <h3 class="chat-h">コメント欄</h3>
-        <% if @messages.present? %>
-            <% @messages.each do |message| %>
-                 <% if message.user_id == @post.user_id %>
-                    <h4 class="text-right">
-                        <p class="alert alert-success">
-                             <% if message.user_id == current_user.id %>
-                                 <%= link_to message.content, message_path(message.id), method: :delete,
-                                    data: {confirm: "本当に投稿を削除しますか？"} %>
-                            <% else %>
-                                <%= message.content %>
-                            <% end %>
-                                <br><br>
-                                <% if message.user.image? %>
-                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <% else %>
-                                    <%= image_tag "default.png", size: "50x50" %>
-                                <% end %>
-                                <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
-                        </p>
-                     </h4>
-                  <% else %>
-                     <h4 class="text-left">
-                         <p class="alert alert-info">
-                             <% if message.user_id == current_user.id %>
-                                 <%= link_to message.content, message_path(message.id), method: :delete,
-                                 data: {confirm: "本当に投稿を削除しますか？"} %>
-                            <% else %>
-                                <%= message.content %>
-                            <% end %>
-                                <br><br>
-                                <% if message.user.image? %>
-                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <% else %>
-                                    <%= image_tag "default.png", size: "50x50" %>
-                                <% end %>
-                                <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
-                                        </p>
-                                    </h4>
-                  <% end %>
-            <% end %>
-        <% else %>
-            <br>
-            <h4>メッセージはありません</h4>
-            <br>
-        <% end %>
-        
-<%= form_for @message do |f| %>
-    <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
-        <%= f.hidden_field :post_id, :value => @post.id %>
-    <p><%= f.submit "送信", class: 'btn btn-info' %></p>
-<% end %> 
-</div>
-    
-    
-<% else %>
-
-<h1 class="text-center"><%=@post.title %></h1>
-<hr>
-    <div class= "posts-index-item text-left">
-        <% if @post.user.image? %>
-            <div class="posts-left">
-               <%= image_tag @post.user.image.to_s, class: "users-image" %>
-           </div>
-        <% else %>
-            <div class="posts-left">
-                <%= image_tag "default.png", class: "users-image" %>
-            </div>
-        <% end %>
-        <div class="posts-right">
-            <p>名前:<%= link_to @post.user.name, user_path(@post.user_id) %></p>
-        </div> 
-        <div class="posts-middle">
-            投稿内容:<%= @post.content %>
         </div>
-        <!--いいねをする処理-->          
-        <%if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
-                <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
-                <span class="fa fa-heart like-btn-unlike fa-2x"></span>
+    <% end %>        
+         <!--- コメント -->
+    <div class='chat text-center'>
+        <div class='chat2'>
+            <h3 class="chat-h">コメント欄</h3>
+            <hr>
+                <% if @messages.present? %>
+                    <% @messages.each do |message| %>
+                         <% if message.user_id == @post.user_id %>
+                            <h4 class="text-right">
+                                <p class="alert alert-success">
+                                     <% if message.user_id == current_user.id %>
+                                         <%= link_to message.content, message_path(message.id), method: :delete,
+                                            data: {confirm: "本当に投稿を削除しますか？"} %>
+                                    <% else %>
+                                        <%= message.content %>
+                                    <% end %>
+                                        <br><br>
+                                        <% if message.user.image? %>
+                                            <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                        <% else %>
+                                            <%= image_tag "default.png", size: "50x50" %>
+                                        <% end %>
+                                    <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
+                                </p>
+                             </h4>
+                          <% else %>
+                             <h4 class="text-left">
+                                 <p class="alert alert-info">
+                                     <% if message.user_id == current_user.id %>
+                                         <%= link_to message.content, message_path(message.id), method: :delete,
+                                         data: {confirm: "本当に投稿を削除しますか？"} %>
+                                    <% else %>
+                                        <%= message.content %>
+                                    <% end %>
+                                        <br><br>
+                                        <% if message.user.image? %>
+                                            <%= image_tag message.user.image.to_s, size: "50x50" %>
+                                        <% else %>
+                                            <%= image_tag "default.png", size: "50x50" %>
+                                        <% end %>
+                                    <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
+                                </p>
+                            </h4>
+                          <% end %>
+                    <% end %>
+                <% else %>
+                    <br>
+                    <h4>メッセージはありません</h4>
+                    <br>
                 <% end %>
-        <% else %>
-                <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
-                <span class="fa fa-heart like-btn fa-2x"></span>
-                 <% end %>
-        <% end %>
-        <%= @like_count %>
-        <div class="post-time">
-            <%=@post.created_at %>
+                
+            <%= form_for @message do |f| %>
+                <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
+                    <%= f.hidden_field :post_id, :value => @post.id %>
+                <p><%= f.submit "送信", class: 'btn btn-info' %></p>
+            <% end %> 
         </div>
     </div>
-    
-<!--- コメント -->   
-<div class='chat text-center'>
-    <h3 class="chat-h">コメント欄</h3>
-        <% if @messages.present? %>
-            <% @messages.each do |message| %>
-                 <% if message.user_id == @post.user_id %>
-                    <h4 class="text-right">
-                        <p class="alert alert-success">
-                            <% if message.user_id == current_user.id %>
-                                <%= link_to message.content, message_path(message.id), method: :delete,
-                                    data: {confirm: "本当に投稿を削除しますか？"} %>
-                            <% else %>
-                                <%= message.content %>
-                            <% end %>
-                            <br><br>
-                                <% if message.user.image? %>
-                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <% else %>
-                                    <%= image_tag "default.png", size: "50x50" %>
-                                <% end %>
-                            <small><strong> <%= link_to message.user.name, user_path(message.user_id) %></strong></small>
-                        </p>
-                     </h4>
-                  <% else %>
-                     <h4 class="text-left">
-                         <p class="alert alert-info">
-                             <% if message.user_id == current_user.id %>
-                                 <%= link_to message.content, message_path(message.id), method: :delete,
-                                 data: {confirm: "本当に投稿を削除しますか？"} %>
-                            <% else %>
-                                <%= message.content %>
-                            <% end %>
-                            <br><br>
-                                <% if message.user.image? %>
-                                    <%= image_tag message.user.image.to_s, size: "50x50" %>
-                                <% else %>
-                                    <%= image_tag "default.png", size: "50x50" %>
-                                <% end %>
-                            <small><strong> <%= link_to message.user.name, user_path(message.user.id) %></strong></small>
-                          </p>
-                      </h4>
-                  <% end %>
+    <div class='user-show-btn text-center'>
+        <div class='user-show-btn2'>
+            <% if @post.user_id == current_user.id %>
+                <p><%= link_to '編集する', edit_post_path(@post.id), class:'btn btn-info' %></p>
+                <p><%= link_to '削除', post_path(@post.id), method: :delete, data:
+                            {confirm: "本当に投稿を削除しますか？",
+                             cancel: 'やめる',
+                             commit: '削除する'}, title: '削除確認', class:'btn btn-warning' %></p>
             <% end %>
-        <% else %>
-            <br>
-            <h4>メッセージはありません</h4>
-            <br>
-        <% end %>
-        
-   <%= form_for @message do |f| %>
-    <p><%= f.text_area :content, class: 'form-control', placeholder: 'メッセージを入力してください' %></p>
-        <%= f.hidden_field :post_id, :value => @post.id %>
-    <p><%= f.submit "送信", class: 'btn btn-info' %></p>
-    <% end %> 
-</div>
-<% end %>
-
-
-<div class='text-center'>
-    <% if @post.user_id == current_user.id %>
-        <p><%= link_to '編集する', edit_post_path(@post.id), class:'btn btn-info' %></p>
-        <p><%= link_to '削除', post_path(@post.id), method: :delete, data:
-                    {confirm: "本当に投稿を削除しますか？",
-                     cancel: 'やめる',
-                     commit: '削除する'}, title: '削除確認', class:'btn btn-warning' %>
-    <% end %>
+        </div>
+    </div>
 </div>

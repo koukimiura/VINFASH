@@ -42,7 +42,7 @@ before_action :forbid_login_user
         @likes = Like.where(user_id: @user.id)
         @chat = Chat.new
         @entry = @chat.entries.build
-        @frind = Friend.new
+        @friend = Friend.new
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
@@ -66,7 +66,7 @@ before_action :forbid_login_user
         @likes = Like.where(user_id: @user.id)
         @chat = Chat.new
         @entry = @chat.entries.build
-        @frind = Friend.new
+        @friend = Friend.new
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
@@ -88,7 +88,7 @@ before_action :forbid_login_user
         @user = User.find(params[:id])
         @chat = Chat.new
         @entry = @chat.entries.build
-        @frind = Friend.new
+        @friend = Friend.new
         @friend_following = Friend.where(follower: @user.id).count
         @friend_followers = Friend.where(followed: @user.id).count
         @relationship = "友人レベル"
