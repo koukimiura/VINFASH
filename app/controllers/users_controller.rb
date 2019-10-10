@@ -126,54 +126,53 @@ before_action :forbid_login_user
                     @chosen_area.push(my.area_id) 
                 end
             end
-        #一覧（メッセージ一覧。）
-        #each文配列をmyRoomIds代入
+            
+        #チャット一覧（最新メッセージ）
+        #each文配列をmyChatIds代入
+        #current_userの参加しているレコードを取得
         myChatIds = []
-        #myEntries = []
-        #current_userのレコードを取得
-        #current_userのレコードchat_idと同じchat.idを取得
             Entry.where(user_id: current_user.id).each do |e|
                 if Chat.find(e.chat_id)
-                    #myEntries.push(e.id)
                     myChatIds.push(e.chat_id)
                    # logger.debug("--------myEntries=#{myEntries}")
                 end
             end
         #current_user.chat_idと同じchat_idを探してuser.id != current_user_idとする
-        @anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', current_user.id)
-        #user参加��チャット相手がわかる
-        @myentries = Entry.where(chat_id: myChatIds).where(user_id: current_user.id)
-    
-        #talk一覧(chat一覧に最新メッセージを表示)
-        #@talk_userIds=[]
-        @talks=[] 
-            @anotherEntries.each do |an|
-                @myentries.each do |e| 
-                    if an.chat_id == e.chat_id  #同じentry.idが複数入ってしまう。
-                        @talks.push(Talk.order(created_at: :desc)
+        anotherEntries = Entry.where(chat_id: myChatIds).where('user_id != ?', current_user.id)
+        #logger.debug("--------------anotherEntries=#{anotherEntries.inspect}")
+        #自分のuser_idと参加しているchat_id
+        myEntries = Entry.where(chat_id: myChatIds).where(user_id: current_user.id)
+        #logger.debug("--------------myEntries=#{myEntries.inspect}")
+        #チャットの最新のTalkレコードを取得
+        talks=[] 
+            anotherEntries.each do |an|
+                myEntries.each do |e| 
+                    if an.chat_id == e.chat_id #同じentry.idが複数入ってしまう。
+                        talks.push(Talk.order(created_at: :desc)
                               .where(entry_id: [an.id, e.id]).first)
                     end
                 end 
             end 
+        
+        #ChatレコードEntryレコードがcreateされたがTalkがされていないのtalksにはnilがある可能性があるcompackメソッドで弾く
+        new_talks = talks.compact
+        #logger.debug("--------------new_talks=#{new_talks.inspect}")
             
+        talks_all = Talk.all.order(created_at: :desc)
         #順番揃える
         talks2=[]
-            @talks_all = Talk.all.order(created_at: :desc)
-                @talks_all.each do |talk_all|
-                    @talks.each do |talk|
-                        if talk_all.id == talk.id
-                            talks2.push(talk.id)
-                        end
+            talks_all.each do |talk_all|
+                new_talks.each do |talk|
+                    if talk_all.id == talk.id
+                        talks2.push(talk.id)
                     end
                 end
+            end
         
+        #最終的配列 for view
         @talks3 = talks2.map do |t|
             Talk.find(t)
         end
-        #＊今回の肝です。一度繰り返し処理をするのは、entryIdに合う条件がtalksテーブルにはたくさんある。
-        #（なぜならユーザーがメッセージを交わすだけレコードが増えるから）各chatでの最新messageを出すため、
-        #条件に合うentry_idを　並び替えしかつ各entry.idごとのfirstを取って来る必要がある。
-            
         
         #一覧（相手の名前を出す。）
         #current_userのレコードを取得

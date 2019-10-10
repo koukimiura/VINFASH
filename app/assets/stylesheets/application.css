@@ -15,15 +15,29 @@
  *= require font-awesome
  */
  
-/** div container **/
-
-body {
+ 
+/**レスポンシブデザインで崩れ区可能性がある**/
+/**body {
     background-image: url(back-ground-image2.jpg);
     background-size: cover;
-    /**color: white;**/
     color: white;
-}
+    background-attachment: fixed;
+}**/
 
+/**画像の固定**/
+body:before{
+  display: block;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  background-image: url(back-ground-image2.jpg);
+  background-size: cover;
+  content:"";
+  z-index:-1;
+}
+ 
 /** user-edit フォーム用 **/
 .edit-color input {
     color: black;
@@ -38,11 +52,11 @@ body {
     color: grey;
 }
 
-
 .my-page{
     max-width: 1170px;
     width: 100%;
     margin: 50px auto 0px;
+    color: white;
 }
 
 .ul, li{
