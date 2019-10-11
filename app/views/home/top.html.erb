@@ -15,7 +15,9 @@
 
 
 <script>
-    $('h1').fadeIn(1000);
-    $('#hoge').fadeIn(3000);
+    $(document).on('turbolinks:load', function() { 
+        $('h1').fadeIn(1000);
+        $('#hoge').fadeIn(3000);
+    });
   
 </script>
