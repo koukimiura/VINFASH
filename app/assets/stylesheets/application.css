@@ -59,6 +59,25 @@ body:before{
     color: white;
 }
 
+
+.home-top {
+    padding: 100px 0px;
+    
+}
+
+.item {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.item p {
+    line-height: 1.5;
+    font-size: 20px;
+}
+
+
+
+
 .ul, li{
     list-style-type: none;
 }

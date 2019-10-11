@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   }
   
   resources :posts 
-  root 'posts#index'
-  #root 'home#top'
+  #root 'posts#index'
+  root 'home#top'
   resources :home, only: [:top]
   resources :users, only: [:show] do
   member do
