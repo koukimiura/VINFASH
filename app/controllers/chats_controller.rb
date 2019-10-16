@@ -76,8 +76,8 @@ class ChatsController < ApplicationController
                 end
             
             else
-                redirect_to :back
                 flash[:alert] = '権限はありません'
+                redirect_to :back
             end
     end
     

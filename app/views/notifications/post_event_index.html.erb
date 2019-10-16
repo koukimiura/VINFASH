@@ -8,7 +8,7 @@
                             <div class="notification-content_black">
                                 <%= test(notification).html_safe %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} ago)" %></span>
                                 <% if @message %>
-                                <p><%= @message.content %></p>
+                                    <p><%= @message.content %></p>
                                 <% end %>
                             </div>
                         </div> 

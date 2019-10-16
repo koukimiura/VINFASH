@@ -25,7 +25,7 @@ class EventsController < ApplicationController
                 flash[:notice] = '投稿しました。'
                 redirect_to events_path
             else
-                flash[:alert] = '投稿できませんでした。'
+                flash.now[:alert] = '投稿できませんでした。'
                 render 'events/new'
             end
     end
@@ -40,8 +40,8 @@ class EventsController < ApplicationController
                 flash[:notice] = 'イベントを編集しました。'
                 redirect_to events_path
             else
+                flash.now[:alert] = '投稿できませんでした。'
                 render 'events/edit'
-                flash[:alert] = '投稿できませんでした。'
             end
     end
     

@@ -1,18 +1,17 @@
-<h1 class= "text-center">イベント編集</h1>
-<br>
-<br>
-
-<div class='post-edit'>
-    <div class='post-edit2'>
-        <% if @event.image? %>
-    <div class="post-edit-image text-center">
-        <%= image_tag @event.image.to_s %>
+<div class='posts'>
+    <div class='post-new-head_edit'>
+        <h2 class= "text-left">イベント編集</h2>
     </div>
-<br>
-        <% end %>
-
-
-<%= render 'form' %>
+    <div class='post-edit'>
+        <div class='post-edit2'>
+            <% if @event.image? %>
+                <div class="post-edit-image text-center">
+                    <%= image_tag @event.image.to_s %>
+                </div>
+                <br>
+            <% end %>
+                <%= render 'form' %>
+        </div>
     </div>
 </div>
 

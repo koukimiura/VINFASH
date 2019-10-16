@@ -1,34 +1,36 @@
-<h1 class="text-center">イベント投稿一覧</h1>
-<br>
-<br>
-
-<% @events.each do |event| %>
-<div class="posts-index">
-    <div class= "posts-index-item">
-      <% if event.user.image? %>
-        <div class="posts-left">
-          <%= image_tag event.user.image.to_s, class: "users-image" %>
-        </div>
-     <% else %>
-        <div class="posts-left">
-          <%= image_tag "default.png", class: "users-image" %>
-        </div>
-    <% end %>
-        <div class="posts-right">
-          <strong>名前:<%= link_to event.user.name, user_path(event.user_id) %></strong>
-          <br><br>
-          <strong>開催場所:<%= event.location %></strong>
-        </div> 
-        <div class="posts-middle">
-          投稿内容:<%= link_to event.content, event_path(event.id), class: "posts-content" %>
-        </div>
-          <% if event.image.present? %>
-            <div class="posts-bottom" >
-              <%= image_tag event.image.to_s, class: "posts-image" %>
+<div class='posts'>
+  <h2 class="text-center">イベント投稿一覧</h2>
+  <br>
+  <br>
+  
+  <% @events.each do |event| %>
+    <div class="posts-index">
+        <div class= "posts-index-item">
+          <% if event.user.image? %>
+            <div class="posts-left">
+              <%= image_tag event.user.image.to_s, class: "users-image" %>
             </div>
-          <% else %>
-            <div></div>
-          <% end %>
+         <% else %>
+            <div class="posts-left">
+              <%= image_tag "default.png", class: "users-image" %>
+            </div>
+        <% end %>
+            <div class="posts-right">
+              <strong>名前:<%= link_to event.user.name, user_path(event.user_id) %></strong>
+              <br><br>
+              <strong>開催場所:<%= event.location %></strong>
+            </div> 
+            <div class="posts-middle">
+              投稿内容:<%= link_to event.content, event_path(event.id), class: "posts-content" %>
+            </div>
+              <% if event.image.present? %>
+                <div class="posts-bottom" >
+                  <%= image_tag event.image.to_s, class: "posts-image" %>
+                </div>
+              <% else %>
+                <div></div>
+              <% end %>
+        </div>
     </div>
+  <% end %>
 </div>
-<% end %>

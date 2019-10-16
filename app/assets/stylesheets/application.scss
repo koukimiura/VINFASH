@@ -15,7 +15,6 @@
  *= require font-awesome
  */
  
- 
 /**レスポンシブデザインで崩れ区可能性がある**/
 /**body {
     background-image: url(back-ground-image2.jpg);
@@ -23,6 +22,99 @@
     color: white;
     background-attachment: fixed;
 }**/
+
+/* smartphone */
+@media screen and (max-width: 670px) {
+    
+    * {
+	float: none;
+	position: static;
+    }
+ 
+    img {
+    	max-width: 100%;
+    	height: auto;
+    }
+    
+    /* chat/showのmessage一覧をスマホでは表示しない。 */
+    .chat-show-index {
+        display: none;
+    }
+    /* chat/show, 相手名前,head-line */  
+    .chat-show h2 {
+        margin: 70px auto 10px;
+    }
+    .my-page{
+        margin: 100px auto 0px!important;
+    }
+    
+    .my-form {
+        width: auto!important;
+    }
+
+    /*tab*/
+    .user-tabs {
+     /* padding入れた*/
+        padding-left: 10px;
+    }
+    
+    .user-tabs li {
+        display: block!important;
+        float: none!important;
+    }
+    
+    /* current_userでは無い人----違いはuser-tabs2のpaddingが違うだけ*/
+    .user-tabs2 {
+        /* padding入れた*/
+      padding-left: 10px;
+    }
+    
+    .user-tabs2 li {
+        float: none!important;
+        display: block!important;
+    }
+    
+    .user-tabs2 a {
+        padding: 16px 10px 16px 10px!important;
+        /* paddingの大きさが違うだけ*/
+    }
+    
+    .item {
+        width: 100%!important;
+        margin: 0 auto;
+    }
+}
+
+
+/* iPad */
+@media screen and(max-width: 1024px) {
+    * {
+	float: none;
+	position: static;
+    }
+ 
+    img {
+    	max-width: 100%;
+    	height: auto;
+    }
+    /* chat/showのmessage一覧iPadでは表示しない。*/
+    .chat-show-index {
+        display: none;
+    }
+    
+    .my-page{
+        margin: 100px auto 0px!important;
+    }
+    
+    .home-top {
+    padding: 200px 0px!important;
+    margin-right: auto;
+    margin-left:auto;
+    }
+    
+  
+}
+
 
 /**画像の固定**/
 body:before{
@@ -44,11 +136,13 @@ body:before{
 }
 
 .my-page select {
+    background-color: white;
     color: black;
 }
 
 /** user-edit アカウントキャンセル用 **/
 .cancel-account {
+    background-color: white;
     color: grey;
 }
 
@@ -59,10 +153,10 @@ body:before{
     color: white;
 }
 
-
 .home-top {
     padding: 100px 0px;
-    
+    margin-right: auto;
+    margin-left:auto;
 }
 
 .item {
@@ -74,8 +168,6 @@ body:before{
     line-height: 1.5;
     font-size: 20px;
 }
-
-
 
 
 .ul, li{
@@ -94,6 +186,12 @@ body:before{
 }
 
 /* post/index, */
+/** post/index new , event  inquiry, **/
+.posts {
+    margin: 70px auto 0;
+}
+
+
 .posts-index {
     transition: all 0.2s;
     margin: 0px auto;
@@ -143,6 +241,7 @@ body:before{
 
 .posts-content {
     font-size: 18px;
+    word-wrap: break-word
 }
 
 
@@ -179,6 +278,7 @@ body:before{
 .post-show-content {
     font-size: 15px;
     margin: 10px auto 30px;
+    word-wrap: break-word
 }
 
 
@@ -230,24 +330,30 @@ body:before{
     display: block;
 }
 
+/** post/new **/
+.post-new-head {
+    padding-left: 30px;
+}
+
+.post-new-head_edit {
+    padding-left: 60px;
+}
 
 
-
-/** post/edit **/
+/** post/ edit **/
 
 .post-edit {
     margin: auto;
 }
 
 .post-edit2{
-    padding: 10px 15px;
+    padding: 30px;
 }
 
 .post-edit-image img {
     height: auto;
     max-width: 100%;
 }
-
 
 .user-name {
     font-size: 20px;
@@ -291,7 +397,6 @@ body:before{
 
 
 
-
 /*_user_info*/
 .user {
     margin: 40px auto 0px;
@@ -330,7 +435,6 @@ body:before{
 
 
 /*tab*/
-
 .user-tabs {
   margin-top: 40px;
   background-color: white;
@@ -343,6 +447,7 @@ body:before{
 }
 
 .user-tabs a {
+    
   display: inline-block;
   padding :16px 20px 16px 10px;
 }
@@ -371,9 +476,10 @@ body:before{
 .user-tabs2 a {
     display: inline-block;
     padding:16px 10px 16px 35px;
+    /* paddingの大きさが違うだけ*/
 }
 
-user-tabs2 li.active a {
+.user-tabs2 li.active a {
     color: #57575f;
 }
 
@@ -382,12 +488,14 @@ user-tabs2 li.active a {
 }
 
 
+
 .content-box {
      width: 90%;
      height: auto;
      box-shadow: 0 2px 6px #c1ced7;
      padding: 20px 20px 20px 30px;
      text-align: left;
+     word-wrap: break-word
 }
 
 .content-box2 {
@@ -501,15 +609,11 @@ user-tabs2 li.active a {
     -ms-flex-item-align: start;
 }
 
-f-btn2 {
-    width: 94px;
-}
-
 .f-btn2 a {
     object-fit: hidden;
 }
 
-f-btn2 input {
+.f-btn2 input {
     object-fit: hidden;
 } 
 
@@ -517,6 +621,7 @@ f-btn2 input {
     padding-top:  5px;
     font-size: 15px;
     font-weight: 400;
+    word-wrap: break-word
 }
 
 .r-f {
@@ -564,19 +669,21 @@ f-btn2 input {
     padding: 14px 10px 8px 30px;
 }
 
-
-.notification-content a {
-    font-weight: bold;
-    font-size: 20px;
+/** chats_index content **/
+.notification-content p {
+    color: silver;
 }
-
 /** friendとpost**/
 .notification-content_black {
     color: black;
 }
 
+.notification-content_black a {
+    font-weight: bold;
+    font-size: 18px;
+}
 
-.notification-content p {
+.notification-content_black p {
     color: silver;
 }
 
@@ -588,7 +695,6 @@ f-btn2 input {
     color: silver;
     font-size: 13px;
 }
-
 
 /** お問合わせ**/
 

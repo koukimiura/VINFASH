@@ -73,7 +73,6 @@ gem 'seed-fu', '~> 2.3'
 gem 'font-awesome-rails'
 
 
-
 #delete confirm
 gem 'data-confirm-modal'
 

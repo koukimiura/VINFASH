@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
             #@relay_notifications = Notification.where(visited_id: @message.user_id, post_id: @post.id, action: "m_on_post")
         end
         
-        if @post && @message.user_id != @post.user_id
+        if @post && @message.user_id != @post.user_id #自分の投稿でコメントした内容をはじく
             @notification = Notification.new(
                 visiter_id: @message.user_id,
                 visited_id: @post.user_id,
@@ -34,8 +34,6 @@ class MessagesController < ApplicationController
        
        redirect_to :back
     end
-    
-    
     
     
     def destroy

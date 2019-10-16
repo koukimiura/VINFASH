@@ -1,17 +1,16 @@
-<h1 class= "text-center">投稿編集</h1>
-<br>
-<br>
-
-<div class='post-edit'>
-    <div class='post-edit2'>
-        <% if @post.image? %>
-    <div class="post-edit-image text-center">
-        <%= image_tag @post.image.to_s %>
-    </div>
-<br>
-        <% end %>
-
-
-<%= render 'form' %>
+<div class='posts'>
+    <div class='post-new-head_edit'>
+        <h2 class= "text-left">投稿編集</h2>
+    </div>   
+    <div class='post-edit'>
+        <div class='post-edit2'>
+            <% if @post.image? %>
+                <div class="post-edit-image text-center">
+                    <%= image_tag @post.image.to_s %>
+                </div>
+                <br>
+            <% end %>
+                <%= render 'form' %>
+        </div>
     </div>
 </div>

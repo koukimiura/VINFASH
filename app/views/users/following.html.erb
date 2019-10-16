@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
         <%= render 'user_info', {user: @user, friend_following: @friend_following, friend_followers: @friend_followers, shoe: @shoe,
          consumption: @consumption, chosen_area: @chosen_area, relationship: @relationship, friend: @friend, isChat: @isChat, 
          chatId: @chatId, chat: @chat, entry: @entry} %>
@@ -8,7 +8,7 @@
 
 
 <!-- tabu -->
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
         <% if current_user.id == @user.id %>
              <ul class="user-tabs" >
                 <li><%= link_to "投稿", user_path(@user.id) %></li>

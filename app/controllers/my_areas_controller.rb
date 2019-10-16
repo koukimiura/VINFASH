@@ -19,7 +19,7 @@ class MyAreasController < ApplicationController
      
      def create
          @my_area = MyArea.create(my_area_params)
-          @my_area.save
+         @my_area.save
          flash[:notice] = 'エリアを登録しました'
          redirect_to :back
              

@@ -1,10 +1,10 @@
 <% if  @chosen_areas.empty? %>
     <div class="user-myarea ">
-        <h2 class="text-center myarea-header"><%= current_user.name %>さんのお買い物エリア</h2>
+        <h2 class="text-center myarea-header"><%= current_user.name %>さんの買い物エリア</h2>
         <h3 class="text-center">新規入力</h3>
         <div class="new text-center">
             <%= form_for @my_area do |f| %>
-                <p><%= f.label :お買い物エリア %></p>
+                <p><%= f.label :買い物エリア %></p>
                 <p><%= f.collection_select(:area_id, @areas, :id, :name,:prompt => "選択してください") %></p>
                 <p><%= f.submit "登録する", class:"btn btn-info" %></p>
             <% end %>
@@ -12,8 +12,8 @@
     </div>   
 <% else %>
     <div class="row">
-        <div class="col-xs-6 already text-center">
-            <h2 class="text-center myarea-header">お買い物エリア</h2>
+        <div class="col-xs-12 col-md-6 already text-center">
+            <h2 class="text-center myarea-header">買い物エリア</h2>
             <% i = 0 %>
                 <% @chosen_areas.each do |area| %>
                 <% a = Area.find(area) %>
@@ -26,10 +26,10 @@
                     </ul>
                 <% end %>
         </div>
-    <div class="col-xs-6 new text-center">
+    <div class="col-xs-12 col-md-6 new text-center">
         <h3 class="text-center myarea-header">新規入力</h3>
         <%= form_for @my_area do |f| %>
-                <p><%= f.label :お買い物エリア %></p>
+                <p><%= f.label :買い物エリア %></p>
                 <p><%= f.collection_select(:area_id, @areas, :id, :name, :prompt => "選択してください") %></p>
                 <p><%= f.submit "登録する", class:"btn btn-info" %></p>
             <% end %>

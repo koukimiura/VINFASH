@@ -10,8 +10,8 @@ class FriendsController < ApplicationController
           action: "F"
           )
         @notifcation.save
-        redirect_to :back
         flash[:notice] = '申請しました。'
+        redirect_to :back
   end
     
   private
