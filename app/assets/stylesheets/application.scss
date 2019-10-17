@@ -23,99 +23,9 @@
     background-attachment: fixed;
 }**/
 
-/* smartphone */
-@media screen and (max-width: 670px) {
-    
-    * {
-	float: none;
-	position: static;
-    }
- 
-    img {
-    	max-width: 100%;
-    	height: auto;
-    }
-    
-    /* chat/showのmessage一覧をスマホでは表示しない。 */
-    .chat-show-index {
-        display: none;
-    }
-    /* chat/show, 相手名前,head-line */  
-    .chat-show h2 {
-        margin: 70px auto 10px;
-    }
-    .my-page{
-        margin: 100px auto 0px!important;
-    }
-    
-    .my-form {
-        width: auto!important;
-    }
-
-    /*tab*/
-    .user-tabs {
-     /* padding入れた*/
-        padding-left: 10px;
-    }
-    
-    .user-tabs li {
-        display: block!important;
-        float: none!important;
-    }
-    
-    /* current_userでは無い人----違いはuser-tabs2のpaddingが違うだけ*/
-    .user-tabs2 {
-        /* padding入れた*/
-      padding-left: 10px;
-    }
-    
-    .user-tabs2 li {
-        float: none!important;
-        display: block!important;
-    }
-    
-    .user-tabs2 a {
-        padding: 16px 10px 16px 10px!important;
-        /* paddingの大きさが違うだけ*/
-    }
-    
-    .item {
-        width: 100%!important;
-        margin: 0 auto;
-    }
-}
 
 
-/* iPad */
-@media screen and(max-width: 1024px) {
-    * {
-	float: none;
-	position: static;
-    }
- 
-    img {
-    	max-width: 100%;
-    	height: auto;
-    }
-    /* chat/showのmessage一覧iPadでは表示しない。*/
-    .chat-show-index {
-        display: none;
-    }
-    
-    .my-page{
-        margin: 100px auto 0px!important;
-    }
-    
-    .home-top {
-    padding: 200px 0px!important;
-    margin-right: auto;
-    margin-left:auto;
-    }
-    
-  
-}
-
-
+/**pcファースト**/
 /**画像の固定**/
 body:before{
   display: block;
@@ -728,3 +638,101 @@ body:before{
     margin-top: 20px;
 }
 
+/* iPad */
+@media screen and (max-width: 1024px) {
+    * {
+	float: none;
+	position: static;
+    }
+ 
+    img {
+    	max-width: 100%;
+    	height: auto;
+    }
+    /* chat/showのmessage一覧iPadでは表示しない。*/
+    .chat-show-index {
+        display: none;
+    }
+    
+    .my-page{
+        margin: 100px auto 0px!important;
+    }
+    
+    .home-top {
+    padding: 200px 0px;
+    margin-right: auto;
+    margin-left:auto;
+    }
+    
+  
+}
+
+
+
+/* smartphone */
+@media screen and (max-width: 670px) {
+    
+    * {
+	float: none;
+	position: static;
+    }
+ 
+    img {
+    	max-width: 100%;
+    	height: auto;
+    }
+    
+    /* chat/showのmessage一覧をスマホでは表示しない。 */
+    .chat-show-index {
+        display: none;
+    }
+    /* chat/show, 相手名前,head-line */  
+    .chat-show h2 {
+        margin: 70px auto 10px;
+    }
+    .my-page{
+        margin: 100px auto 0px!important;
+    }
+    
+    .my-form {
+        width: auto!important;
+    }
+
+    /*tab*/
+    .user-tabs {
+     /* padding入れた*/
+        padding-left: 10px;
+    }
+    
+    .user-tabs li {
+        display: block!important;
+        float: none!important;
+    }
+    
+    /* current_userでは無い人----違いはuser-tabs2のpaddingが違うだけ*/
+    .user-tabs2 {
+        /* padding入れた*/
+      padding-left: 10px;
+    }
+    
+    .user-tabs2 li {
+        float: none!important;
+        display: block!important;
+    }
+    
+    .user-tabs2 a {
+        padding: 16px 10px 16px 10px!important;
+        /* paddingの大きさが違うだけ*/
+    }
+    
+    .home-top {
+        padding: 100px 0px;
+        margin-right: auto;
+        margin-left:auto;
+    }
+    
+    .item {
+        width: 100%!important;
+        margin: 0 auto;
+    }
+}
