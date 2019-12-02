@@ -2,8 +2,8 @@
  
  VINFASH
  
-"hoge"が何かを簡潔に紹介する
- 
+#About
+
 The purpose of this app is making friends who likes vintage clothing and postting your favarite one.
 
 # DEMO
@@ -40,6 +40,7 @@ git clone https://github.com/hoge/~
 cd examples
 python demo.py
 ```
+
  
 # Note
  
@@ -50,9 +51,6 @@ Everyone can see user's posts, but if you would like to enjoy anything else, you
 * 三浦 光樹
 * 東洋大学
 * miurak565@gmail.com
- 
- 
-"hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
  
  
 This app is my portfolio 
