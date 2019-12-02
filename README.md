@@ -1,22 +1,26 @@
-# Name（リポジトリ/プロジェクト/OSSなどの名前）
+# Name
  
- 
+ VINFASH
  
 "hoge"が何かを簡潔に紹介する
  
+The purpose of this app is making friends who likes vintage clothing and postting your favarite one.
+
 # DEMO
  
 "hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
  
 # Features
  
-"hoge"のセールスポイントや差別化などを説明する
+ The features of this app is that user can make your accaunt and enjoy following other users, chating , posting pho, sending   comments to other's post,announcing your any event which will take place before long.
  
+ This app has notification. if you receive that, it shows someone follows you, texts you, or makes comments on your posts.
+
 # Requirement
  
 "hoge"を動かすのに必要なライブラリなどを列挙する
  
-* huga 3.5.2
+*  3.5.2
 * hogehuga 1.0.2
  
 # Installation
@@ -39,21 +43,16 @@ python demo.py
  
 # Note
  
-注意点などがあれば書く
+Everyone can see user's posts, but if you would like to enjoy anything else, you have to sign up or logn in.
  
 # Author
  
-作成情報を列挙する
- 
 * 三浦 光樹
 * 東洋大学
-* E-mail
+* miurak565@gmail.com
  
-# License
-ライセンスを明示する
  
 "hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
  
-社内向けなら社外秘であることを明示してる
  
-"hoge" is Confidential.
+This app is my portfolio 
