@@ -64,7 +64,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   
   #画像の向きを整える
-  
   def auto
     manipulate! do|image|
       image.auto_orient
