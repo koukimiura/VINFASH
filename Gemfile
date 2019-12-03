@@ -62,7 +62,7 @@ gem 'carrierwave'
 gem 'fog-aws'
 gem 'rmagick'
 
-#devise
+
 gem 'devise'
 
 gem 'railties'
