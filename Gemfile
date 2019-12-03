@@ -78,5 +78,5 @@ gem 'data-confirm-modal'
 
 gem 'websocket-extensions','~> 0.1.4'
 
-#pegination
+#pegination ページネーション
 gem 'kaminari', '~> 0.17.0'
