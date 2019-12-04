@@ -10,13 +10,15 @@ The purpose of this app is making friends who likes vintage clothing and posttin
 このWEBアプリケーションは古着好きの友達作り、投稿の閲覧を目的として作られました。
 
 # DEMO
- notification
+ *notification
+ 
+ <img width="1114" alt="スクリーンショット 2019-12-03 23 23 13" src="https://user-images.githubusercontent.com/50481755/70173702-  badd3500-1716-11ea-9c5a-383bf7408ac7.png">
+
+ 
+ *user page
  
  
- user page
- 
- 
- chat
+ *chat
  
  
 
