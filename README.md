@@ -1,6 +1,6 @@
 # Name
  
-# VINFASH
+*VINFASH
 
  
 # Description
@@ -22,7 +22,7 @@ The purpose of this app is making friends who likes vintage clothing and posttin
  
  *chat
  
- 
+ <img width="803" alt="スクリーンショット 2019-12-03 23 24 00" src="https://user-images.githubusercontent.com/50481755/70174287-ec0a3500-1717-11ea-92ad-6bb3e1e8e0f8.png">
 
  
 # Features
