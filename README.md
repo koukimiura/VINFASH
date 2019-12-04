@@ -12,7 +12,7 @@ The purpose of this app is making friends who likes vintage clothing and posttin
 # DEMO
  *notification
  
- <img width="1114" alt="スクリーンショット 2019-12-03 23 23 13" src="https://user-images.githubusercontent.com/50481755/70173702-  badd3500-1716-11ea-9c5a-383bf7408ac7.png">
+<img width="1114" alt="スクリーンショット 2019-12-03 23 23 13" src="https://user-images.githubusercontent.com/50481755/70173702-badd3500-1716-11ea-9c5a-383bf7408ac7.png">
 
  
  *user page
