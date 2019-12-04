@@ -17,6 +17,8 @@ The purpose of this app is making friends who likes vintage clothing and posttin
  
  *user page
  
+ <img width="1181" alt="スクリーンショット 2019-12-03 23 23 28" src="https://user-images.githubusercontent.com/50481755/70174114-a77e9980-1717-11ea-8360-db41e6561060.png">
+ 
  
  *chat
  
