@@ -134,7 +134,11 @@ Everyone can see user's posts, but if you would like to enjoy anything else, you
 
 投稿、イベントの閲覧はできますが、他の機能を使う場合はSing Upまたは、Logn inが必要となります。
 
-*simple accaunt   
+*simple accaunt
+
+mail -> simple@gmail.com
+
+password -> simple0114
 
 *you can use the one  (テスト用にお使いください。)
 

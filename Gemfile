@@ -80,3 +80,10 @@ gem 'websocket-extensions','~> 0.1.4'
 
 #pegination ページネーション
 gem 'kaminari', '~> 0.17.0'
+
+
+#アラート
+
+gem "excon", ">= 0.71.0"
+
+gem "rack", ">= 2.0.8"
