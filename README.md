@@ -1,5 +1,3 @@
-# Name
- 
 # VINFASH
 
  
@@ -140,7 +138,7 @@ mail -> simple@gmail.com
 
 password -> simple0114
 
-*you can use the one  (テスト用にお使いください。)
+*you can use that one  (テスト用にお使いください。)
 
 
 
@@ -149,9 +147,7 @@ password -> simple0114
  
 * Koki Miura　　
 * Toyo univercity
-* miurak565@gmail.com
- 
+
 * 三浦 光樹　　
 * 東洋大学
-* miurak565@gmail.com
- 
+
