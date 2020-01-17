@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 # VINFASH
-=======
-# Name
- 
-*VINFASH
->>>>>>> origin/master
-
  
 # Description
 
