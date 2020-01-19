@@ -7,17 +7,17 @@ The purpose of this app is making friends who likes vintage clothing and posttin
 このWEBアプリケーションは古着好きの友達作り、投稿の閲覧を目的として作られました。
 
 # DEMO
-notification
+* notification
  
 <img width="1114" alt="スクリーンショット 2019-12-03 23 23 13" src="https://user-images.githubusercontent.com/50481755/70173702-badd3500-1716-11ea-9c5a-383bf7408ac7.png">
 
  
-user page
+* user page
  
  <img width="1181" alt="スクリーンショット 2019-12-03 23 23 28" src="https://user-images.githubusercontent.com/50481755/70174114-a77e9980-1717-11ea-8360-db41e6561060.png">
  
  
-chat
+* chat
  
  <img width="803" alt="スクリーンショット 2019-12-03 23 24 00" src="https://user-images.githubusercontent.com/50481755/70174287-ec0a3500-1717-11ea-92ad-6bb3e1e8e0f8.png">
 
@@ -33,88 +33,84 @@ chat
  
 * This app has notification. if you receive that, it shows someone follows you, texts you, or makes comments on your posts.
  
-*記事関連
-    投稿機能
-    一覧表示機能
-    詳細表示機能
-    削除機能
-    編集機能
-    プレビュー機能
+記事関連
+    * 投稿機能
+    * 一覧表示機能
+    * 詳細表示機能
+    * 削除機能
+    * 編集機能
+    * プレビュー機能
     
-*ユーザー関連
-    登録機能
-    よく行く買い物エリアの登録機能
-    編集機能(アドレス・パスワード)
-    管理ユーザー追加機能
-    ログイン・アウト機能
+ユーザー関連
+    * 登録機能
+    * よく行く買い物エリアの登録機能
+    * 編集機能(アドレス・パスワード)
+    * 管理ユーザー追加機能
+    * ログイン・アウト機能
 
-*チャット機能
-    チャット機能
-    最新チャット一覧
+チャット機能
+    * チャット機能
+    * 最新チャット一覧
 
-*コメント関連
-    コメント投稿機能
-    削除機能
+コメント関連
+    * コメント投稿機能
+    * 削除機能
     
-*友達関連
-    フォロー機能
-    チャット機能
+友達関連
+    * フォロー機能
+    * チャット機能
 
-*通知機能
-    フォロー通知機能
-    メッセージ通知機能
-    投稿に対するコメント通知機能
+通知機能
+    * フォロー通知機能
+    * メッセージ通知機能
+    * 投稿に対するコメント通知機能
     
-*お問い合わせ機能
-    お問い合わせを送信機能
+お問い合わせ機能
+    * お問い合わせを送信機能
 
 
 # Requirement
     
-     *ruby 2.6.3
-     *Rails 5.0.7.2
-     *html
-     *css 
-     *javascript
+     * ruby 2.6.3
+     * Rails 5.0.7.2
+     * html5
+     * css 
+     * javascript
 
 Library(gem)
     
-    *sqlite3  1.3.13
-    *puma
-    *jquery-rails
-    *bootstrap
-    *carrierwave
-    *devise
-    *seed_fu 2.3
-    *font-awesome-rails
-    *data-confirm-moda
-    *kaminari ページネーション 0.17.0
+    * sqlite3  1.3.13
+    * puma
+    * jquery-rails
+    * bootstrap
+    * carrierwave
+    * devise
+    * seed_fu 2.3
+    * font-awesome-rails
+    * data-confirm-moda
+    * kaminari ページネーション 0.17.0
 
 # Setup
  
+arrierwave
 
+    * $ bundle install
+    * $ rails g migration add_image_to_articles カラム名:string
+    * $ rails db:migrate
+    * $ rails g uploader Image
+    * mount_uploader :image, ImageUploader
 
-*carrierwave
+devise
 
-$ bundle install
-$ rails g migration add_image_to_articles カラム名:string
-$ rails db:migrate
-$ rails g uploader Image
-mount_uploader :image, ImageUploader
+    * $ rails g devise:install
+    * $ rails g devise user
+    * $ rails db:migrate
+    * $ rails g devise：controllers users
+    * $ rails g devise:views
 
+Bootstrap
 
-
-*devise
-
-$ rails g devise:install
-$ rails g devise user
-$ rails db:migrate
-$ rails g devise：controllers users
-$ rails g devise:views
-
-*bootstrap
-
-$ rails g bootstrap:install
+    * $ rails g bootstrap:install
 
 
 
@@ -135,14 +131,14 @@ Everyone can see user's posts, but if you would like to enjoy anything else, you
 
 投稿、イベントの閲覧はできますが、他の機能を使う場合はSing Upまたは、Logn inが必要となります。
 
-*simple accaunt
 
-mail -> simple@gmail.com
+# simple accaunt
 
-password -> simple0114
+* mail -> simple@gmail.com
 
-*you can use that one  (テスト用にお使いください。)
+* password -> simple0114
 
+* you can use that one  (テスト用にお使いください。)
 
 
 
