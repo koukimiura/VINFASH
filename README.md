@@ -92,9 +92,6 @@ The purpose of this app is making friends who likes vintage clothing and posttin
     html5
     css
     javascript
-
-* Library(gem)
-    
     sqlite3  1.3.13
     puma
     jquery-rails
@@ -105,8 +102,6 @@ The purpose of this app is making friends who likes vintage clothing and posttin
     font-awesome-rails
     data-confirm-moda
     kaminari ページネーション 0.17.0
-
-
 
 # Setup
  
