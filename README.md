@@ -93,7 +93,7 @@ The purpose of this app is making friends who likes vintage clothing and posttin
     css
     javascript
 
-###### Library(gem)
+* Library(gem)
     
     sqlite3  1.3.13
     puma
