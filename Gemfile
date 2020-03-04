@@ -9,7 +9,8 @@ ruby "2.6.3"
 gem 'sqlite3', '~> 1.3.13', group: [:development, :test]
 gem 'pg', group: :production
 # Use Puma as the app servery
-gem 'puma'
+# gem 'puma'
+gem "puma", ">= 4.3.3"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -87,3 +88,6 @@ gem 'kaminari', '~> 0.17.0'
 gem "excon", ">= 0.71.0"
 
 gem "rack", ">= 2.0.8"
+
+#のこぎり
+gem "nokogiri", ">= 1.10.8"

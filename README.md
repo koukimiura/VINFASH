@@ -159,7 +159,7 @@ Everyone can see user's posts, but if you would like to enjoy anything else, you
 # Author
  
 * Koki Miura　　
-* Toyo univercity
+* Toyo university
 
 * 三浦 光樹　　
 * 東洋大学

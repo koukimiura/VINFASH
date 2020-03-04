@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "handlebars": "^4.3.0",
+    "yarn": "^1.22.0"
+  }
+}
