@@ -54,7 +54,7 @@ wordwrap@~0.0.2:
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
   integrity sha1-o9XabNXAvAAI03I0u68b7WMFkQc=
 
-yarn@^1.22.0:
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.0.tgz#acf82906e36bcccd1ccab1cfb73b87509667c881"
-  integrity sha512-KMHP/Jq53jZKTY9iTUt3dIVl/be6UPs2INo96+BnZHLKxYNTfwMmlgHTaMWyGZoO74RI4AIFvnWhYrXq2USJkg==
+yarn@^2.0.0-rc.27:
+  version "2.0.0-rc.27"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-2.0.0-rc.27.tgz#117838aaedfb89a257578313d6e0fd2ec420f3d4"
+  integrity sha512-hWnJHN87yb1gYA2ZXD42JFGShEMYU/pX7M0qAzTKyns2CMrt3dKxb2/SkaqoqVtymKfjBnk3JlX+tpEXD1swgQ==
