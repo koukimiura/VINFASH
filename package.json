@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "acorn": "^7.1.1",
     "handlebars": "^4.5.3",
+    "kind-of": "^6.0.3",
     "minimist": "^1.2.2",
-    "yarn": "^2.0.0-rc.27"
+    "yarn": "^1.22.0"
   }
 }

@@ -1,5 +1,5 @@
 Arguments: 
-  /home/ec2-user/.nvm/versions/node/v13.12.0/bin/node /home/ec2-user/.nvm/versions/node/v13.12.0/bin/yarn upgrade lodash.acorn@^7.1.1
+  /home/ec2-user/.nvm/versions/node/v13.12.0/bin/node /home/ec2-user/.nvm/versions/node/v13.12.0/bin/yarn upgrade lodash.minimist@^1.2.2:
 
 PATH: 
   /home/ec2-user/.nvm/versions/node/v13.12.0/bin:/home/ec2-user/.rvm/gems/ruby-2.6.3/bin:/home/ec2-user/.rvm/gems/ruby-2.6.3@global/bin:/home/ec2-user/.rvm/rubies/ruby-2.6.3/bin:/home/ec2-user/.rvm/bin:/usr/local/bin:/bin:/usr/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/aws/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/lodash.acorn: Not found
+  Error: https://registry.yarnpkg.com/lodash.minimist: Not found
       at Request.params.callback [as _callback] (/home/ec2-user/.nvm/versions/node/v13.12.0/lib/node_modules/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/home/ec2-user/.nvm/versions/node/v13.12.0/lib/node_modules/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:315:20)
