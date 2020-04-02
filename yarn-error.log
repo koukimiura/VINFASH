@@ -30,6 +30,7 @@ npm manifest:
   {
     "dependencies": {
       "handlebars": "^4.5.3",
+      "minimist": "^1.2.2",
       "yarn": "^2.0.0-rc.27"
     }
   }
@@ -136,6 +137,11 @@ Lockfile:
     integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
     dependencies:
       p-locate "^4.1.0"
+  
+  minimist@^1.2.2:
+    version "1.2.5"
+    resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
+    integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
   
   neo-async@^2.6.0:
     version "2.6.1"
