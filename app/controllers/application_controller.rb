@@ -9,5 +9,6 @@ class ApplicationController < ActionController::Base
                  flash[:alert] ='ユーザー詳細を入力してください。'
          end
      end
+     
 end
 
