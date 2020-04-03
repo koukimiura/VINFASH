@@ -8,44 +8,42 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def twitter
   # end
 
-  # def facebook
-  #   callback_from :facebook
-  # end
+  def facebook
+    callback_from :facebook
+  end
   
 
-  # private
+  private
   
-  # #fasebookからの情報を受け取る
-  # def callback_from(provider)
-  #   provider = provider.to_s
+  #fasebookからの情報を受け取る
+  def callback_from(provider)
+    provider = provider.to_s
     
-  #   #コールバックメソッドを呼び出し
-  #   @user = User.find_for_oauth(request.env['omniauth.auth'])
-  #   logger.debug("--------------リクエスト=#{request.env['omniauth.auth']}")
-    
+    #コールバックメソッドを呼び出し
+    @user = User.find_for_oauth(request.env['omniauth.auth'])
     
     
-  #   if @user   
-  #     #flashメッセージをする。providerの頭文字だけ大文字
-  #     #lash messageにはdefaultのメッセージ
-  #     flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
-  #     sign_in_and_redirect @user, event: :authentication  #eventはuserがアクティブでないときにエラーを吐き出す。
+    if @user   
+      #flashメッセージをする。providerの頭文字だけ大文字
+      #lash messageにはdefaultのメッセージ
+      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
+      sns_registration_and_redirect @user, event: :authentication  #eventはuserがアクティブでないときにエラーを吐き出す。
       
-  #   else
-  #     @user = User.create_for_oauth(request.env['omniauth.auth'])
-  #     #flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
-  #     redirect_to edit_user_registration_url(@user), event: :authentication
+    else
+      @user = User.create_for_oauth(request.env['omniauth.auth'])
+      #flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
+      sign_in_and_redirect @user, event: :authentication
              
-  #   end
+    end
     
-    # unless @user.persisted?    #@userがDBに存在するなら、またはcreate（新規登録ができたか)
-    #   #create（新規登録)ができていなかった場合はsessionに取得したfasebookデータを入れる。画像遷移時に役立つ。
-    #   #userがブラウザから離れるときはdevise.で始まるデータは全て削除される。
-    #   session["devise.#{provider}_data"] = request.env['omniauth.auth']   #データを保持してログインへ飛ばす
-    #   redirect_to new_user_registration_url
-    # end
+    unless @user.persisted?    #@userがDBに存在するなら、またはcreate（新規登録ができたか)
+      #create（新規登録)ができていなかった場合はsessionに取得したfasebookデータを入れる。画像遷移時に役立つ。
+      #userがブラウザから離れるときはdevise.で始まるデータは全て削除される。
+      session["devise.#{provider}_data"] = request.env['omniauth.auth']   #データを保持してログインへ飛ばす
+      redirect_to new_user_registration_url
+    end
     
-  #end
+  end
   
   
   

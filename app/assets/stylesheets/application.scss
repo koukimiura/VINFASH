@@ -40,6 +40,7 @@ body:before{
   z-index:-1;
 }
  
+
 /** user-edit フォーム用 **/
 .edit-color input {
     color: black;
@@ -304,9 +305,6 @@ body:before{
   color: #ff2581;
 }
 
-
-
-
 /*_user_info*/
 .user {
     margin: 40px auto 0px;
@@ -325,7 +323,7 @@ body:before{
 
 /* htmlにふたつ下記の２つを書いています。面倒なのでこのままにしてるよ*/
 .user-show img {
-  max-width: 80px;
+  width: 80px;
   max-height: 80px;
   border-radius: 40%;
   box-shadow: 0 2px 6px #c1ced7;

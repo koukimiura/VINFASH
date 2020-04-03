@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable
          
          validates :name, length: { maximum: 25 }, presence: true, on: :update
          validates :birthday, presence: true, on: :update
@@ -37,13 +37,17 @@ class User < ApplicationRecord
          end
          
          def self.create_for_oauth(auth)
+          logger.debug("----------auth.info.image.gsub('http://','https://')=#{auth.info.image.gsub('http://','https://')}")
              user = User.create(
                  uid:      auth.uid,
                  provider: auth.provider,
                  email:    auth.info.email,
                  name: auth.info.name,
                  #パスワードを作る
-                 password: Devise.friendly_token[0, 20]
+                 password: Devise.friendly_token[0, 20],
+                 #image: image_url
+                 #keyをremot_image_urlにする。
+                 remote_image_url: auth.info.image.gsub('http://','https://')
               )
              return user
          end

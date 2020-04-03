@@ -30,11 +30,10 @@
 <br>
   <div class="actions">
     <p><%= f.submit "Sign up", class:"btn btn-info" %></p>
+    <p><%= link_to "facebookでログイン", user_facebook_omniauth_authorize_path, class:"btn btn-primary" %></p>
   </div>
   </div>
 </div>
 <% end %>
 
 
-
-<%= link_to "facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary"  %>
