@@ -96,7 +96,3 @@ gem "nokogiri", ">= 1.10.8"
 
 gem 'omniauth'
 gem 'omniauth-facebook'
-
-# gem "actionview", ">= 5.2.4.2"
-
-# gem "actionview"
