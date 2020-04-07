@@ -96,3 +96,9 @@ gem "nokogiri", ">= 1.10.8"
 
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+#Twitter
+
+gem 'omniauth-twitter'
+
+#gem 'twitter'

@@ -12,6 +12,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_from :facebook
   end
   
+  def twitter
+    callback_from :twitter
+  end
+  
 
   private
   
@@ -36,12 +40,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
              
     end
     
-    unless @user.persisted?    #@userがDBに存在するなら、またはcreate（新規登録ができたか)
-      #create（新規登録)ができていなかった場合はsessionに取得したfasebookデータを入れる。画像遷移時に役立つ。
-      #userがブラウザから離れるときはdevise.で始まるデータは全て削除される。
-      session["devise.#{provider}_data"] = request.env['omniauth.auth']   #データを保持してログインへ飛ばす
-      redirect_to new_user_registration_url
-    end
+    # unless @user.persisted?    #@userがDBに存在するなら、またはcreate（新規登録ができたか)
+    #   #create（新規登録)ができていなかった場合はsessionに取得したfasebookデータを入れる。画像遷移時に役立つ。
+    #   #userがブラウザから離れるときはdevise.で始まるデータは全て削除される。
+    #   session["devise.#{provider}_data"] = request.env['omniauth.auth']   #データを保持してログインへ飛ばす
+    #   redirect_to new_user_registration_url
+    # end
     
   end
   
@@ -57,8 +61,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # GET|POST /users/auth/twitter/callback
   # def failure
-  # #   super
-  #     redirect_to new_user_registration_url
+  #     super
+  # #     redirect_to new_user_registration_url
   # end
 
   # protected

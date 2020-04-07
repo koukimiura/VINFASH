@@ -3,6 +3,7 @@ class PostsController < ApplicationController
     before_action :ensure_correct_user, :only => [:edit, :update, :destroy]
     before_action :forbid_login_user, only: [:show, :new, :create, :edit, :update, :destroy]
     
+    
     def index
         @posts = Post.all.order(created_at: :desc)
     end
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
     def create
          @post= Post.new(post_params)
              if @post.save
+                 
                 flash[:notice] = "投稿しました"
                 redirect_to posts_path
              else
@@ -65,4 +67,13 @@ class PostsController < ApplicationController
     def post_params
         params.require(:post).permit(:title, :content, :image, :user_id).merge(:user_id => current_user.id)
     end
+    
+    # def twitter_client
+    #     client = Twitter::REST::Client.new do |config|
+    #     config.consumer_key        = ENV["twitter_api_id"]
+    #     config.consumer_secret     = ENV["twitter_api_secret"]
+    #     config.access_token        = ENV["ACCESS_TOKEN"]
+    #     config.access_token_secret = ENV["ACCESS_SECRET"]
+    #     end
+    # end
 end

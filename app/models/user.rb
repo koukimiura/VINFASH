@@ -37,16 +37,17 @@ class User < ApplicationRecord
          end
          
          def self.create_for_oauth(auth)
-          logger.debug("----------auth.info.image.gsub('http://','https://')=#{auth.info.image.gsub('http://','https://')}")
+          # logger.debug("----------auth=#{auth}")
+        
              user = User.create(
                  uid:      auth.uid,
                  provider: auth.provider,
-                 email:    auth.info.email,
+                 email: auth.info.email,
                  name: auth.info.name,
                  #パスワードを作る
                  password: Devise.friendly_token[0, 20],
                  #image: image_url
-                 #keyをremot_image_urlにする。
+                 #keyをremot_image_urlにする。 gsubで書き換え
                  remote_image_url: auth.info.image.gsub('http://','https://')
               )
              return user
