@@ -3,25 +3,22 @@
 
 # Description
 
-The purpose of this app is making friends who likes vintage clothing and postting your favarite one.
+The purpose of this app is making friends who likes vintage clothing and postting your fovarite one.
 
 このWEBアプリケーションは古着好きの友達作り、投稿の閲覧を目的として作られました。
 
 # DEMO
 
 * notification
- 
 <img width="1114" alt="スクリーンショット 2019-12-03 23 23 13" src="https://user-images.githubusercontent.com/50481755/70173702-badd3500-1716-11ea-9c5a-383bf7408ac7.png">
 
  
 * user page
- 
- <img width="1181" alt="スクリーンショット 2019-12-03 23 23 28" src="https://user-images.githubusercontent.com/50481755/70174114-a77e9980-1717-11ea-8360-db41e6561060.png">
+<img width="1181" alt="スクリーンショット 2019-12-03 23 23 28" src="https://user-images.githubusercontent.com/50481755/70174114-a77e9980-1717-11ea-8360-db41e6561060.png">
  
  
 * chat
- 
- <img width="803" alt="スクリーンショット 2019-12-03 23 24 00" src="https://user-images.githubusercontent.com/50481755/70174287-ec0a3500-1717-11ea-92ad-6bb3e1e8e0f8.png">
+<img width="803" alt="スクリーンショット 2019-12-03 23 24 00" src="https://user-images.githubusercontent.com/50481755/70174287-ec0a3500-1717-11ea-92ad-6bb3e1e8e0f8.png">
 
  
 # Features
@@ -52,6 +49,7 @@ The purpose of this app is making friends who likes vintage clothing and posttin
     <dd>編集機能(アドレス・パスワード)</dd>
     <dd>管理ユーザー追加機能</dd>
     <dd>ログイン・アウト機能</dd>
+    <dd>Facebook,Twitter認証</dd>
 </dl>
 
 <dl>
